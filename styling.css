@@ -43,7 +43,7 @@
 
 table{
     min-width: 1000px;
-    /*ik kan er wel voor zorgen dat de verhouding altijd gelijk zijn, ongeacht welk scherm.
+    /*ik kan er wel voor zorgen dat de verhoudingen altijd gelijk zijn, ongeacht welk scherm.
     Maar dan heb ik javascript nodig om de breedte en hoogte van het huidige scherm
     op te halen.*/
 }
