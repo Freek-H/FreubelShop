@@ -11,8 +11,40 @@
     <link rel="stylesheet" href="styling.css">
 </head>
 
-<body>
-    <div class="nav"><button><img src="nav.png" alt="nav" width="20" height="20"></div></button>
+<script>
+    let menuShown = true;
+
+    function resizeTable(){
+    let tabelHeight = window.innerHeight;
+    let tabelWidth = window.innerWidth;
+    console.log(tabelWidth*0.2);
+    document.getElementsByClassName("menukolom").style="width: "+(tabelWidth*0.2);
+    document.getElementsByClassName("product").style="padding: "+(tabelWidth*0.1)+"px"+(tabelWidth*0.1)+"px";
+    document.getElementsByClassName("omschrijving").style="padding: "+(tabelWidth*0.15)+"px"+(tabelWidth*0.15)+"px";
+    document.getElementsByClassName("afbeelding").style="padding: "+(tabelWidth*0.15)+"px"+(tabelWidth*0.15)+"px";
+    //document.getElementById("productLog").style="min-width: "+tabelWidth*0.8;
+    //document.getElementsByClassName("menukolom")[0].innerHTML=tabelWidth;
+}
+    function showMenu(){
+        var x = document.getElementsByClassName("menukolom")[0];
+        //log.console(document.getElementsByClassName("grid-container")[0][1]);
+        if (x.style.display=="none"){
+            x.style.display = "block";
+        }else{
+            x.style.display ="none";
+            //document.getElementsByClassName("grid-container").style= "grid-template-areas:\n"+
+            //'header header header header header header header header\n'+
+            //'main main main main main main main main\n'+
+            //'main main main main main main main main\n'+
+            //'main main main main main main main main';
+            //document.getElementsByClassName("grid-container").style
+        }
+}
+</script>
+
+<body onresize=resizeTable()>
+    
+    <div class="nav"><button onclick=showMenu()><img src="nav.png" alt="nav" width="20" height="20"></div></button>
     </div>
     <div class="account">
         <button>Aanmelden</button> 
@@ -29,11 +61,11 @@
             Merk<br>
         </div>
         <div class = "centraal">
-            <table>
+            <table id="productLog">
                 <tr>
-                    <th>Product</th>
-                    <th>Beschrijving</th>
-                    <th>Afbeelding</th>
+                    <th class = "product">Product</th>
+                    <th class = "omschrijving">Beschrijving</th>
+                    <th class = "afbeelding">Afbeelding</th>
                 </tr>
                 <tr>
                     <td>Prod_1</td>

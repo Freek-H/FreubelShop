@@ -27,26 +27,32 @@
     'menu main main main main main main main';
     gap: 30px;
     /*background-color: rgba(4, 117, 79, 0.616);*/
-    background-color: #344648;
+    background-color: #c39ea0;
     padding: 10px;
 }
 
 .grid-container > div {
     /*background-color: rgb(61, 90, 55);*/
-    background-color: #7D8E95;
+    background-color: #f8e5e5;
     border:solid 1px;
     border-color: #FBE0C3;
     text-align: center;
-    padding: 20px 0;
+    padding: 10px 0;
     font-size: 30px;
+    }
+.th{
+    padding: 1000px;
 }
 
 table{
-    min-width: 1000px;
-    /*ik kan er wel voor zorgen dat de verhoudingen altijd gelijk zijn, ongeacht welk scherm.
+    /*min-width: 1600px;
+    width: 800px;*/
+    width: 100%;    
+}
+/*ik kan er wel voor zorgen dat de verhoudingen altijd gelijk zijn, ongeacht welk scherm.
     Maar dan heb ik javascript nodig om de breedte en hoogte van het huidige scherm
     op te halen.*/
-}
+
 /*th{
     padding-right:20px;
 }*/
