@@ -1,0 +1,58 @@
+
+
+*{
+    box-sizing: border-box;
+}
+
+.bannerboven {grid-area: header; }
+.menukolom {grid-area: menu; }
+.centraal {grid-area: main; }
+.nav{position: fixed;
+    top:0;
+    left:0;
+    background-color: #7D8E95;
+    border:groove;}
+.account{position: fixed;
+        top:0;
+        right:0;
+        background-color: #7D8E95;
+        border:groove;}
+
+.grid-container{
+    display: grid;
+    grid-template-areas:
+    'header header header header header header header header'
+    'menu main main main main main main main'
+    'menu main main main main main main main'
+    'menu main main main main main main main';
+    gap: 30px;
+    /*background-color: rgba(4, 117, 79, 0.616);*/
+    background-color: #c39ea0;
+    padding: 10px;
+}
+
+.grid-container > div {
+    /*background-color: rgb(61, 90, 55);*/
+    background-color: #f8e5e5;
+    border:solid 1px;
+    border-color: #FBE0C3;
+    text-align: center;
+    padding: 10px 0;
+    font-size: 30px;
+    }
+.th{
+    padding: 1000px;
+}
+
+table{
+    /*min-width: 1600px;
+    width: 800px;*/
+    width: 100%;    
+}
+/*ik kan er wel voor zorgen dat de verhoudingen altijd gelijk zijn, ongeacht welk scherm.
+    Maar dan heb ik javascript nodig om de breedte en hoogte van het huidige scherm
+    op te halen.*/
+
+/*th{
+    padding-right:20px;
+}*/
