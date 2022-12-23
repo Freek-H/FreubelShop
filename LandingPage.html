@@ -127,7 +127,7 @@
         <div id = "onder">Dit is de onderste banner met site informatie.</div><-->
     <script>
         function laadData() {
-            fetch('producten.json')
+            fetch('http://localhost:8080/products')
                 .then(response => response.json()) // Zet json als tekst om naar een object
                 .then(data => {
                     let productenHtml = "";
@@ -135,7 +135,9 @@
                         productenHtml += `<tr>
                             <td>${product.name}</td>
                             <td>${product.description}</td>
-                            <td>${product.img}</td>
+                            <td>
+                                <img class="img-fluid" src="${product.img}">
+                            </td>
                         </tr>`
                     });
 
