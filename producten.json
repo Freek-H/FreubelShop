@@ -1,0 +1,12 @@
+[
+    {
+        "name": "Product 1",
+        "description": "Dit is een description 1",
+        "img": "https://realdutchfood.com/wp-content/uploads/2021/09/Nederlande-levesmiddelen-13.png"
+    },
+    {
+        "name": "Product 2",
+        "description": "Dit is een description 2",
+        "img": "https://realdutchfood.com/wp-content/uploads/2021/09/Nederlande-levesmiddelen-13.png"
+    }
+]
