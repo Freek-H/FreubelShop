@@ -43,14 +43,36 @@
             <li class="nav-item">
             <a class="nav-link disabled">Disabled</a>
             </li>
+
+
+            
         </ul>
         <form class="d-flex" role="search">
             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-success" type="submit">Search</button>
         </form>
+                    <!-- List item-knop om het winkelmandje te openen.-->
+        <ul class="navbar-nav me-auto mb-1 order-last">
+            <li class="nav-item">
+                <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvas">
+                    Winkelmandje
+                </button>
+            </li>
+        </ul>
         </div>
     </div>
     </nav>
+    <div class="container">
+        <div class="offcanvas offcanvas-end show" tabindex="-1" id="offcanvas" aria-labelledby="offcanvasLabel">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="offcanvasLabel">Winkelmandje</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+                
+            </div>
+      </div>
+    </div>
     <div class="container">
         <div class="row">
             <div class="col-12 text-center"><h1>Alle Producten</h1></div>
@@ -70,6 +92,7 @@
                         <tr>
                             <th class = "product">Product</th>
                             <th class = "omschrijving">Beschrijving</th>
+                            <th class = "prijs">Prijs</th>
                             <th class = "afbeelding">Afbeelding</th>
                         </tr>
                     </thead>
@@ -77,41 +100,49 @@
                         <tr>
                             <td>Prod_1</td>
                             <td>Beschr_1</td>
+                            <td><button type="button" class="btn btn-secondary">1.99</button></td>
                             <td>Img_1</td>
                         </tr>
                         <tr>
                             <td>Prod_2</td>
                             <td>Beschr_2</td>
+                            <td><button type="button" class="btn btn-secondary">1.99</button></td>
                             <td>Img_2</td>
                         </tr>
                         <tr>
                             <td>Prod_3</td>
                             <td>Beschr_3</td>
+                            <td><button type="button" class="btn btn-secondary">1.99</button></td>
                             <td>Img_3</td>
                         </tr>
                         <tr>
                             <td>Prod_4</td>
                             <td>Beschr_4</td>
+                            <td><button type="button" class="btn btn-secondary">1.99</button></td>
                             <td>Img_4</td>
                         </tr>
                         <tr>
                             <td>Prod_5</td>
                             <td>Beschr_5</td>
+                            <td><button type="button" class="btn btn-secondary">1.99</button></td>
                             <td>Img_5</td>
                         </tr>
                         <tr>
                             <td>Prod_6</td>
                             <td>Beschr_6</td>
+                            <td><button type="button" class="btn btn-secondary">1.99</button></td>
                             <td>Img_6</td>
                         </tr>
                         <tr>
                             <td>Prod_7</td>
                             <td>Beschr_7</td>
+                            <td><button type="button" class="btn btn-secondary">1.99</button></td>
                             <td>Img_7</td>
                         </tr>
                         <tr>
                             <td>Prod_8</td>
                             <td>Beschr_8</td>
+                            <td><button type="button" class="btn btn-secondary">1.99</button></td>
                             <td>Img_8</td>
                         </tr>
                     </tbody>
