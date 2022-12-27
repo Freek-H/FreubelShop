@@ -8,60 +8,81 @@
 </head>
 <body>
     <body>
-        <!-- Nav bar-->
-        <nav class="navbar navbar-expand-lg bg-primary">
-          <div class="container-fluid">
-            <a class="navbar-brand" href="index.html">Navbar</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-              aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                  <a class="nav-link active" aria-current="page" href="index.html">Home</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">Link</a>
-                </li>
-                <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Dropdown
-                  </a>
-                  <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">Action</a></li>
-                    <li><a class="dropdown-item" href="#">Another action</a></li>
-                    <li>
-                      <hr class="dropdown-divider">
-                    </li>
-                    <li><a class="dropdown-item" href="#">Something else here</a></li>
-                  </ul>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link disabled">Disabled</a>
-                </li>
-        
-        
-        
-              </ul>
-              <form class="d-flex" role="search">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success" type="submit">Search</button>
-              </form>
-              <!-- List item-knop om het winkelmandje te openen.-->
-              <ul class="navbar-nav me-auto mb-1 order-last">
-                <li class="nav-item">
-                  <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvas">
-                    Winkelmandje
-                  </button>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </nav>
-        <!-- Tot zover de nav bar -->
+          <!-- Nav bar-->
+  <nav class="navbar navbar-expand-lg bg-primary">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="index.html">Navbar</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Link</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Dropdown
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">Action</a></li>
+              <li><a class="dropdown-item" href="#">Another action</a></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li><a class="dropdown-item" href="#">Something else here</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link disabled">Disabled</a>
+          </li>
 
-        <p>Granny Inc</p>
+
+
+        </ul>
+        <form class="d-flex" role="search">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+        <!-- List item-knop om het winkelmandje te openen.-->
+        <ul class="navbar-nav me-auto mb-1 order-last">
+          <li class="nav-item">
+            <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvas">
+              Winkelmandje
+            </button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <!-- Dit is de uitklapbare winkelmand -->
+  <div class="container">
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvas" aria-labelledby="offcanvasLabel">
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasLabel">Winkelmandje</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+
+      </div>
+    </div>
+  </div>
+  <!-- Tot zover de nav bar -->
+
+  <!-- Granny Inc -->
+
+  <div class="container text-center">
+    <div class="position-center">
+      <p class="fw-bold fs-2">Granny Inc.</p>
+      <p class="fw-semibold fs-5">De one-stop-shop voor al je Granny-artikelen.</p>
+
+
+
+    </div>
       
 </body>
 </html>
