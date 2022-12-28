@@ -7,60 +7,81 @@
   <title>Document</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
 </head>
 
 <body>
+  <!-- Logo enzo -->
+  <div class="container-fluid text-bg-danger p-3 text-white text-left">
+    <div class="container-fluid navbar-brand fw-bold fs-1 lh-1">Granny Inc.&nbsp; &nbsp; <img src="grandma.png" width="75"
+        height="75">
+        <a class="btn btn-outline-light " href = "test.html" style="float:right"><i class="bi bi-person"
+          style="font-size:20px"></i>&nbsp;Inloggen</a>
+    </div>
+    <div class="container-fluid navbar-brand fs-6 lh-1">Laat de oma in je los!</a>
+    </div>
+  </div>
+
+
   <!-- Nav bar-->
-  <nav class="navbar navbar-expand-lg bg-primary">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="index.html">Navbar</a>
+  <nav class="navbar navbar-expand-lg bg-light">
+    <div class="container-fluid mb-center">
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <ul class="navbar-nav me-auto">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+            <a class="nav-link active" aria-current="page" href="index.html">Homepagina</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-          </li>
+
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Dropdown
+              Categorieën
             </a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Action</a></li>
-              <li><a class="dropdown-item" href="#">Another action</a></li>
+              <li><a class="dropdown-item" href="test.html">Handwerk</a></li>
+              <li><a class="dropdown-item" href="test.html">Lezen & Puzzelen</a></li>
+              <li><a class="dropdown-item" href="test.html">Creatief</a></li>
               <li>
                 <hr class="dropdown-divider">
               </li>
-              <li><a class="dropdown-item" href="#">Something else here</a></li>
+              <li><a class="dropdown-item" href="Alleproducten.html">Alle categorieën</a></li>
             </ul>
           </li>
           <li class="nav-item">
-            <a class="nav-link disabled">Disabled</a>
+            <a class="nav-link" href="FAQ.html">FAQ</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="overons.html.html">Over ons</a>
           </li>
 
 
 
+          <!-- Zoek gedeelte -->
         </ul>
-        <form class="d-flex" role="search">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Search</button>
+        <form class="navbar-nav mb-center me-3" role="search">
+          <input class="form-control me-1" size=40 type="search" placeholder="Waar ben je naar op zoek?"
+            aria-label="Search">
+          <button class="btn btn-outline-danger" type="submit">Zoeken</button>
         </form>
+
+
         <!-- List item-knop om het winkelmandje te openen.-->
-        <ul class="navbar-nav me-auto mb-1 order-last">
+        <ul class="navbar-nav ml-10 mb-center order-last">
           <li class="nav-item">
-            <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvas">
-              Winkelmandje
+            <button class="btn btn-outline-danger" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvas">
+              <i class="bi bi-cart3" style="font-size: 1.5rem; color: rgb(0, 0, 0);"></i>
             </button>
           </li>
         </ul>
+
       </div>
     </div>
   </nav>
+
+
   <!-- Dit is de uitklapbare winkelmand -->
   <div class="container">
     <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvas" aria-labelledby="offcanvasLabel">
@@ -75,16 +96,17 @@
   </div>
   <!-- Tot zover de nav bar -->
 
+
   <!-- Dit zijn de FAQs -->
   <div class="accordion" id="accordionExample">
     <div class="accordion-item">
       <h2 class="accordion-header" id="headingOne">
-        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
           aria-expanded="true" aria-controls="collapseOne">
           Wie zijn jullie?
         </button>
       </h2>
-      <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+      <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne"
         data-bs-parent="#accordionExample">
         <div class="accordion-body">
           <strong>Wij zijn de fantastic five:</strong> Rasoel, Tonie, Robert, Evi en Leonie. Vijf trainees van het Big
@@ -108,6 +130,7 @@
           te sturen. Helaas kan het soms gebeuren dat het wat langer duurt. Onze excuses hiervoor. Hou altijd je mailbox
           goed in de gaten voor de laatste informatie betreft je bestelling.
         </div>
+      </div>
       </div>
       <div class="accordion-item">
         <h2 class="accordion-header" id="headingThree">
