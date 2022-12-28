@@ -15,64 +15,91 @@
 </head>
 
 <body>
-<nav class="navbar navbar-expand-lg bg-primary">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="#">Navbar</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+<!-- Logo enzo -->
+<div class="container-fluid text-bg-danger p-3 text-white text-left">
+    <div class="container-fluid navbar-brand fw-bold fs-1 lh-1">Granny Inc.&nbsp; &nbsp; <img src="grandma.png" width="75"
+        height="75">
+        <a class="btn btn-outline-light " href = "test.html" style="float:right"><i class="bi bi-person"
+            style="font-size:20px"></i>&nbsp;Inloggen</a>
+    </div>
+    <div class="container-fluid navbar-brand fs-6 lh-1">Laat de oma in je los!</a>
+    </div>
+  </div>
+
+
+  <!-- Nav bar-->
+  <nav class="navbar navbar-expand-lg bg-light">
+    <div class="container-fluid mb-center">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Home</a>
-            </li>
-            <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-            </li>
-            <li class="nav-item dropdown">
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="index.html">Homepagina</a>
+          </li>
+
+          <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Dropdown
+              Categorieën
             </a>
             <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Action</a></li>
-                <li><a class="dropdown-item" href="#">Another action</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="#">Something else here</a></li>
+              <li><a class="dropdown-item" href="test.html">Handwerk</a></li>
+              <li><a class="dropdown-item" href="test.html">Lezen & Puzzelen</a></li>
+              <li><a class="dropdown-item" href="test.html">Creatief</a></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li><a class="dropdown-item" href="Alleproducten.html">Alle categorieën</a></li>
             </ul>
-            </li>
-            <li class="nav-item">
-            <a class="nav-link disabled">Disabled</a>
-            </li>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="FAQ.html">FAQ</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="overons.html.html">Over ons</a>
+          </li>
 
 
-            
+
+          <!-- Zoek gedeelte -->
         </ul>
-        <form class="d-flex" role="search">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success" type="submit">Search</button>
+        <form class="navbar-nav mb-center me-3" role="search">
+          <input class="form-control me-1" size=40 type="search" placeholder="Waar ben je naar op zoek?"
+            aria-label="Search">
+          <button class="btn btn-outline-danger" type="submit">Zoeken</button>
         </form>
-                    <!-- List item-knop om het winkelmandje te openen.-->
-        <ul class="navbar-nav me-auto mb-1 order-last">
-            <li class="nav-item">
-                <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvas">
-                    Winkelmandje
-                </button>
-            </li>
+
+
+        <!-- List item-knop om het winkelmandje te openen.-->
+        <ul class="navbar-nav ml-10 mb-center order-last">
+          <li class="nav-item">
+            <button class="btn btn-outline-danger" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvas">
+              <i class="bi bi-cart3" style="font-size: 1.5rem; color: rgb(0, 0, 0);"></i>
+            </button>
+          </li>
         </ul>
-        </div>
-    </div>
-    </nav>
-    <div class="container">
-        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvas" aria-labelledby="offcanvasLabel">
-            <div class="offcanvas-header">
-                <h5 class="offcanvas-title" id="offcanvasLabel">Winkelmandje</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-            </div>
-            <div class="offcanvas-body">
-                
-            </div>
+
       </div>
     </div>
+  </nav>
+
+
+  <!-- Dit is de uitklapbare winkelmand -->
+  <div class="container">
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvas" aria-labelledby="offcanvasLabel">
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasLabel">Winkelmandje</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+
+      </div>
+    </div>
+  </div>
+  <!-- Tot zover de nav bar -->
+
     <div class="container">
         <div class="row">
             <div class="col-12 text-center"><h1>Alle Producten</h1></div>
