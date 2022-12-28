@@ -166,10 +166,12 @@
                         productenHtml += `<tr>
                             <td>${product.naam}</td>
                             <td>${product.categorie}</td>
+                            <td>${product.prijs}</td>
                             <td>
                                 <img class="img-fluid" src="${product.img}">
                             </td>
                         </tr>`
+
                     });
 
                     document.getElementById('productCatalog').innerHTML = productenHtml;
