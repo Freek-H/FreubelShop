@@ -26,11 +26,9 @@ def delete(user_ID):
         cursor.execute("DELETE FROM users WHERE ID =%s", user_ID)
         conn.commit()
         response = jsonify('SUCCES')
-        response.status_code = 200
         return response 
-    except Exception:
-            response = jsonify('Verwijderen mislukt!')
-            return response
+    except Exception as e:
+        print(e)
     finally:
         cursor.close() 
         conn.close()  

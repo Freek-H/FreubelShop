@@ -26,11 +26,9 @@ def profile():
         cursor.execute("SELECT ID, Username, Password, Voornaam, Achternaam, Geslacht, Adres, Telefoon, Email, Geboortedatum, Betaling, Aflever FROM users")
         empRows = cursor.fetchall()
         response = jsonify(empRows)
-        response.status_code = 200
         return response
-    except Exception:
-            response = jsonify('Fout in het ophalen van gegevens!')
-            return response
+    except Exception as e:
+        print(e)
     finally:
         cursor.close() 
         conn.close()  

@@ -36,7 +36,8 @@ def user_register():
 @app.route('/login', methods=['POST'])
 def user_login():
     return login.login()
-        
+
+### Probleem met GET --> Voor iedereen toegankelijk met URL --> Enkel alle profielen oproepen via JSON door bv Admin zoals gebeurt door individuele gebruikers in eigen profiel ### 
 @app.route('/profile')
 def user_profile():
     return profiel.profile()
@@ -58,6 +59,8 @@ def vinddeproducten():
     #return producten.vindalleproducten() 
     return producten.vindNonStandardGegevens()
 
+### ERROR CODES ### 
+
 @app.errorhandler(404)
 def showMessage(error=None):
     message = {
@@ -66,4 +69,24 @@ def showMessage(error=None):
     }
     response = jsonify(message)
     response.status_code = 404
+    return response
+
+@app.errorhandler(405)
+def showMessage(error=None):
+    message = {
+        'STATUS': 405,
+        'MESSAGE': 'Methode kan niet handmatig worden opgeroepen: ' + request.url,
+    }
+    response = jsonify(message)
+    response.status_code = 405
+    return response
+
+@app.errorhandler(500)
+def showMessage(error=None):
+    message = {
+        'STATUS': 500,
+        'MESSAGE': 'Er is een probleem opgetreden op de server of website: ' + request.url,
+    }
+    response = jsonify(message)
+    response.status_code = 500
     return response
