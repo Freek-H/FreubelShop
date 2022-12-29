@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Test</title>
+</head>
+
+<body style="text-align:center;" id="body">
+    <a href="index.html">Terug</a><br>
+    <h1 style="color:green;">
+      Registreer
+    </h1>
+ 
+    <p>
+        <input type="text" id="Username" placeholder="Username"><br><br>
+        <input type="password" id="Password" placeholder="Password"><br><br>
+        <input type="text" id="Voornaam" placeholder="Voornaam"><br>    <br>
+        <input type="text" id="Achternaam" placeholder="Achternaam"><br><br>
+        Geslacht  
+        <select id = "Geslacht" name = "Geslacht">
+            <option value="Anders">Anders</option>
+            <option value="Man">Man</option>
+            <option value="Vrouw">Vrouw</option>
+            </select>   <br><br>
+        <input type="text" id="Woonadres" placeholder="Woonadres"><br><br>
+        <input type="email" id="Email" placeholder="Email"><br><br>
+        <input type="tel" id="Telefoon" placeholder="Telefoon"><br><br>
+        Geboortedatum<input type="date" id="Geboortedatum" placeholder="Geboortedatum"><br><br>
+        Betaling <select id = "Betaling" name = "Betaling">
+            <option value="iDeal">iDeal</option>
+            <option value="Credit Card">Credit Card</option>
+            <option value="PayPal">PayPal</option>
+            </select><br><br>
+        <input type="text" id="Afleveradres" placeholder="Afleveradres"><br>
+
+       
+       
+        <br>
+         
+        <button onclick="sendJSON()">Bevestig</button>
+ 
+      <p class="result" style="color:green"></p>
+     
+   </p>
+
+<script>
+        window.onload = CheckSession
+        function CheckSession() {
+        if (localStorage.getItem("Ingelogd") == "Ja"){
+            alert("Je bent al ingelogd!")
+            window.location.href = "index.html";
+        }
+    }
+
+function sendJSON() {
+    var User = document.getElementById("Username").value
+    var Pass = document.getElementById("Password").value
+    var Voor = document.getElementById("Voornaam").value
+    var Achter = document.getElementById("Achternaam").value
+    var Gesl = document.getElementById("Geslacht").value
+    var Woon = document.getElementById("Woonadres").value
+    var Tel = document.getElementById("Telefoon").value
+    var Mail = document.getElementById("Email").value
+    var Datum = document.getElementById("Geboortedatum").value
+    var Betaal = document.getElementById("Betaling").value
+    var AAdres = document.getElementById("Afleveradres").value
+
+
+    fetch('http://127.0.0.1:5000/register', {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+        Username: User,
+        Password: Pass,
+        Voornaam: Voor,
+        Achternaam: Achter,
+        Geslacht: Gesl,
+        Adres: Woon,
+        Telefoon: Tel,
+        Email: Mail,
+        Geboortedatum: Datum,
+        Betaling: Betaal,
+        Aflever: AAdres
+        }),
+        })
+            .then(response => response.json())
+            .then(json => {
+                if (json === 'BESTAAT'){
+                    alert("Gebruiker bestaat al!")
+                    window.location.href = "register.html";
+                    return
+                }
+                if (json === 'SUCCES'){
+                    alert("Gebruiker aangemaakt!")
+                    window.location.href = "login.html";
+                    return
+                }
+                else {
+                    alert("Niet alles is goed ingevuld!")
+                }
+            })
+            .catch(err => console.log('Request Failed', err)); 
+}
+
+</script>
+</body>
+</html>
