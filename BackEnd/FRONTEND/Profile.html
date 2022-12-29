@@ -126,17 +126,13 @@ function Update(){
         },
         body: JSON.stringify({
         ID: ID,
-        Username: Username,
         //Password: Pass,
-        Voornaam: Voornaam,
-        Achternaam: Achternaam,
-        Geslacht: Geslacht,
         Adres: Woon,
         Telefoon: Tel,
         Email: Mail,
-        //Geboortedatum: Geboortedatum,
+        Geboortedatum: Geboortedatum,
         Betaling: Betaal,
-        Aflever: AAdres,
+        Aflever: AAdres
         }),
     })
     .then(response => response.json())
