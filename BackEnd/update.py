@@ -25,28 +25,51 @@ def update():
     try:
         _json = request.json
         _ID = _json['ID']
-        ##_Username = _json['Username']
-        ##_Password = sha512_crypt.encrypt(_json['Password'])
-        ##_Voornaam = _json['Voornaam']
-        ##_Achternaam = _json['Achternaam']
-        ## _Geslacht = _json['Geslacht']
-        _Telefoon = _json['Telefoon']
-        _Adres = _json['Adres']
-        _Email = _json['Email']
-       ## _Geboortedatum = _json['Geboortedatum']
-        _Betaling = _json['Betaling']
-        _Aflever = _json['Aflever']
-        if _Adres and _Telefoon and _Email and _Betaling and _Aflever and _ID and request.method == 'PUT':
-            sqlQuery = "UPDATE users SET Adres=%s, Telefoon=%s, Email=%s, Betaling=%s, Aflever=%s WHERE ID=%s"
-            bindData = (_Adres, _Telefoon, _Email, _Betaling, _Aflever, _ID)
+
+        if(_json['Adres']):
+            _Adres = _json['Adres']
+            sqlQuery = "UPDATE users SET Adres=%s WHERE ID=%s"
+            bindData = (_Adres, _ID)
             cursor.execute(sqlQuery, bindData)
             conn.commit()
-            response = jsonify('SUCCES')
-            response.status_code = 200
+        if(_json['Telefoon']):
+            _Telefoon = _json['Telefoon']
+            sqlQuery = "UPDATE users SET Telefoon=%s WHERE ID=%s"
+            bindData = (_Telefoon, _ID)
+            cursor.execute(sqlQuery, bindData)
+            conn.commit()
+        if(_json['Email']):
+            _Email = _json['Email']
+            sqlQuery = "UPDATE users SET Email=%s WHERE ID=%s"
+            bindData = (_Email, _ID)
+            cursor.execute(sqlQuery, bindData)
+            conn.commit()
+        if(_json['Betaling']):
+            _Betaling = _json['Betaling']
+            sqlQuery = "UPDATE users SET Betaling=%s WHERE ID=%s"
+            bindData = (_Betaling, _ID)
+            cursor.execute(sqlQuery, bindData)
+            conn.commit()
+        if(_json['Aflever']):
+            _Aflever = _json['Aflever']
+            sqlQuery = "UPDATE users SET Aflever=%s WHERE ID=%s"
+            bindData = (_Aflever, _ID)
+            cursor.execute(sqlQuery, bindData)
+            conn.commit()
+        if(_json['Password']):
+            _Password = sha512_crypt.encrypt(_json['Password'])
+            sqlQuery = "UPDATE users SET Password=%s WHERE ID=%s"
+            bindData = (_Password, _ID)
+            cursor.execute(sqlQuery, bindData)
+            conn.commit()
+        if(not _json['Adres'] and not _json['Telefoon'] and not _json['Email'] and not _json['Betaling'] and not _json['Aflever'] and not _json['Password']):
+            response = jsonify('FAIL')
             return response 
-    except Exception:
-            response = jsonify('Niet alles is ingevuld!')
-            return response
+        else: 
+            response = jsonify('SUCCES')
+            return response 
+    except Exception as e:
+        print(e)
     finally:
         cursor.close() 
         conn.close()  

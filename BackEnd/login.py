@@ -30,17 +30,18 @@ def login():
         if _Username and _Password:
             cursor.execute('SELECT * FROM users WHERE Username = %s', _Username)
             account = cursor.fetchone()
-            
-        if account:
-            if sha512_crypt.verify(_Password, account['Password']):
-                response = jsonify('SUCCES')
-                response.status_code = 200
-                return response 
-        else: 
-            response = jsonify('Foutieve gebruikersnaam en / of wachtwoord!')
-            return response
+            if account:
+                if sha512_crypt.verify(_Password, account['Password']):
+                    response = jsonify('SUCCES')
+                    return response 
+                else:
+                    response = jsonify('FAIL')
+                    return response        
+        else:
+            response = jsonify('FAIL')
+            return response   
     except Exception as e:
-            print(e)
+        print(e)
     finally:
         cursor.close() 
         conn.close()  

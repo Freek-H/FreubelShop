@@ -37,10 +37,9 @@ def add():
             cursor.execute(sqlQuery, bindData)
             conn.commit()
             response = jsonify('SUCCES')
-            response.status_code = 200
             return response 
         else: 
-            response = jsonify('FAILXXX')
+            response = jsonify('FAIL')
             return response 
     except Exception as e:
             print(e)

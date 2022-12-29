@@ -39,16 +39,15 @@ def register():
         if _Username and _Password:
             cursor.execute('SELECT * FROM users WHERE Username = %s', _Username)
             account = cursor.fetchone()
-        if account:
-            response = jsonify('BESTAAT')
-            return response 
+            if account:
+                    response = jsonify('BESTAAT')
+                    return response 
         if  _Username and _Password and _Voornaam and _Achternaam and _Geslacht and _Adres and _Telefoon and _Email and _Geboortedatum and _Betaling and _Aflever and request.method == 'POST':
             sqlQuery = "INSERT INTO users(Username, Password, Voornaam, Achternaam, Geslacht, Adres, Telefoon, Email, Geboortedatum, Betaling, Aflever) VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
             bindData = (_Username, _Password, _Voornaam, _Achternaam, _Geslacht, _Adres, _Telefoon, _Email, _Geboortedatum, _Betaling, _Aflever)
             cursor.execute(sqlQuery, bindData)
             conn.commit()
             response = jsonify('SUCCES')
-            response.status_code = 200
             return response 
         else: 
             response = jsonify('FAIL')
