@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Test</title>
+</head>
+<a href="index.html">Terug</a><br><br>
+
+
+<b>Mijn Profiel</b>
+<br><br>
+<div id="myData"></div>
+
+<br><br>
+<button id="Delete" onclick="Delete()">Delete Account</button>
+
+<br><br><br>
+
+<b>UPDATE ACCOUNT</b><br><br>
+
+Woonadres<br><input type="text" id="Woonadres" value=""><br><br>Email<br>
+<input type="email" id="Email" value=""><br><br>Telefoon<br>
+<input type="tel" id="Telefoon" value=""><br><br>Afleveradres<br>
+<input type="text" id="Aflever" value=""><br><br>Wachtwoord<br>
+<input type="password" id="Password" value=""><br><br>
+Betaling <select id = "Betaling" name = "Betaling">
+    <option value="iDeal">iDeal</option>
+    <option value="Credit Card">Credit Card</option>
+    <option value="PayPal">PayPal</option>
+</select><br><br>
+
+
+
+<button id="Update" onclick="Update()">Update Account</button>
+
+<script>
+    window.onload = CheckSession
+    function CheckSession() {
+    if (localStorage.getItem("Ingelogd") != "Ja"){
+        alert("Je bent niet ingelogd!")
+        window.location.href = "login.html";
+    }
+}
+
+Sessienaam = localStorage.getItem("Sessienaam")
+var resultaat = document.getElementById("myData")
+
+fetch('http://127.0.0.1:5000/profile')
+    .then(response => response.json())
+    .then((data) => {
+    for (i = 0; i< data.length; i++) {
+        if (data[i].Username == Sessienaam){
+    ID = data[i].ID
+    Username = data[i].Username 
+    Voornaam = data[i].Voornaam
+    Achternaam = data[i].Achternaam
+    Geslacht = data[i].Geslacht
+    Adres = data[i].Adres
+    Telefoon = data[i].Telefoon
+    Email = data[i].Email
+    Geboortedatum = data[i].Geboortedatum
+    Betaling = data[i].Betaling
+    Aflever = data[i].Aflever
+    Password = data[i].Password
+    document.getElementById("Woonadres").value = Adres;
+    document.getElementById("Email").value = Email;
+    document.getElementById("Telefoon").value = Telefoon;
+    document.getElementById("Aflever").value = Aflever;
+    document.getElementById("Betaling").value = Betaling;
+    document.getElementById("Password").value = Password;
+    resultaat.innerHTML = 
+    'Username: ' + data[i].Username + "<br>" +
+    'ID: ' + data[i].ID + "<br><br>" + 
+    'Voornaam: ' + data[i].Voornaam + "<br>" + 
+    'Achternaam: ' + data[i].Achternaam + "<br>" + 
+    'Geslacht: ' + data[i].Geslacht + "<br>" + 
+    'Adres: ' + data[i].Adres + "<br>" +
+    'Telefoon: ' + data[i].Telefoon + "<br>" + 
+    'Email: ' + data[i].Email + "<br>" + 
+    'Geboortedatum: ' + data[i].Geboortedatum + "<br>" + 
+    'Betaling: ' + data[i].Betaling + "<br>" + 
+    'Aflever: ' + data[i].Aflever + "<br>"
+    }}
+    })
+    .catch(err => console.log('Request Failed', err)); 
+
+function Delete(){
+    url = "http://127.0.0.1:5000/delete/" + ID
+    localStorage.removeItem("Ingelogd")
+    localStorage.removeItem("Sessienaam")
+    localStorage.removeItem("Rol")
+    
+    fetch(url, {
+        method: "DELETE",
+        headers: {
+            'Content-Type': 'application/json'
+        },
+    })
+    .then(response => response.json())
+    .then(json => {
+        if (json === 'SUCCES'){
+            alert("Gebruiker verwijderd!")
+            window.location.href = "index.html";
+        }
+        else {
+            alert("Er is iets misgegaan..")
+        }
+    })
+    .catch(err => console.log('Request Failed', err)); 
+}
+
+function Update(){
+    var Woon = document.getElementById("Woonadres").value
+    var Tel = document.getElementById("Telefoon").value
+    var Mail = document.getElementById("Email").value
+    var Betaal = document.getElementById("Betaling").value
+    var AAdres = document.getElementById("Aflever").value
+    var Pass = document.getElementById("Password").value
+
+    fetch ("http://127.0.0.1:5000/update", {
+        method: "PUT",
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+        ID: ID,
+        Username: Username,
+        //Password: Pass,
+        Voornaam: Voornaam,
+        Achternaam: Achternaam,
+        Geslacht: Geslacht,
+        Adres: Woon,
+        Telefoon: Tel,
+        Email: Mail,
+        //Geboortedatum: Geboortedatum,
+        Betaling: Betaal,
+        Aflever: AAdres,
+        }),
+    })
+    .then(response => response.json())
+    .then(json => {
+        if (json === 'SUCCES'){
+            alert("Gegevens aangepast!")
+            window.location.href = "profile.html";
+        }
+        else {
+            alert("Niet alles is goed ingevuld!")
+        }
+    })
+    .catch(err => console.log('Request Failed', err)); 
+}
+
+
+</script>
+</body>
+</html>

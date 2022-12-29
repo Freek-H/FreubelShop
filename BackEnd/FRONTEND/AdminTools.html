@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Product Manager</title>
+</head>
+
+<body style="text-align:center;" id="body">
+    <a href="index.html">Terug</a><br>
+    <h1 style="color:green;">
+      Product Manager
+    </h1>
+ 
+    <p>
+        <input type="text" id="naam" placeholder="Naam"><br><br>
+        <input type="text" id="categorie" placeholder="Categorie"><br><br>
+        <input type="text" id="prijs" placeholder="Prijs"><br><br>
+        <input type="text" id="sterren" placeholder="Sterren"><br><br>
+        <input type="text" id="leverbaar" placeholder="Leverbaar"><br><br>
+        <input type="text" id="afbeelding_url" placeholder="afbeelding URL"><br><br>
+
+       
+       
+        <br>
+         
+        <button onclick="sendJSON()">Voeg toe</button>
+ 
+      <p class="result" style="color:green"></p>
+     
+   </p>
+
+   <br><br>
+
+<b>Andere Admin Tools</b><br><br>
+
+<a href="Profiles.html">Alle Users</a><br><br>
+<a href="">Alle Bestellingen (N/A)</a><br><br>
+<a href="">Jaarcijfers (N/A)</a><br><br>
+
+
+
+<script>
+        window.onload = CheckSession
+        function CheckSession() {
+        if (localStorage.getItem("Rol") != "Winkelier"){
+            alert("Je hebt geen winkeliers-rechten! Tip: Admin / Admin")
+            window.location.href = "index.html";
+        }
+    }
+
+function sendJSON() {
+    var Naam = document.getElementById("naam").value
+    var Cat = document.getElementById("categorie").value
+    var Prix = document.getElementById("prijs").value
+    var Star = document.getElementById("sterren").value
+    var Leev = document.getElementById("leverbaar").value
+    var Img = document.getElementById("afbeelding_url").value
+
+    fetch('http://127.0.0.1:5000/addproduct', {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+        naam: Naam,
+        categorie: Cat,
+        prijs: Prix,
+        sterren: Star,
+        leverbaar: Leev,
+        afbeelding_url: Img
+        }),
+        })
+            .then(response => response.json())
+            .then(json => {
+                if (json === 'SUCCES'){
+                    alert("Product Toegevoegd!")
+                    window.location.href = "AdminTools.html";
+                    return
+                }
+                else {
+                    alert("Er is iets misgegaan..")
+                }
+            })
+            .catch(err => console.log('Request Failed', err)); 
+}
+
+</script>
+</body>
+</html>
