@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Test</title>
+    <title>Login</title>
 </head>
 
 <body style="text-align:center;" id="body">
-    <a href="index.html">Terug</a><br>
+    <a href="../../FrontEnd/index.html">Terug</a><br>
     <h1 style="color:green;">
       Login
     </h1>
@@ -33,7 +33,7 @@ Nog geen account? <br>
     function CheckSession() {
     if (localStorage.getItem("Ingelogd") == "Ja"){
         alert("Je bent al ingelogd!")
-        window.location.href = "index.html";
+        window.location.href = "../../FrontEnd/index.html";
     }
 }
 
@@ -64,7 +64,7 @@ function sendJSON() {
                     localStorage.setItem("Sessienaam", User);
                     localStorage.setItem("Rol", "Klant");
                     setSession()
-                if (User == "Tonie" || User == "Admin"){
+                if (User == "Tonie" || User == "Admin"){ // Geef Winkeliers hier rechten 
                     localStorage.setItem("Rol", "Winkelier");
                     setSession()                    
                 }
@@ -82,7 +82,7 @@ Sessienaam = localStorage.getItem("Sessienaam")
 Rol = localStorage.getItem("Rol")
 
 sessie.innerHTML = "<b>SESSION</b>" + "<br>" + "Ingelogd: " + Ingelogd + "<br>" + "Gebruiker: " +Sessienaam + "<br>" + "Rol: " +Rol
-window.location.href = "index.html";
+window.location.href = "../../FrontEnd/index.html";
 
 }
 
