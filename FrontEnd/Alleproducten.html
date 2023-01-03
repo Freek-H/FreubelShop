@@ -15,175 +15,178 @@
 </head>
 
 <body>
-<!-- Logo enzo -->
-<div class="container-fluid text-bg-danger p-3 text-white text-left">
-  <div class="container-fluid navbar-brand fw-bold fs-1 lh-1">Granny Inc.&nbsp; &nbsp; <img src="grandma.png" width="75"
-      height="75">
-    <a class="btn btn-outline-light " href = "inlogtest.html" style="float:right"><i class="bi bi-person"
-        style="font-size:20px"></i>&nbsp;Inloggen</a>
-  </div>
-  <div class="container-fluid navbar-brand fs-6 lh-1">Laat de oma in je los!</a>
-  </div>
-</div>
+  <header>
+    <!-- Logo enzo -->
+    <div class="container-fluid text-bg-danger p-3 text-white text-left">
+      <div class="container-fluid navbar-brand fw-bold fs-1 lh-1">Granny Inc.&nbsp; &nbsp; <img src="grandma.png"
+          width="75" height="75">
+        <a class="btn btn-outline-light " href="../BackEnd/FRONTEND/Login.html" style="float:right">
+          <i class="bi bi-person" style="font-size:20px"></i>&nbsp;Inloggen</a>
+      </div>
+      <div class="container-fluid navbar-brand fs-6 lh-1">Laat de oma in je los!</a>
+      </div>
+    </div>
 
-
-
-<!-- Nav bar-->
-<nav class="navbar navbar-expand-lg bg-light">
-  <div class="container-fluid mb-center">
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="index.html">Homepagina</a>
-        </li>
-
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Categorieën
-          </a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="test.html">Handwerk</a></li>
-            <li><a class="dropdown-item" href="test.html">Lezen & Puzzelen</a></li>
-            <li><a class="dropdown-item" href="test.html">Creatief</a></li>
-            <li>
-              <hr class="dropdown-divider">
+    <!-- Nav bar-->
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid mb-center">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="index.html">Homepagina</a>
             </li>
-            <li><a class="dropdown-item" href="Alleproducten.html">Alle categorieën</a></li>
+
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                Categorieën
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="test.html">Handwerk</a></li>
+                <li><a class="dropdown-item" href="test.html">Lezen & Puzzelen</a></li>
+                <li><a class="dropdown-item" href="test.html">Creatief</a></li>
+                <li>
+                  <hr class="dropdown-divider">
+                </li>
+                <li><a class="dropdown-item" href="Alleproducten.html">Alle categorieën</a></li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="FAQ.html">FAQ</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="overons.html">Over ons</a>
+            </li>
+
+            <!-- Zoek gedeelte -->
           </ul>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="FAQ.html">FAQ</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="overons.html">Over ons</a>
-        </li>
+          <form class="navbar-nav mb-center me-3" role="search">
+            <input class="form-control me-1" size=40 type="search" placeholder="Waar ben je naar op zoek?"
+              aria-label="Search">
+            <button class="btn btn-outline-danger" type="submit">Zoeken</button>
+          </form>
 
 
+          <!-- List item-knop om het winkelmandje te openen.-->
+          <ul class="navbar-nav ml-10 mb-center order-last">
+            <li class="nav-item">
+              <button class="btn btn-outline-danger" type="button" data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvas">
+                <i class="bi bi-cart3" style="font-size: 1.5rem; color: rgb(0, 0, 0);"></i>
+              </button>
+            </li>
+          </ul>
 
-        <!-- Zoek gedeelte -->
-      </ul>
-      <form class="navbar-nav mb-center me-3" role="search">
-        <input class="form-control me-1" size=40 type="search" placeholder="Waar ben je naar op zoek?"
-          aria-label="Search">
-        <button class="btn btn-outline-danger" type="submit">Zoeken</button>
-      </form>
+        </div>
+      </div>
+    </nav>
+    <!-- Tot zover de nav bar -->
 
 
-      <!-- List item-knop om het winkelmandje te openen.-->
-      <ul class="navbar-nav ml-10 mb-center order-last">
-        <li class="nav-item">
-          <button class="btn btn-outline-danger" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvas">
-            <i class="bi bi-cart3" style="font-size: 17px; color: rgb(0, 0, 0);"></i>
-          </button>
-        </li>
-      </ul>
+    <!-- Dit is de uitklapbare winkelmand -->
+    <div class="container mb-4">
+      <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvas" aria-labelledby="offcanvasLabel">
+        <div class="offcanvas-header">
+          <h5 class="offcanvas-title" id="offcanvasLabel">Winkelmandje</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
 
+        </div>
+      </div>
     </div>
-  </div>
-</nav>
+  </header>
 
-
-<!-- Dit is de uitklapbare winkelmand -->
-<div class="container mb-4">
-  <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvas" aria-labelledby="offcanvasLabel">
-    <div class="offcanvas-header">
-      <h5 class="offcanvas-title" id="offcanvasLabel">Winkelmandje</h5>
-      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-    </div>
-    <div class="offcanvas-body">
-
-    </div>
-  </div>
-</div>
-<!-- Tot zover de nav bar -->
-
+  <main>
     <div class="container">
-        <div class="row">
-            <div class="col-12 text-center"><h1>Alle Producten</h1></div>
-        </div>
-        <div class="row">
-            <div class="col-4">
-                <table class="table">
-                    <tr><td>Categorie</td></tr>
-                    <tr><td>Prijs</td></tr>
-                    <tr><td>Kleur</td></tr>
-                    <tr><td>Merk</td></tr>
-                </table>
-            </div>
-            <div class="col-8">
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th class = "product">Product</th>
-                            <th class = "omschrijving">Beschrijving</th>
-                            <th class = "prijs">Prijs</th>
-                            <th class = "afbeelding">Afbeelding</th>
-                        </tr>
-                    </thead>
-                    <tbody id="productCatalog">
-                        <tr>
-                            <td>Prod_1</td>
-                            <td>Beschr_1</td>
-                            <td><button type="button" class="btn btn-secondary">1.99</button></td>
-                            <td>Img_1</td>
-                        </tr>
-                        <tr>
-                            <td>Prod_2</td>
-                            <td>Beschr_2</td>
-                            <td><button type="button" class="btn btn-secondary">1.99</button></td>
-                            <td>Img_2</td>
-                        </tr>
-                        <tr>
-                            <td>Prod_3</td>
-                            <td>Beschr_3</td>
-                            <td><button type="button" class="btn btn-secondary">1.99</button></td>
-                            <td>Img_3</td>
-                        </tr>
-                        <tr>
-                            <td>Prod_4</td>
-                            <td>Beschr_4</td>
-                            <td><button type="button" class="btn btn-secondary">1.99</button></td>
-                            <td>Img_4</td>
-                        </tr>
-                        <tr>
-                            <td>Prod_5</td>
-                            <td>Beschr_5</td>
-                            <td><button type="button" class="btn btn-secondary">1.99</button></td>
-                            <td>Img_5</td>
-                        </tr>
-                        <tr>
-                            <td>Prod_6</td>
-                            <td>Beschr_6</td>
-                            <td><button type="button" class="btn btn-secondary">1.99</button></td>
-                            <td>Img_6</td>
-                        </tr>
-                        <tr>
-                            <td>Prod_7</td>
-                            <td>Beschr_7</td>
-                            <td><button type="button" class="btn btn-secondary">1.99</button></td>
-                            <td>Img_7</td>
-                        </tr>
-                        <tr>
-                            <td>Prod_8</td>
-                            <td>Beschr_8</td>
-                            <td><button type="button" class="btn btn-secondary">1.99</button></td>
-                            <td>Img_8</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-    
+      <div class="row">
+          <div class="col-12 text-center"><h1>Alle Producten</h1></div>
+      </div>
+      <div class="row">
+          <div class="col-4">
+              <table class="table">
+                  <tr><td>Categorie</td></tr>
+                  <tr><td>Prijs</td></tr>
+                  <tr><td>Kleur</td></tr>
+                  <tr><td>Merk</td></tr>
+              </table>
+          </div>
+          <div class="col-8">
+              <table class="table table-striped">
+                  <thead>
+                      <tr>
+                          <th class = "product">Product</th>
+                          <th class = "omschrijving">Beschrijving</th>
+                          <th class = "prijs">Prijs</th>
+                          <th class = "afbeelding">Afbeelding</th>
+                      </tr>
+                  </thead>
+                  <tbody id="productCatalog">
+                      <tr>
+                          <td>Prod_1</td>
+                          <td>Beschr_1</td>
+                          <td><button type="button" class="btn btn-secondary">1.99</button></td>
+                          <td>Img_1</td>
+                      </tr>
+                      <tr>
+                          <td>Prod_2</td>
+                          <td>Beschr_2</td>
+                          <td><button type="button" class="btn btn-secondary">1.99</button></td>
+                          <td>Img_2</td>
+                      </tr>
+                      <tr>
+                          <td>Prod_3</td>
+                          <td>Beschr_3</td>
+                          <td><button type="button" class="btn btn-secondary">1.99</button></td>
+                          <td>Img_3</td>
+                      </tr>
+                      <tr>
+                          <td>Prod_4</td>
+                          <td>Beschr_4</td>
+                          <td><button type="button" class="btn btn-secondary">1.99</button></td>
+                          <td>Img_4</td>
+                      </tr>
+                      <tr>
+                          <td>Prod_5</td>
+                          <td>Beschr_5</td>
+                          <td><button type="button" class="btn btn-secondary">1.99</button></td>
+                          <td>Img_5</td>
+                      </tr>
+                      <tr>
+                          <td>Prod_6</td>
+                          <td>Beschr_6</td>
+                          <td><button type="button" class="btn btn-secondary">1.99</button></td>
+                          <td>Img_6</td>
+                      </tr>
+                      <tr>
+                          <td>Prod_7</td>
+                          <td>Beschr_7</td>
+                          <td><button type="button" class="btn btn-secondary">1.99</button></td>
+                          <td>Img_7</td>
+                      </tr>
+                      <tr>
+                          <td>Prod_8</td>
+                          <td>Beschr_8</td>
+                          <td><button type="button" class="btn btn-secondary">1.99</button></td>
+                          <td>Img_8</td>
+                      </tr>
+                  </tbody>
+              </table>
+          </div>
+      </div>
+  </div>
+  
 
-            
-        <!--Dit is het middelste scroll venster met de producten. Door middel van een dynamische tabel kun je hier eindeloos blijven scrollen om alle producten te zien.</div>
-        <div id = "rechter">Dit is de rechter banner met aanbiedingen.</div>
-        <div id = "onder">Dit is de onderste banner met site informatie.</div><-->
+          
+      <!--Dit is het middelste scroll venster met de producten. Door middel van een dynamische tabel kun je hier eindeloos blijven scrollen om alle producten te zien.</div>
+      <div id = "rechter">Dit is de rechter banner met aanbiedingen.</div>
+      <div id = "onder">Dit is de onderste banner met site informatie.</div><-->
+  </main>
+ 
     <script>
         function laadData() {
             fetch('http://localhost:5000/producten')
