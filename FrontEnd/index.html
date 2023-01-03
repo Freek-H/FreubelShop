@@ -4,164 +4,156 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Homepagina</title>
+  <title>Granny Inc. - Homepagina</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
 </head>
 
 <body>
-  <!-- Logo enzo -->
-  <div class="container-fluid text-bg-danger p-3 text-white text-left">
-    <div class="container-fluid navbar-brand fw-bold fs-1 lh-1">Granny Inc.&nbsp; &nbsp; <img src="grandma.png" width="75"
-        height="75">
-      <a class="btn btn-outline-light " href = "test.html" style="float:right"><i class="bi bi-person"
-          style="font-size:20px"></i>&nbsp;Inloggen</a>
-    </div>
-    <div class="container-fluid navbar-brand fs-6 lh-1">Laat de oma in je los!</a>
-    </div>
-  </div>
 
-
-
-  <!-- Nav bar-->
-  <nav class="navbar navbar-expand-lg bg-light">
-    <div class="container-fluid mb-center">
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="index.html">Homepagina</a>
-          </li>
-
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Categorieën
-            </a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="test.html">Handwerk</a></li>
-              <li><a class="dropdown-item" href="test.html">Lezen & Puzzelen</a></li>
-              <li><a class="dropdown-item" href="test.html">Creatief</a></li>
-              <li>
-                <hr class="dropdown-divider">
-              </li>
-              <li><a class="dropdown-item" href="Alleproducten.html">Alle categorieën</a></li>
-            </ul>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="FAQ.html">FAQ</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="overons.html">Over ons</a>
-          </li>
-
-
-
-          <!-- Zoek gedeelte -->
-        </ul>
-        <form class="navbar-nav mb-center me-3" role="search">
-          <input class="form-control me-1" size=40 type="search" placeholder="Waar ben je naar op zoek?"
-            aria-label="Search">
-          <button class="btn btn-outline-danger" type="submit">Zoeken</button>
-        </form>
-
-
-        <!-- List item-knop om het winkelmandje te openen.-->
-        <ul class="navbar-nav ml-10 mb-center order-last">
-          <li class="nav-item">
-            <button class="btn btn-outline-danger" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvas">
-              <i class="bi bi-cart3" style="font-size: 1.5rem; color: rgb(0, 0, 0);"></i>
-            </button>
-          </li>
-        </ul>
-
+  <header>
+    <!-- Logo enzo -->
+    <div class="container-fluid text-bg-danger p-3 text-white text-left">
+      <div class="container-fluid navbar-brand fw-bold fs-1 lh-1">Granny Inc.&nbsp; &nbsp; <img src="grandma.png"
+          width="75" height="75">
+        <a class="btn btn-outline-light " href="../BackEnd/FRONTEND/Login.html" style="float:right">
+          <i class="bi bi-person" style="font-size:20px"></i>&nbsp;Inloggen</a>
+      </div>
+      <div class="container-fluid navbar-brand fs-6 lh-1">Laat de oma in je los!</a>
       </div>
     </div>
-  </nav>
+
+    <!-- Nav bar-->
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid mb-center">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="index.html">Homepagina</a>
+            </li>
+
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                Categorieën
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="test.html">Handwerk</a></li>
+                <li><a class="dropdown-item" href="test.html">Lezen & Puzzelen</a></li>
+                <li><a class="dropdown-item" href="test.html">Creatief</a></li>
+                <li>
+                  <hr class="dropdown-divider">
+                </li>
+                <li><a class="dropdown-item" href="Alleproducten.html">Alle categorieën</a></li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="FAQ.html">FAQ</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="overons.html">Over ons</a>
+            </li>
+
+            <!-- Zoek gedeelte -->
+          </ul>
+          <form class="navbar-nav mb-center me-3" role="search">
+            <input class="form-control me-1" size=40 type="search" placeholder="Waar ben je naar op zoek?"
+              aria-label="Search">
+            <button class="btn btn-outline-danger" type="submit">Zoeken</button>
+          </form>
 
 
-  <!-- Dit is de uitklapbare winkelmand -->
-  <div class="container mb-4">
-    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvas" aria-labelledby="offcanvasLabel">
-      <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="offcanvasLabel">Winkelmandje</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-      </div>
-      <div class="offcanvas-body">
+          <!-- List item-knop om het winkelmandje te openen.-->
+          <ul class="navbar-nav ml-10 mb-center order-last">
+            <li class="nav-item">
+              <button class="btn btn-outline-danger" type="button" data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvas">
+                <i class="bi bi-cart3" style="font-size: 1.5rem; color: rgb(0, 0, 0);"></i>
+              </button>
+            </li>
+          </ul>
 
-      </div>
-    </div>
-  </div>
-  <!-- Tot zover de nav bar -->
-
-
-
-  <!-- Granny Inc -->
-
-
-
-
-  <!-- Afbeeldingen van categorieen -->
-
-  <div class="container text-center">
-
-
-
-    <div class="row">
-
-      <div class="col-sm-3">
-        <div class="card">
-          <img class="card-img-top" src="../../Afbeeldingen/drmartens.jpg" alt="Card image cap" height=300>
-          <div class="card-body">
-            <p class="card-text">
-            <p style="font-weight: bold;">Handwerk</p>
-            <p>Hier vind je alles wat je zoekt om te breien, haken, naaien, borduren, punniken en noem het maar op!</p>
-            <a href="test.html" class="btn btn-danger">Bekijk Handwerk</a>
-            </p>
-          </div>
         </div>
       </div>
+    </nav>
+    <!-- Tot zover de nav bar -->
 
-      <div class="col-sm-3">
-        <div class="card">
-          <img class="card-img-top" src="../../Afbeeldingen/drmartens.jpg" alt="Card image cap" height=300>
-          <div class="card-body">
-            <p class="card-text">
-            <p style="font-weight: bold;">Lezen & Puzzelen</p>
-            <p>Zoals de naam al zegt: hier vind je alles (maar dan ook echt alles) om te lezen en te puzzelen.</p>
-            <a href="test.html" class="btn btn-danger">Bekijk Lezen & Puzzelen</a></p>
-          </div>
+
+    <!-- Dit is de uitklapbare winkelmand -->
+    <div class="container mb-4">
+      <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvas" aria-labelledby="offcanvasLabel">
+        <div class="offcanvas-header">
+          <h5 class="offcanvas-title" id="offcanvasLabel">Winkelmandje</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
-      </div>
+        <div class="offcanvas-body">
 
-      <div class="col-sm-3">
-        <div class="card">
-          <img class="card-img-top" src="../../Afbeeldingen/drmartens.jpg" alt="Card image cap" height=300>
-          <div class="card-body">
-            <p class="card-text">
-            <p style="font-weight: bold;">Creatief</p>
-            <p>Laat de Bob Ross in je naar boven komen met creatieve producten zoals verf, verfdoeken en kleurpotloden
-            </p>
-            <a href="test.html" class="btn btn-danger">Bekijk Creatief</a></p>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-sm-3">
-        <div class="card">
-          <img class="card-img-top" src="../../Afbeeldingen/drmartens.jpg" alt="Card image cap" height=300>
-          <div class="card-body">
-            <p class="card-text">
-            <p style="font-weight: bold;">Alle categorieën</p>
-            <p>Wanneer je niet kan kiezen (snappen we!), of gewoon even door het hele assortiment wil bladeren.</p>
-            <a href="Alleproducten.html" class="btn btn-danger">Bekijk alle categorieën</a></p>
-          </div>
         </div>
       </div>
     </div>
+  </header>
+
+  <main>
+    <!-- Afbeeldingen van categorieen -->
+    <div id = "categorieen" class="container text-center">
+      <div class="row">
+        <div id = "cat_handwerk" class="col-sm-3">
+          <div class="card">
+            <img class="card-img-top" src="../../Afbeeldingen/breien.jpg" alt="Card image cap" height=300>
+            <div class="card-body">
+              <p class="card-text">
+              <p style="font-weight: bold;">Handwerk</p>
+              <p>Hier vind je alles wat je zoekt om te breien, haken, naaien, borduren, punniken en noem het maar op!
+              </p>
+              <a href="test.html" class="btn btn-danger">Bekijk Handwerk</a>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div id = "cat_lezen" class="col-sm-3">
+          <div class="card">
+            <img class="card-img-top" src="../../Afbeeldingen/puzzelen.jpg" alt="Card image cap" height=300>
+            <div class="card-body">
+              <p class="card-text">
+              <p style="font-weight: bold;">Lezen & Puzzelen</p>
+              <p>Zoals de naam al zegt: hier vind je alles (maar dan ook echt alles) om te lezen en te puzzelen.</p>
+              <a href="test.html" class="btn btn-danger">Bekijk Lezen & Puzzelen</a></p>
+            </div>
+          </div>
+        </div>
+
+        <div id = "cat_creatief" class="col-sm-3">
+          <div class="card">
+            <img class="card-img-top" src="../../Afbeeldingen/verven.jpg" alt="Card image cap" height=300>
+            <div class="card-body">
+              <p class="card-text">
+              <p style="font-weight: bold;">Creatief</p>
+              <p>Laat de Bob Ross in je naar boven komen met creatieve producten zoals verf, verfdoeken en kleurpotloden
+              </p>
+              <a href="test.html" class="btn btn-danger">Bekijk Creatief</a></p>
+            </div>
+          </div>
+        </div>
+
+        <div id = "cat_alles" class="col-sm-3">
+          <div class="card">
+            <img class="card-img-top" src="grandma.png" alt="Card image cap" height=300>
+            <div class="card-body">
+              <p class="card-text">
+              <p style="font-weight: bold;">Alle categorieën</p>
+              <p>Wanneer je niet kan kiezen (snappen we!), of gewoon even door het hele assortiment wil bladeren.</p>
+              <a href="Alleproducten.html" class="btn btn-danger">Bekijk alle categorieën</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+  </main>
 
 </body>
 
@@ -169,3 +161,5 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
   integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+
+  
