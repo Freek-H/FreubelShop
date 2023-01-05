@@ -100,9 +100,9 @@
         </div>
     </header>
 
-    <main>
-        <a href="../../FrontEnd/index.html">Terug</a><br>
-        <h1 style="color:green;">
+    <main style = "text-align: center";
+>
+        <h1 style="color:black">
             Login
         </h1>
 
@@ -128,7 +128,7 @@
         function CheckSession() {
             if (localStorage.getItem("Ingelogd") == "Ja") {
                 alert("Je bent al ingelogd!")
-                window.location.href = "../../FrontEnd/index.html";
+                window.location.href = "index.html";
             }
         }
 
@@ -177,7 +177,7 @@
             Rol = localStorage.getItem("Rol")
 
             sessie.innerHTML = "<b>SESSION</b>" + "<br>" + "Ingelogd: " + Ingelogd + "<br>" + "Gebruiker: " + Sessienaam + "<br>" + "Rol: " + Rol
-            window.location.href = "../../FrontEnd/index.html";
+            window.location.href = "index.html";
 
         }
 

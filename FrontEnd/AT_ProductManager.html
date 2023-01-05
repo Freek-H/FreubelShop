@@ -99,14 +99,23 @@
         </div>
     </header>
 
-    <main style="text-align: center;">
-        <div class = "fs-1"> Alle Admin Tools
-            <div id="AlleAT" class = "d-grid gap-2 col-6 mx-auto" >
-                <a class="btn btn-outline-danger btn-block" href="AT_ProductManager.html">Product Manager</a>
-                <a class="btn btn-outline-danger btn-block" href="Profiles.html">Alle Users</a>
-                <a class="btn btn-outline-danger btn-block" href="" >Alle Bestellingen (N/A)</a>
-                <a class="btn btn-outline-danger btn-block" href="" >Jaarcijfers (N/A)</a>
-            </div>
+    <main>
+        <a class="btn btn-outline-danger" href="AdminTools.html">Terug naar alle AdminTools</a>
+
+        <div style="text-align: center; text-align: center;">
+            <h1 style="color:black; ">
+                Product Manager
+            </h1>
+            <input type="text" id="naam" placeholder="Naam"><br><br>
+            <input type="text" id="categorie" placeholder="Categorie"><br><br>
+            <input type="text" id="prijs" placeholder="Prijs"><br><br>
+            <input type="text" id="sterren" placeholder="Sterren"><br><br>
+            <input type="text" id="leverbaar" placeholder="Leverbaar"><br><br>
+            <input type="text" id="afbeelding_url" placeholder="afbeelding URL"><br><br>
+
+            <button onclick="sendJSON()">Voeg toe</button>
+        </div>
+        <p class="result" style="color:green"></p>
 
     </main>
 
