@@ -8,7 +8,7 @@
 </head>
 
 <body style="text-align:center;" id="body">
-    <a href="index.html">Terug</a><br>
+    <a href="login.html">Terug</a><br>
     <h1 style="color:green;">
       Registreer
     </h1>
@@ -50,7 +50,7 @@
         function CheckSession() {
         if (localStorage.getItem("Ingelogd") == "Ja"){
             alert("Je bent al ingelogd!")
-            window.location.href = "index.html";
+            window.location.href = "../../FrontEnd/index.html";
         }
     }
 
@@ -100,7 +100,7 @@ function sendJSON() {
                     return
                 }
                 else {
-                    alert("Niet alles is goed ingevuld!")
+                    alert("Niet alles is ingevuld!")
                 }
             })
             .catch(err => console.log('Request Failed', err)); 
