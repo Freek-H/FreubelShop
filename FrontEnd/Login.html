@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Login</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+</head>
+
+<body id="body">
+
+    <header>
+        <!-- Logo enzo -->
+        <div class="container-fluid text-bg-danger p-3 text-white text-left">
+            <div class="container-fluid navbar-brand fw-bold fs-1 lh-1">Granny Inc.&nbsp; &nbsp; <img src="grandma.png"
+                    width="75" height="75">
+                <a class="btn btn-outline-light " href="../BackEnd/FRONTEND/Login.html" style="float:right">
+                    <i class="bi bi-person" style="font-size:20px"></i>&nbsp;Inloggen</a>
+            </div>
+            <div class="container-fluid navbar-brand fs-6 lh-1">Laat de oma in je los!</a>
+            </div>
+        </div>
+
+        <!-- Nav bar-->
+        <nav class="navbar navbar-expand-lg bg-light">
+            <div class="container-fluid mb-center">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="index.html">Homepagina</a>
+                        </li>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                Categorieën
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="test.html">Handwerk</a></li>
+                                <li><a class="dropdown-item" href="test.html">Lezen & Puzzelen</a></li>
+                                <li><a class="dropdown-item" href="test.html">Creatief</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="Alleproducten.html">Alle categorieën</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="FAQ.html">FAQ</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="overons.html">Over ons</a>
+                        </li>
+
+                        <!-- Zoek gedeelte -->
+                    </ul>
+                    <form class="navbar-nav mb-center me-3" role="search">
+                        <input class="form-control me-1" size=40 type="search" placeholder="Waar ben je naar op zoek?"
+                            aria-label="Search">
+                        <button class="btn btn-outline-danger" type="submit">Zoeken</button>
+                    </form>
+
+
+                    <!-- List item-knop om het winkelmandje te openen.-->
+                    <ul class="navbar-nav ml-10 mb-center order-last">
+                        <li class="nav-item">
+                            <button class="btn btn-outline-danger" type="button" data-bs-toggle="offcanvas"
+                                data-bs-target="#offcanvas">
+                                <i class="bi bi-cart3" style="font-size: 1.5rem; color: rgb(0, 0, 0);"></i>
+                            </button>
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+        </nav>
+        <!-- Tot zover de nav bar -->
+
+
+        <!-- Dit is de uitklapbare winkelmand -->
+        <div class="container mb-4">
+            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvas" aria-labelledby="offcanvasLabel">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="offcanvasLabel">Winkelmandje</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <a href="../../FrontEnd/index.html">Terug</a><br>
+        <h1 style="color:green;">
+            Login
+        </h1>
+
+        <p>
+            <input type="text" id="Username" placeholder="Username">
+            <input type="password" id="Password" placeholder="Password">
+
+            <button onclick="sendJSON()">Bevestig</button>
+
+        <p class="result" style="color:green"></p>
+
+        </p>
+
+        <div id="session"></div>
+
+        Nog geen account? <br>
+        <a href="Register.html">Registreer</a>
+    </main>
+
+
+    <script>
+        window.onload = CheckSession
+        function CheckSession() {
+            if (localStorage.getItem("Ingelogd") == "Ja") {
+                alert("Je bent al ingelogd!")
+                window.location.href = "../../FrontEnd/index.html";
+            }
+        }
+
+
+
+        var sessie = document.getElementById("session")
+
+
+        function sendJSON() {
+            var User = document.getElementById("Username").value
+            var Pass = document.getElementById("Password").value
+
+            fetch('http://127.0.0.1:5000/login', {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    Username: User,
+                    Password: Pass
+                }),
+            })
+                .then(response => response.json())
+                .then(json => {
+                    if (json === 'SUCCES') {
+                        alert("Je bent ingelogd!")
+                        localStorage.setItem("Ingelogd", "Ja");
+                        localStorage.setItem("Sessienaam", User);
+                        localStorage.setItem("Rol", "Klant");
+                        setSession()
+                        if (User == "Tonie" || User == "Admin") { // Geef Winkeliers hier rechten 
+                            localStorage.setItem("Rol", "Winkelier");
+                            setSession()
+                        }
+                    }
+                    else {
+                        alert("Voer een correcte gebruikernaam en/of wachtwoord in!")
+                    }
+                })
+                .catch(err => console.log('Request Failed', err));
+        }
+
+        function setSession() {
+            Ingelogd = localStorage.getItem("Ingelogd")
+            Sessienaam = localStorage.getItem("Sessienaam")
+            Rol = localStorage.getItem("Rol")
+
+            sessie.innerHTML = "<b>SESSION</b>" + "<br>" + "Ingelogd: " + Ingelogd + "<br>" + "Gebruiker: " + Sessienaam + "<br>" + "Rol: " + Rol
+            window.location.href = "../../FrontEnd/index.html";
+
+        }
+
+
+// localstorage 
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
