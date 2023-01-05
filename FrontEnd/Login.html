@@ -116,7 +116,7 @@
 
         </p>
 
-        <div id="session"></div>
+        <!--<div id="session"></div> -->
 
         Nog geen account? <br>
         <a href="Register.html">Registreer</a>
@@ -158,11 +158,10 @@
                         localStorage.setItem("Ingelogd", "Ja");
                         localStorage.setItem("Sessienaam", User);
                         localStorage.setItem("Rol", "Klant");
-                        setSession()
                         if (User == "Tonie" || User == "Admin") { // Geef Winkeliers hier rechten 
                             localStorage.setItem("Rol", "Winkelier");
-                            setSession()
                         }
+                        window.location.href = "index.html";
                     }
                     else {
                         alert("Voer een correcte gebruikernaam en/of wachtwoord in!")
@@ -171,15 +170,14 @@
                 .catch(err => console.log('Request Failed', err));
         }
 
-        function setSession() {
-            Ingelogd = localStorage.getItem("Ingelogd")
-            Sessienaam = localStorage.getItem("Sessienaam")
-            Rol = localStorage.getItem("Rol")
-
-            sessie.innerHTML = "<b>SESSION</b>" + "<br>" + "Ingelogd: " + Ingelogd + "<br>" + "Gebruiker: " + Sessienaam + "<br>" + "Rol: " + Rol
-            window.location.href = "index.html";
-
-        }
+       // function setSession() {
+       //     Ingelogd = localStorage.getItem("Ingelogd")
+       //     Sessienaam = localStorage.getItem("Sessienaam")
+       //     Rol = localStorage.getItem("Rol")
+        //    sessie.innerHTML = "<b>SESSION</b>" + "<br>" + "Ingelogd: " + Ingelogd + "<br>" + "Gebruiker: " + Sessienaam + "<br>" + "Rol: " + Rol
+        //    window.location.href = "index.html";
+        //
+       // }
 
 
 // localstorage 

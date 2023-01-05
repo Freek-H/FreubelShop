@@ -11,6 +11,8 @@
 </head>
 
 <body>
+<!-- Preloader [zorgt ervoor dat html+js volledig geladen/klaar is voordat gebruiker iets ziet] -->
+<div id="PreLoader" style="height:100%; width:100%; background-color:white"></div>
 
   <header>
     <!-- Logo enzo -->
@@ -20,7 +22,7 @@
         <a class="btn btn-outline-light" style="float:right;margin-left: 5px">
           <i class="bi bi-person" style="font-size:20px"></i>[..]</a>
           <a class="btn btn-outline-light" href="profile.html" id = "ProfielKnop" style="float:right">
-          <i class="bi bi-person" style="font-size:20px"></i>Profiel</a>
+          <i class="bi bi-person" style="font-size:20px"></i> Profiel</a>
       </div>
       <div id="sessie" style="float:right"></div>
       <div class="container-fluid navbar-brand fs-6 lh-1">Laat de oma in je los!</a>
@@ -170,24 +172,32 @@
 
 <script>
 
-// Login Check bij Laden Pagina // 
-// window.onload niet altijd ideaal, laadt niet snel genoeg // 
+
 
     window.onload = CheckSession
-    ProfielKnop = document.getElementById("ProfielKnop")
+    // Preloader
+    const PreLoader = document.getElementById("PreLoader")
+    setTimeout(() => {
+    PreLoader.style.display = "none"
+    },150);
+
+    // Hide elementen die toegang vereisen 
+    const ProfielKnop = document.getElementById("ProfielKnop")
     ProfielKnop.style.display = "none" 
-    AdminTools = document.getElementById("AdminTools")
+    const AdminTools = document.getElementById("AdminTools")
     AdminTools.style.display = "none" 
 
-    sessie = document.getElementById("sessie")
-    Ingelogd = localStorage.getItem("Ingelogd")
-    Sessienaam = localStorage.getItem("Sessienaam")
-    Rol = localStorage.getItem("Rol")
+    const sessie = document.getElementById("sessie")
+    const Ingelogd = localStorage.getItem("Ingelogd")
+    const Sessienaam = localStorage.getItem("Sessienaam")
+    const Rol = localStorage.getItem("Rol")
 
+  // Login Check bij Laden Pagina // 
     function CheckSession() {
           Login = document.getElementsByClassName("btn btn-outline-light")[0]
           if (localStorage.getItem("Ingelogd") == "Ja") { // Controleert Login aan de hand van LocalStorage
               Login.childNodes[2].textContent = " Uitloggen" 
+              Login.removeAttribute("href");
               Login.addEventListener("click", Clear) 
               sessie.innerHTML = "Welkom " +Sessienaam + " ( " +Rol + " ) " 
               ProfielKnop.style.display = "block" 
@@ -195,9 +205,9 @@
                   AdminTools.style.display = "block"
           }}
           else {
-              Login.childNodes[2].textContent = " Inloggen" }       
-              Login.setAttribute("href", "login.html");
-
+              Login.childNodes[2].textContent = " Inloggen"     
+              Login.setAttribute("href", "login.html")
+          }
     }
 
 // Logout - Reset Local Storage 
