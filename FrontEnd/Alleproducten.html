@@ -188,71 +188,74 @@
   </main>
  
     <script>
-        function laadData() {
-          // start (asynchroon?) process om data op te halen uit db
-                fetch('http://localhost:5000/producten')
-                .then(response => response.json()) // Zet json als tekst om naar een object
-                .then(data => { //gebruik het resultaat van net als "data"
-                    let productenHtml = ""; //start van de stringbuild
-                    data.forEach(product => { // voor elk item uit data noem dit product.
-                        productenHtml += `<tr>
-                            <td>${product.naam}</td>
-                            <td>${product.categorie}</td>
-                            <td><button type="button" class="btn btn-secondary buyItem">${product.prijs}</button></td>
-                            
-                            <td>
-                                <img class="img-fluid" src="${product.afbeelding_url}">
-                                
-                            </td>
-                        </tr>`
-                        // vul in het bovenstaande de string aan volgens een vast schema,
-                        // met kolomnamen "naam/categorie/prijs/afbeeldinurl"
-                        // <td>Toevoegen aan winkelmand.</td>
-                    });
+      function laadData() 
+      {
+        // start (asynchroon?) process om data op te halen uit db
+        fetch('http://localhost:5000/producten')
+        .then(response => response.json()) // Zet json als tekst om naar een object
+        .then(data => { //gebruik het resultaat van net als "data"
+          let productenHtml = ""; //start van de stringbuild
+          data.forEach(product => { // voor elk item uit data noem dit product.
+          productenHtml += `<tr>
+                              <td>${product.naam}</td>
+                              <td>${product.categorie}</td>
+                              <td><button type="button" class="btn btn-secondary buyItem">${product.prijs}</button></td>
+                              <td>
+                                  <img class="img-fluid" src="${product.afbeelding_url}">
+                              </td>
+                            </tr>`
+          // vul in het bovenstaande de string aan volgens een vast schema,
+          // met kolomnamen "naam/categorie/prijs/afbeeldinurl"
+          // <td>Toevoegen aan winkelmand.</td>
+          });
 
-                    document.getElementById('productCatalog').innerHTML = productenHtml;
-                    // pas in het document de innerhtml van element met id productcata... aan
-                    // met het resultaat van de gebouwde string.
-                    
-                })
-                return true;
-        }
-        
-        function voegItemToe(){
-          console.log("Itempje toegevoegd als een baas.");
-        }
-
-        function buttonsListenen(){
-          const buttonCollection = document.getElementsByClassName("buyItem"); // zouden er dus 10 moetne zijn.
-          console.log(buttonCollection);
-          for (let buttonnr = 0; buttonnr < buttonCollection.length; buttonnr++){
-            buttonCollection[buttonnr].addEventListener("click",voegItemToe);
-          }
-        }
-
-        let tableLoaded = false;
-        tableLoaded = laadData();
-
-        let tableFetched = new Promise(function(myResolve, myReject){
-          if (tableLoaded){
-            myResolve(buttonsListenen(), console.log("toch?"));
-          }else{
-            myReject(console.log("Dat ging niet goed."))
-          }
+          document.getElementById('productCatalog').innerHTML = productenHtml;
+          // pas in het document de innerhtml van element met id productcata... aan
+          // met het resultaat van de gebouwde string.
         });
+      }
+      
+      function voegItemToe(){
+        console.log("Itempje toegevoegd als een baas.");
+      }
 
-        tableFetched.then(
+      // async function buttonsListenen(){
+        function buttonsListenen(){
+        // await laadData();
+        const buttonCollection = document.getElementsByClassName("buyItem"); // zouden er dus 10 moeten zijn.
+        console.log(buttonCollection);
+        for (let buttonnr = 0; buttonnr < buttonCollection.length; buttonnr++){
+          buttonCollection[buttonnr].addEventListener("click",voegItemToe);
+        }
+      }
 
-        )
+      laadData()
+      // buttonsListenen();
+      // ;
+      window.setTimeout(buttonsListenen,100); // seconde wachten werkt wel.
+      
+      
+      
+      // let tableFetched = new Promise(function(myResolve, myReject){
+      //   if (tableLoaded){
+      //     myResolve(buttonsListenen(), console.log("toch?"));
+      //   }else{
+      //     myReject(console.log("Dat ging niet goed."))
+      //   }
+      // });
 
-        
+      // tableFetched.then(
+
+      // )
+
+      
 
 
-        // console.log(buttonCollection);
-        // console.log("buttonCollection", buttonCollection);
-        // console.log(buttonCollection[0]);
-        
-        
+      // console.log(buttonCollection);
+      // console.log("buttonCollection", buttonCollection);
+      // console.log(buttonCollection[0]);
+      
+      
 // Dus nu maak ik dynamisch knoppen aan, top.
 // stap 2 is om een eventlistener toe te voegen aan alle knoppen met classe = buy-item.
 // Als een willekeurige knop met die classe wordt aangeklikt, vuurt er een event af, die het product waar die knop bijhoort, toevoegt aan het mandje.
