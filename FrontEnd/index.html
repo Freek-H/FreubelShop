@@ -17,10 +17,14 @@
     <div class="container-fluid text-bg-danger p-3 text-white text-left">
       <div class="container-fluid navbar-brand fw-bold fs-1 lh-1">Granny Inc.&nbsp; &nbsp; <img src="grandma.png"
           width="75" height="75">
-        <a class="btn btn-outline-light " href="Login.html" style="float:right">
-          <i class="bi bi-person" style="font-size:20px"></i>&nbsp;Inloggen</a>
+        <a class="btn btn-outline-light" style="float:right;margin-left: 5px">
+          <i class="bi bi-person" style="font-size:20px"></i>[..]</a>
+          <a class="btn btn-outline-light" href="profile.html" id = "ProfielKnop" style="float:right">
+          <i class="bi bi-person" style="font-size:20px"></i>Profiel</a>
       </div>
+      <div id="sessie" style="float:right"></div>
       <div class="container-fluid navbar-brand fs-6 lh-1">Laat de oma in je los!</a>
+        
       </div>
     </div>
 
@@ -57,6 +61,9 @@
             </li>
             <li class="nav-item">
               <a class="nav-link" href="over_ons_def.html">Over ons</a>
+            </li>
+            <li class="nav-item" id="AdminTools">
+              <a class="nav-link" href="AdminTools.html">Admin Tools</a>
             </li>
 
             <!-- Zoek gedeelte -->
@@ -159,7 +166,50 @@
 
 </html>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
-  integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+
+<script>
+
+// Login Check bij Laden Pagina // 
+// window.onload niet altijd ideaal, laadt niet snel genoeg // 
+
+    window.onload = CheckSession
+    ProfielKnop = document.getElementById("ProfielKnop")
+    ProfielKnop.style.display = "none" 
+    AdminTools = document.getElementById("AdminTools")
+    AdminTools.style.display = "none" 
+
+    sessie = document.getElementById("sessie")
+    Ingelogd = localStorage.getItem("Ingelogd")
+    Sessienaam = localStorage.getItem("Sessienaam")
+    Rol = localStorage.getItem("Rol")
+
+    function CheckSession() {
+          Login = document.getElementsByClassName("btn btn-outline-light")[0]
+          if (localStorage.getItem("Ingelogd") == "Ja") { // Controleert Login aan de hand van LocalStorage
+              Login.childNodes[2].textContent = " Uitloggen" 
+              Login.addEventListener("click", Clear) 
+              sessie.innerHTML = "Welkom " +Sessienaam + " ( " +Rol + " ) " 
+              ProfielKnop.style.display = "block" 
+                  if(localStorage.getItem("Rol") == "Winkelier") {
+                  AdminTools.style.display = "block"
+          }}
+          else {
+              Login.childNodes[2].textContent = " Inloggen" }       
+              Login.setAttribute("href", "login.html");
+
+    }
+
+// Logout - Reset Local Storage 
+    function Clear(){
+      localStorage.removeItem("Ingelogd")
+      localStorage.removeItem("Sessienaam")
+      localStorage.removeItem("Rol")
+      window.location.reload();
+    }
+
+
+
+</script>
 
   
