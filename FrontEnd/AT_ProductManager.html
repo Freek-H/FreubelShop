@@ -10,8 +10,11 @@
         integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
 </head>
-
 <body id="body">
+
+<!-- Preloader [zorgt ervoor dat html+js volledig geladen/klaar is voordat gebruiker iets ziet] -->
+<div id="PreLoader" style="height:100vh; width:100vh; background-color:white"></div>
+
     <header>
         <!-- Logo enzo -->
         <div class="container-fluid text-bg-danger p-3 text-white text-left">
@@ -101,34 +104,165 @@
 
     <main>
         <a class="btn btn-outline-danger" href="AdminTools.html">Terug naar alle AdminTools</a>
-
-        <div style="text-align: center; text-align: center;">
-            <h1 style="color:black; ">
+        <div style="text-align: center">
+            <br><h1 style="color:black">
                 Product Manager
-            </h1>
-            <input type="text" id="naam" placeholder="Naam"><br><br>
-            <input type="text" id="categorie" placeholder="Categorie"><br><br>
-            <input type="text" id="prijs" placeholder="Prijs"><br><br>
-            <input type="text" id="sterren" placeholder="Sterren"><br><br>
-            <input type="text" id="leverbaar" placeholder="Leverbaar"><br><br>
-            <input type="text" id="afbeelding_url" placeholder="afbeelding URL"><br><br>
+            </h1><br>
+            <select style="width:200px" id="Product">
+            <option>Nieuw Product</option>
+            </select>&nbsp;&nbsp;
+            <button onclick="NewOrOld()">Go</button>
+        </div>
 
-            <button onclick="sendJSON()">Voeg toe</button>
+        <br><hr><br>
+
+        <div id="Manager" style="text-align: center; text-align: center;">
+            Naam<br>
+            <input type="text" id="naam" placeholder="Naam"><br>
+            Categorie<br><input type="text" id="categorie" placeholder="Categorie"><br>Prijs<br>
+            <input type="text" id="prijs" placeholder="Prijs"><br>Sterren<br>
+            <input type="text" id="sterren" placeholder="Sterren"><br>Leverbaar<br>
+            <input type="text" id="leverbaar" placeholder="Leverbaar"><br>Afbeelding<br>
+            <input type="text" id="afbeelding_url" placeholder="afbeelding URL"><br><br>
+            <img id="plaatje" width="250" height="250" style="border-style: solid"><br>
+            <button id="AddOrUpdate">Voeg toe</button><br><br><button onclick="DeleteProduct()" id="Delete">Delete</button>
         </div>
         <p class="result" style="color:green"></p>
-
     </main>
+</body>
+</html>
 
+<script>
+    window.onload = CheckSession
+    // Preloader
+    const PreLoader = document.getElementById("PreLoader")
+    setTimeout(() => {
+    PreLoader.style.display = "none"
+    },150);
 
-
-
-    <script>
-        window.onload = CheckSession
         function CheckSession() {
             if (localStorage.getItem("Rol") != "Winkelier") {
                 alert("Je hebt geen winkeliers-rechten! Tip: Admin / Admin")
                 window.location.href = "index.html";
             }
+        }
+
+        const Manager = document.getElementById("Manager")
+        Manager.style.display = "none" 
+
+        fetch('http://127.0.0.1:5000/producten')
+            .then(response => response.json())
+            .then(data => {                
+                let Product = document.getElementById("Product")
+                Product += `<option id="NewProduct">[Nieuw Product]</option>`
+
+                    for (i = 0; i< data.length; i++) {
+                    Product += `<option id="${data[i].productID}">${data[i].productID}) ${data[i].naam}</option>`
+                    document.getElementById("Product").innerHTML = Product
+                }
+            })
+            .catch(err => console.log('Request Failed', err));
+
+        function NewOrOld() {
+        const GivenID = Product.options[Product.selectedIndex].id
+        if (GivenID == "NewProduct") {
+            Manager.style.display = "block" 
+            document.getElementById("AddOrUpdate").textContent = "Voeg toe"
+            document.getElementById("naam").value = null
+            document.getElementById("categorie").value = null
+            document.getElementById("prijs").value = null
+            document.getElementById("sterren").value = null
+            document.getElementById("leverbaar").value = null
+            document.getElementById("afbeelding_url").value = null
+            setTimeout(() => { document.getElementById("AddOrUpdate").addEventListener("click", sendJSON)},150)
+            document.getElementById("Delete").style.display = "none"
+            document.getElementById("Delete").style.margin = "auto"
+            document.getElementById("plaatje").style.display = "none"
+            document.getElementById("plaatje").style.margin = "auto"
+
+        }
+        else {
+            fetch ('http://127.0.0.1:5000/producten')
+                .then(response => response.json())
+                .then(data => { 
+                    for (i = 0; i< data.length; i++) {
+                        if(GivenID == data[i].productID) {
+                            Manager.style.display = "block" 
+                            document.getElementById("naam").value = data[i].naam
+                            document.getElementById("categorie").value = data[i].categorie
+                            document.getElementById("prijs").value = data[i].prijs
+                            document.getElementById("sterren").value = data[i].sterren
+                            document.getElementById("leverbaar").value = data[i].leverbaar
+                            document.getElementById("afbeelding_url").value = data[i].afbeelding_url
+                            document.getElementById("plaatje").setAttribute('src', data[i].afbeelding_url)
+                            document.getElementById("AddOrUpdate").textContent = "Update"
+                            setTimeout(() => { document.getElementById("AddOrUpdate").addEventListener("click", UpdateProduct)},150)
+                            document.getElementById("Delete").style.display = "block"
+                            document.getElementById("Delete").style.margin = "auto"
+                            document.getElementById("plaatje").style.display = "block"
+                            document.getElementById("plaatje").style.margin = "auto"
+                        }
+                    }
+                })
+        }
+        }
+
+        function DeleteProduct(){
+            url = "http://127.0.0.1:5000/deleteproduct/" + Product.options[Product.selectedIndex].id
+            fetch(url, {
+                method: "DELETE",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+            })
+            .then(response => response.json())
+            .then(json => {
+                if (json === 'SUCCES'){
+                    alert("Product verwijderd!")
+                    window.location.href = "AT_ProductManager.html";
+                }
+                else {
+                    alert("Er is iets misgegaan..")
+                }
+            })
+            .catch(err => console.log('Request Failed', err)); 
+        }
+
+        function UpdateProduct(){
+            var ID = Product.options[Product.selectedIndex].id
+            var Naam = document.getElementById("naam").value
+            var Cat = document.getElementById("categorie").value
+            var Prix = document.getElementById("prijs").value
+            var Star = document.getElementById("sterren").value
+            var Leev = document.getElementById("leverbaar").value
+            var Img = document.getElementById("afbeelding_url").value
+        
+            fetch ("http://127.0.0.1:5000/updateproduct", {
+                method: "PUT",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                ID: ID,
+                naam: Naam,
+                categorie: Cat,
+                prijs: Prix,
+                sterren: Star,
+                leverbaar: Leev,
+                afbeelding_url: Img
+                }),
+            })
+            .then(response => response.json())
+            .then(json => {
+                if (json === 'SUCCES'){
+                    alert("Gegevens aangepast!")
+                    window.location.href = "AT_ProductManager.html";
+                }
+                else {
+                    alert("Er is niets om te veranderen..")
+                }
+            })
+            .catch(err => console.log('Request Failed', err)); 
         }
 
         function sendJSON() {
@@ -157,7 +291,7 @@
                 .then(json => {
                     if (json === 'SUCCES') {
                         alert("Product Toegevoegd!")
-                        window.location.href = "AdminTools.html";
+                        window.location.href = "AT_ProductManager.html";
                         return
                     }
                     else {
@@ -171,6 +305,3 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
         crossorigin="anonymous"></script>
-</body>
-
-</html>
