@@ -106,10 +106,10 @@
         <a class="btn btn-outline-danger" href="AdminTools.html">Terug naar alle AdminTools</a>
         <div style="text-align: center">
             <br><h1 style="color:black">
-                Product Manager
+                User Manager
             </h1><br>
-            <select style="width:200px" id="Product">
-            <option>Nieuw Product</option>
+            <select style="width:200px" id="User">
+            <option>Nieuwe User</option>
             </select>&nbsp;&nbsp;
             <button onclick="NewOrOld()">Go</button>
         </div>
@@ -117,15 +117,25 @@
         <br><hr><br>
 
         <div id="Manager" style="text-align: center; text-align: center;">
-            Naam<br>
-            <input style="width:200px" type="text" id="naam" placeholder="Naam"><br>
-            Categorie<br><input style="width:200px" type="text" id="categorie" placeholder="Categorie"><br>Prijs<br>
-            <input style="width:200px" type="text" id="prijs" placeholder="Prijs"><br>Sterren<br>
-            <input style="width:200px" type="text" id="sterren" placeholder="Sterren"><br>Leverbaar<br>
-            <input style="width:200px" type="text" id="leverbaar" placeholder="Leverbaar"><br>Afbeelding<br>
-            <input style="width:500px" type="text" id="afbeelding_url" placeholder="afbeelding URL"><br><br>
-            <img id="plaatje" width="250" height="250" style="border-style: solid"><br>
-            <button id="AddOrUpdate">Voeg toe</button><br><br><button onclick="DeleteProduct()" id="Delete">Delete</button>
+            Username<br><input style="width:200px" type="text" id="Username" placeholder="Username"><br>
+            Password<br><input style="width:200px" type="password" id="Password" placeholder="Password"><br>
+            Voornaam<br><input style="width:200px" type="text" id="Voornaam" placeholder="Voornaam"><br>
+            Achternaam<br><input style="width:200px" type="text" id="Achternaam" placeholder="Achternaam"><br>
+            Geslacht<br><select style="width:200px" id="Geslacht" placeholder="Geslacht"><br>
+                <option value="Anders">Anders</option>
+                <option value="Man">Man</option>
+                <option value="Vrouw">Vrouw</option></select><br>
+            Woonadres<br><input style="width:200px" type="text" id="Woonadres" placeholder="Woonadres"><br>
+            Telefoon<br><input style="width:200px" type="text" id="Telefoon" placeholder="Telefoon"><br>
+            Email<br><input style="width:200px" type="text" id="Email" placeholder="Email"><br>
+            Geboortedatum<br><input style="width:200px" type="date" id="Geboortedatum" placeholder="Geboortedatum"><br>
+            Betaling<br><select style="width:200px" id="Betaling" placeholder="Betaling"><br>
+            <option value="iDeal">iDeal</option>
+            <option value="Credit Card">Credit Card</option>
+            <option value="PayPal">PayPal</option></select><br>
+            Afleveradres<br><input style="width:200px" type="text" id="Afleveradres" placeholder="Afleveradres"><br><br>
+
+            <button id="AddOrUpdate">Voeg toe</button><br><br><button onclick="DeleteUser()" id="Delete">Delete</button>
         </div>
         <p class="result" style="color:green"></p>
     </main>
@@ -150,65 +160,72 @@
         const Manager = document.getElementById("Manager")
         Manager.style.display = "none" 
 
-        fetch('http://127.0.0.1:5000/producten')
+        fetch("http://127.0.0.1:5000/profile")
             .then(response => response.json())
             .then(data => {                
-                let Product = document.getElementById("Product")
-                Product += `<option id="NewProduct">[Nieuw Product]</option>`
+                let User = document.getElementById("User")
+                User += `<option id="NewUser">[Nieuwe User]</option>`
 
                     for (i = 0; i< data.length; i++) {
-                    Product += `<option id="${data[i].productID}">${data[i].productID}) ${data[i].naam}</option>`
-                    document.getElementById("Product").innerHTML = Product
+                    User += `<option id="${data[i].ID}">${data[i].ID}) ${data[i].Username}</option>`
+                    document.getElementById("User").innerHTML = User
                 }
             })
             .catch(err => console.log('Request Failed', err));
 
         function NewOrOld() {
-        const GivenID = Product.options[Product.selectedIndex].id
-        if (GivenID == "NewProduct") {
+        const GivenID = User.options[User.selectedIndex].id
+        if (GivenID == "NewUser") {
             Manager.style.display = "block" 
             document.getElementById("AddOrUpdate").textContent = "Voeg toe"
-            document.getElementById("naam").value = null
-            document.getElementById("categorie").value = null
-            document.getElementById("prijs").value = null
-            document.getElementById("sterren").value = null
-            document.getElementById("leverbaar").value = null
-            document.getElementById("afbeelding_url").value = null
-            document.getElementById("AddOrUpdate").addEventListener("click", sendJSON)
+            document.getElementById("Username").value = null
+            document.getElementById("Password").value = null
+            document.getElementById("Voornaam").value = null
+            document.getElementById("Achternaam").value = null
+            document.getElementById("Geslacht").value = "Anders"
+            document.getElementById("Woonadres").value = null
+            document.getElementById("Telefoon").value = null
+            document.getElementById("Email").value = null
+            document.getElementById("Geboortedatum").value = "1990-01-01"
+            document.getElementById("Betaling").value = "iDeal"
+            document.getElementById("Afleveradres").value = null
+            setTimeout(() => { document.getElementById("AddOrUpdate").addEventListener("click", sendJSON)},150)
             document.getElementById("Delete").style.display = "none"
             document.getElementById("Delete").style.margin = "auto"
-            document.getElementById("plaatje").style.display = "none"
-            document.getElementById("plaatje").style.margin = "auto"
 
         }
         else {
-            fetch ('http://127.0.0.1:5000/producten')
+            fetch ('http://127.0.0.1:5000/profile')
                 .then(response => response.json())
                 .then(data => { 
                     for (i = 0; i< data.length; i++) {
-                        if(GivenID == data[i].productID) {
+                        if(GivenID == data[i].ID) {
                             Manager.style.display = "block" 
-                            document.getElementById("naam").value = data[i].naam
-                            document.getElementById("categorie").value = data[i].categorie
-                            document.getElementById("prijs").value = data[i].prijs
-                            document.getElementById("sterren").value = data[i].sterren
-                            document.getElementById("leverbaar").value = data[i].leverbaar
-                            document.getElementById("afbeelding_url").value = data[i].afbeelding_url
-                            document.getElementById("plaatje").setAttribute('src', data[i].afbeelding_url)
                             document.getElementById("AddOrUpdate").textContent = "Update"
-                            document.getElementById("AddOrUpdate").addEventListener("click", UpdateProduct)
+                            document.getElementById("Username").value = data[i].Username
+                            document.getElementById("Password").value = data[i].Password
+                            document.getElementById("Voornaam").value = data[i].Voornaam
+                            document.getElementById("Achternaam").value = data[i].Achternaam
+                            document.getElementById("Geslacht").value = data[i].Geslacht
+                            document.getElementById("Woonadres").value = data[i].Adres
+                            document.getElementById("Telefoon").value = data[i].Telefoon
+                            document.getElementById("Email").value = data[i].Email
+                            const gDatum = new Date(data[i].Geboortedatum)
+                            const ggDatum = gDatum.toISOString().split('T')[0]
+                            document.getElementById("Geboortedatum").value = ggDatum
+                            document.getElementById("Betaling").value = data[i].Betaling
+                            document.getElementById("Afleveradres").value = data[i].Aflever
+                            setTimeout(() => { document.getElementById("AddOrUpdate").addEventListener("click", UpdateUser)},150)
                             document.getElementById("Delete").style.display = "block"
                             document.getElementById("Delete").style.margin = "auto"
-                            document.getElementById("plaatje").style.display = "block"
-                            document.getElementById("plaatje").style.margin = "auto"
                         }
                     }
                 })
         }
         }
 
-        function DeleteProduct(){
-            url = "http://127.0.0.1:5000/deleteproduct/" + Product.options[Product.selectedIndex].id
+        function DeleteUser(){
+            url = "http://127.0.0.1:5000/delete/" + User.options[User.selectedIndex].id
             fetch(url, {
                 method: "DELETE",
                 headers: {
@@ -218,8 +235,8 @@
             .then(response => response.json())
             .then(json => {
                 if (json === 'SUCCES'){
-                    alert("Product verwijderd!")
-                    window.location.href = "AT_ProductManager.html";
+                    alert("User verwijderd!")
+                    window.location.href = "AT_UserManager.html";
                 }
                 else {
                     alert("Er is iets misgegaan..")
@@ -228,35 +245,45 @@
             .catch(err => console.log('Request Failed', err)); 
         }
 
-        function UpdateProduct(){
-            var ID = Product.options[Product.selectedIndex].id
-            var Naam = document.getElementById("naam").value
-            var Cat = document.getElementById("categorie").value
-            var Prix = document.getElementById("prijs").value
-            var Star = document.getElementById("sterren").value
-            var Leev = document.getElementById("leverbaar").value
-            var Img = document.getElementById("afbeelding_url").value
+        function UpdateUser(){
+            var ID = User.options[User.selectedIndex].id
+            var Username = document.getElementById("Username").value
+            var Pass = document.getElementById("Password").value
+            var Voor = document.getElementById("Voornaam").value
+            var Sex = document.getElementById("Geslacht").value
+            var Achter = document.getElementById("Achternaam").value
+            var Datum = document.getElementById("Geboortedatum").value
+            var Woon = document.getElementById("Woonadres").value
+            var Tel = document.getElementById("Telefoon").value
+            var Betaal = document.getElementById("Betaling").value
+            var AAdres = document.getElementById("Afleveradres").value
+            var Mail = document.getElementById("Email").value
         
-            fetch ("http://127.0.0.1:5000/updateproduct", {
+            fetch ("http://127.0.0.1:5000/update", {
                 method: "PUT",
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
                 ID: ID,
-                naam: Naam,
-                categorie: Cat,
-                prijs: Prix,
-                sterren: Star,
-                leverbaar: Leev,
-                afbeelding_url: Img
+                Adres: Woon,
+                Telefoon: Tel,
+                Email: Mail,
+                Betaling: Betaal,
+                Aflever: AAdres,
+                Username: Username,
+                Voornaam: Voor,
+                Geslacht: Sex,
+                Achternaam: Achter,
+                Geboortedatum: Datum,
+                Password: Pass
                 }),
             })
             .then(response => response.json())
             .then(json => {
                 if (json === 'SUCCES'){
                     alert("Gegevens aangepast!")
-                    window.location.href = "AT_ProductManager.html";
+                    window.location.href = "AT_UserManager.html";
                 }
                 else {
                     alert("Er is niets om te veranderen..")
@@ -266,32 +293,42 @@
         }
 
         function sendJSON() {
-            var Naam = document.getElementById("naam").value
-            var Cat = document.getElementById("categorie").value
-            var Prix = document.getElementById("prijs").value
-            var Star = document.getElementById("sterren").value
-            var Leev = document.getElementById("leverbaar").value
-            var Img = document.getElementById("afbeelding_url").value
+            var User = document.getElementById("Username").value
+            var Pass = document.getElementById("Password").value
+            var Voor = document.getElementById("Voornaam").value
+            var Achter = document.getElementById("Achternaam").value
+            var Gesl = document.getElementById("Geslacht").value
+            var Woon = document.getElementById("Woonadres").value
+            var Tel = document.getElementById("Telefoon").value
+            var Mail = document.getElementById("Email").value
+            var Datum = document.getElementById("Geboortedatum").value
+            var Betaal = document.getElementById("Betaling").value
+            var AAdres = document.getElementById("Afleveradres").value
 
-            fetch('http://127.0.0.1:5000/addproduct', {
+            fetch('http://127.0.0.1:5000/register', {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    naam: Naam,
-                    categorie: Cat,
-                    prijs: Prix,
-                    sterren: Star,
-                    leverbaar: Leev,
-                    afbeelding_url: Img
+                    Username: User,
+                    Password: Pass,
+                    Voornaam: Voor,
+                    Achternaam: Achter,
+                    Geslacht: Gesl,
+                    Adres: Woon,
+                    Telefoon: Tel,
+                    Email: Mail,
+                    Geboortedatum: Datum,
+                    Betaling: Betaal,
+                    Aflever: AAdres
                 }),
             })
                 .then(response => response.json())
                 .then(json => {
                     if (json === 'SUCCES') {
-                        alert("Product Toegevoegd!")
-                        location.reload()
+                        alert("Gebruiker Toegevoegd!")
+                        window.location.href = "AT_UserManager.html";
                         return
                     }
                     else {
@@ -300,6 +337,7 @@
                 })
                 .catch(err => console.log('Request Failed', err));
         }
+
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
