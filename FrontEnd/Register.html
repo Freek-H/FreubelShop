@@ -11,11 +11,11 @@
 </head>
 
 <body id="body">
-    <!-- Bedrijfsnaam en logo -->
+  <!-- Bedrijfsnaam en logo -->
   <div class="container-fluid text-bg-danger p-3 text-white text-left">
     <div class="container-fluid navbar-brand fw-bold fs-1 lh-1">Granny Inc.&nbsp; &nbsp; <img src="grandma.png"
         width="75" height="75">
-        <a class="btn btn-outline-light " href = "test.html" style="float:right"><i class="bi bi-person" style="font-size:20px"></i>&nbsp;Inloggen</a>
+        <a class="btn btn-outline-light " href = "Login.html" style="float:right"><i class="bi bi-person" style="font-size:20px"></i>&nbsp;Inloggen</a>
     </div>
     <div class="container-fluid navbar-brand fs-6 lh-1">Laat de oma in je los!</a>
     </div>
@@ -51,10 +51,10 @@
             <a class="nav-link" href="FAQ.html">FAQ</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="overOnsDef.html">Over ons</a>
+            <a class="nav-link" href="over_ons_def.html">Over ons</a>
           </li>
 
-          <!-- Zoek gedeelte -->
+        <!-- Zoek gedeelte -->
         </ul>
         <form class="navbar-nav mb-center me-3" role="search">
           <input class="form-control me-1" size=40 type="search" placeholder="Waar ben je naar op zoek?"
@@ -75,7 +75,6 @@
   </nav>
 
   <!-- Dit is de uitklapbare winkelmand -->
-
   <div class="container">
     <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvas" aria-labelledby="offcanvasLabel">
       <div class="offcanvas-header">
@@ -87,39 +86,88 @@
     </div>
   </div>
 
-
-
-
+  <!-- Registratieformulier -->
+  <div class="text-end">
     
-    <h1 style="text-align: center">
-      Registreer
-    </h1><br>
- 
-    <div id="Register" style="text-align: center; text-align: center;">
-      Username<br><input style="width:200px" type="text" id="Username" placeholder="Username"><br>
-      Password<br><input style="width:200px" type="password" id="Password" placeholder="Password"><br>
-      Voornaam<br><input style="width:200px" type="text" id="Voornaam" placeholder="Voornaam"><br>
-      Achternaam<br><input style="width:200px" type="text" id="Achternaam" placeholder="Achternaam"><br>
-      Geslacht<br><select style="width:200px" id="Geslacht" placeholder="Geslacht"><br>
-          <option value="Anders">Anders</option>
-          <option value="Man">Man</option>
-          <option value="Vrouw">Vrouw</option></select><br>
-      Woonadres<br><input style="width:200px" type="text" id="Woonadres" placeholder="Woonadres"><br>
-      Telefoon<br><input style="width:200px" type="text" id="Telefoon" placeholder="Telefoon"><br>
-      Email<br><input style="width:200px" type="text" id="Email" placeholder="Email"><br>
-      Geboortedatum<br><input style="width:200px" type="date" id="Geboortedatum" placeholder="Geboortedatum"><br>
-      Betaling<br><select style="width:200px" id="Betaling" placeholder="Betaling"><br>
-      <option value="iDeal">iDeal</option>
-      <option value="Credit Card">Credit Card</option>
-      <option value="PayPal">PayPal</option></select><br>
-      Afleveradres<br><input style="width:200px" type="text" id="Afleveradres" placeholder="Afleveradres"><br><br>
-
-       
-       
+  </div>
+  <div class="container text-start">
+    <div class="row">
+      <div class="d-grid gap-2 fs-3 col-6">
         <br>
-         
-        <button onclick="sendJSON()">Bevestig</button>
- 
+        <b>Registreer </b>
+        
+        <div class="fs-6">
+          <div class="alert alert-primary d-flex align-items-center" role="alert">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2" viewBox="0 0 16 16" role="img" aria-label="Warning:">
+              <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+            </svg>
+            <div>
+             Alle invoervelden zijn verplicht!
+            </div>
+          </div>
+
+          <form class = "d-grid gap-2">
+          
+            <label for="Username">Gebruikersnaam</label>
+            <input type="text" id="Username" name="Userame" class="form-control" >
+      
+            <label for="Password">Wachtwoord</label>
+            <input type="password" id="Password" name="Password" class="form-control">
+
+            <div class="d-grid gap-2 col-5">
+            <label for="Geslacht">Geslacht</label>
+            <select id = "Geslacht" name = "Geslacht"class="form-select">
+                <option value="" disabled selected>Selecteer een optie</option>
+                <option value="Man">Man</option>
+                <option value="Vrouw">Vrouw</option>
+                <option value="Anders">Anders</option>
+            </select>
+      
+            <label for="Geboortedatum">Geboortedatum</label>
+            <input type="date" id="Geboortedatum" class="form-control">
+            
+            </div>
+
+            <label for="Voornaam">Voornaam</label>
+            <input type="text" id="Voornaam" name="Voornaam"class="form-control">
+      
+            <label for="Achternaam">Achternaam</label>
+            <input type="text" id="Achternaam" name="Achternaam" class="form-control">
+      
+            <label for="Email">E-mailadres</label>
+            <input type="email" id="Email" name="Email" class="form-control">
+      
+            <label for="Telefoon">Telefoonnummer</label>
+            <input type="tel" id="Telefoon" name="Telefoon" class="form-control">
+      
+            <label for="Woonadres">Woonadres</label>
+            <input type="text" id="Woonadres" name="Woonadres" class="form-control">
+            
+            <label for="Afleveradres">Afleveradres</label>
+            <input type="text" id="Afleveradres" name="Afleveradres" class="form-control">
+            
+            <div class="d-grid gap-2 col-5">
+            <label for="Betaling">Betalingsvoorkeur</label>
+            <select id = "Betaling" name = "Betaling" class="form-select">
+              <option value="" disabled selected>Selecteer een optie</option>
+              <option value="iDeal">iDeal</option>
+              <option value="Credit Card">Credit Card</option>
+              <option value="PayPal">PayPal</option>
+            </select>
+            </div>
+          
+          </form>
+
+          <div>
+            <br>
+            <button class="btn btn-outline-danger" onclick="sendJSON()">Bevestig</button>
+            <br><br>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  
 <script>
         window.onload = CheckSession
         function CheckSession() {
