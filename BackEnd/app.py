@@ -14,6 +14,8 @@ import profiel
 import update
 import delete
 import addproduct
+import updateproduct
+import deleteproduct
 
 app = Flask(__name__)
 app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
@@ -53,6 +55,14 @@ def user_delete(user_ID):
 @app.route('/addproduct', methods=['POST'])
 def product_add():
     return addproduct.add()
+
+@app.route('/updateproduct', methods=['PUT'])
+def product_update():
+    return updateproduct.product_update()
+
+@app.route('/deleteproduct/<int:productID>', methods=['DELETE'])
+def product_delete(productID):
+    return deleteproduct.product_delete(productID)
 
 @app.route('/producten')
 def vinddeproducten():

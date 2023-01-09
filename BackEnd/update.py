@@ -56,13 +56,43 @@ def update():
             bindData = (_Aflever, _ID)
             cursor.execute(sqlQuery, bindData)
             conn.commit()
+        if(_json['Username']):
+            _Username = _json['Username']
+            sqlQuery = "UPDATE users SET Username=%s WHERE ID=%s"
+            bindData = (_Username, _ID)
+            cursor.execute(sqlQuery, bindData)
+            conn.commit()
+        if(_json['Voornaam']):
+            _Voornaam = _json['Voornaam']
+            sqlQuery = "UPDATE users SET Voornaam=%s WHERE ID=%s"
+            bindData = (_Voornaam, _ID)
+            cursor.execute(sqlQuery, bindData)
+            conn.commit()
+        if(_json['Achternaam']):
+            _Achternaam = _json['Achternaam']
+            sqlQuery = "UPDATE users SET Achternaam=%s WHERE ID=%s"
+            bindData = (_Achternaam, _ID)
+            cursor.execute(sqlQuery, bindData)
+            conn.commit()
+        if(_json['Geboortedatum']):
+            _Geboortedatum = _json['Geboortedatum']
+            sqlQuery = "UPDATE users SET Geboortedatum=%s WHERE ID=%s"
+            bindData = (_Geboortedatum, _ID)
+            cursor.execute(sqlQuery, bindData)
+            conn.commit()
+        if(_json['Geslacht']):
+            _Geslacht = _json['Geslacht']
+            sqlQuery = "UPDATE users SET Geslacht=%s WHERE ID=%s"
+            bindData = (_Geslacht, _ID)
+            cursor.execute(sqlQuery, bindData)
+            conn.commit()
         if(_json['Password']):
             _Password = sha512_crypt.encrypt(_json['Password'])
             sqlQuery = "UPDATE users SET Password=%s WHERE ID=%s"
             bindData = (_Password, _ID)
             cursor.execute(sqlQuery, bindData)
             conn.commit()
-        if(not _json['Adres'] and not _json['Telefoon'] and not _json['Email'] and not _json['Betaling'] and not _json['Aflever'] and not _json['Password']):
+        if(not _json['Adres'] and not _json['Telefoon'] and not _json['Email'] and not _json['Betaling'] and not _json['Aflever'] and _json['Username'] and not _json['Voornaam'] and not _json['Achternaam'] and not _json['Geslacht'] and not _json['Geboortedatum'] and not _json['Password']):
             response = jsonify('FAIL')
             return response 
         else: 

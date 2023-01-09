@@ -18,7 +18,7 @@
         <div class="container-fluid text-bg-danger p-3 text-white text-left">
             <div class="container-fluid navbar-brand fw-bold fs-1 lh-1">Granny Inc.&nbsp; &nbsp; <img src="grandma.png"
                     width="75" height="75">
-                <a class="btn btn-outline-light " href="../BackEnd/FRONTEND/Login.html" style="float:right">
+                <a class="btn btn-outline-light " href="Login.html" style="float:right">
                     <i class="bi bi-person" style="font-size:20px"></i>&nbsp;Inloggen</a>
             </div>
             <div class="container-fluid navbar-brand fs-6 lh-1">Laat de oma in je los!</a>
@@ -100,9 +100,9 @@
         </div>
     </header>
 
-    <main>
-        <a href="../../FrontEnd/index.html">Terug</a><br>
-        <h1 style="color:green;">
+    <main style = "text-align: center";
+>
+        <h1 style="color:black">
             Login
         </h1>
 
@@ -116,8 +116,6 @@
 
         </p>
 
-        <div id="session"></div>
-
         Nog geen account? <br>
         <a href="Register.html">Registreer</a>
     </main>
@@ -128,7 +126,7 @@
         function CheckSession() 
             if (localStorage.getItem("Ingelogd") == "Ja") {
                 alert("Je bent al ingelogd!")
-                window.location.href = "../../FrontEnd/index.html";
+                window.location.href = "index.html";
             }
         }
 
@@ -158,11 +156,10 @@
                         localStorage.setItem("Ingelogd", "Ja");
                         localStorage.setItem("Sessienaam", User);
                         localStorage.setItem("Rol", "Klant");
-                        setSession()
-                        if (User == "Tonie" || User == "Admin") { // Geef Winkeliers hier rechten 
+                        if (User == "Admin") { // Geef Winkeliers hier rechten 
                             localStorage.setItem("Rol", "Winkelier");
-                            setSession()
                         }
+                        window.location.href = "index.html";
                     }
                     else {
                         alert("Voer een correcte gebruikernaam en/of wachtwoord in!")
@@ -171,15 +168,14 @@
                 .catch(err => console.log('Request Failed', err));
         }
 
-        function setSession() {
-            Ingelogd = localStorage.getItem("Ingelogd")
-            Sessienaam = localStorage.getItem("Sessienaam")
-            Rol = localStorage.getItem("Rol")
-
-            sessie.innerHTML = "<b>SESSION</b>" + "<br>" + "Ingelogd: " + Ingelogd + "<br>" + "Gebruiker: " + Sessienaam + "<br>" + "Rol: " + Rol
-            window.location.href = "../../FrontEnd/index.html";
-
-        }
+       // function setSession() {
+       //     Ingelogd = localStorage.getItem("Ingelogd")
+       //     Sessienaam = localStorage.getItem("Sessienaam")
+       //     Rol = localStorage.getItem("Rol")
+        //    sessie.innerHTML = "<b>SESSION</b>" + "<br>" + "Ingelogd: " + Ingelogd + "<br>" + "Gebruiker: " + Sessienaam + "<br>" + "Rol: " + Rol
+        //    window.location.href = "index.html";
+        //
+       // }
 
 
 // localstorage 
