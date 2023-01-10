@@ -94,9 +94,7 @@
           <h5 class="offcanvas-title" id="offcanvasLabel">Winkelmandje</h5>
           <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
-        <div class="offcanvas-body">
-
-        </div>
+        <div id= "shopping-cart" class="offcanvas-body">Uw Winkelmandje is nog leeg.</div>
       </div>
     </div>
   </header>
@@ -202,7 +200,8 @@
           productenHtml += `<tr>
                               <td>${product.naam}</td>
                               <td>${product.categorie}</td>
-                              <td><button type="button" class="btn btn-secondary buyItem">${product.prijs}</button></td>
+                              <td>${product.prijs}</td>
+                              <td><button type="button" class="btn btn-secondary buyItem">Voeg toe aan winkelmandje</button></td>
                               <td>
                                   <img class="img-fluid" src="${product.afbeelding_url}">
                               </td>
@@ -217,15 +216,86 @@
           // met het resultaat van de gebouwde string.
       }
       
+      function nieuwWinkelmandje(){
+        document.getElementById("shopping-cart").innerHTML = "";
+        
+      }
+
       function voegItemToe(){
-        console.log("Itempje toegevoegd als een baas.");
+        const tabelRow = this.parentNode.parentElement;
+        const cart = document.getElementById("shopping-cart")
+        // Dit vervangt een eventueel leeg winkelmandje.
+        // Met toekomstige functionaliteit kan dan een winkelmandje geleegd worden.
+        // En dan moet deze weer worden "teruggezet" naar de tekst "Uw Winkelmandje is nog leeg."
+        if(cart.innerHTML=="Uw Winkelmandje is nog leeg."){// als deze dus leeg is, maak een nieuwe aan.
+          nieuwWinkelmandje();
+          let cartRow =   `<table id="shopping-cart-contents">
+                        <tr>
+                          <th>
+                            Product
+                          </th>
+                          <th>
+                            Aantal
+                          </th>
+                          <th>
+                            SubTotaal
+                          </th>
+                        </tr>
+                        <tr>
+                          <td>
+                            ${tabelRow.children[0].innerHTML}
+                          </td>
+                          <td>
+                            1
+                          </td>
+                          <td>
+                            ${tabelRow.children[2].innerHTML}
+                          </td>
+                        </tr>
+                        </table>`
+          cart.innerHTML = cartRow;
+        }else{
+        // if tabelRow.children[0] in keys van tabel verhoog aantal met 1
+        // en verhoog subtotaal van producten met prijs.
+        let shoppingCart = document.getElementById("shopping-cart-contents");
+        let newRow = document.createElement("tr");
+        let prodName = document.createElement("td");
+        let prodQuantity = document.createElement("td");
+        let prodSubTotal = document.createElement("td");
+        prodName.innerHTML = tabelRow.children[0].innerHTML;
+        prodQuantity.innerHTML = 1;
+        prodSubTotal.innerHTML = tabelRow.children[2].innerHTML;
+
+        newRow.appendChild(prodName);
+        newRow.appendChild(prodQuantity);
+        newRow.appendChild(prodSubTotal);
+        shoppingCart.appendChild(newRow);
+        console.log(newRow);
+        console.log(shoppingCart.length);
+        `<table>
+                        <tr>
+                          <th>
+                            Product
+                          </th>
+                          <th>
+                            Aantal
+                          </th>
+                          <th>
+                            SubTotaal
+                          </th>
+                        </tr>
+                        </table>`
+        }
+        console.log(tabelRow.children[0].innerHTML);
+        
+        // cart.innerHTML += tabelRow.children[0].innerHTML;
       }
 
       // async function buttonsListenen(){
         function buttonsListenen(){
         // await laadData();
         const buttonCollection = document.getElementsByClassName("buyItem"); // zouden er dus 10 moeten zijn.
-        console.log(buttonCollection);
+        // console.log(buttonCollection);
         for (let buttonnr = 0; buttonnr < buttonCollection.length; buttonnr++){
           buttonCollection[buttonnr].addEventListener("click",voegItemToe);
         }
