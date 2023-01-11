@@ -206,7 +206,8 @@
                               <td>${product.naam}</td>
                               <td>${product.categorie}</td>
                               <td>${product.prijs}</td>
-                              <td><button type="button" class="btn btn-secondary buyItem">Voeg toe aan winkelmandje</button></td>
+                              <td><button type="button" class="btn btn-secondary buyItem" data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvas">Voeg toe aan winkelmandje</button></td>
                               <td>
                                   <img class="img-fluid" src="${product.afbeelding_url}">
                               </td>
@@ -259,6 +260,13 @@
       }
 
       // implementeer array som functie die gegeven een float-array het totaal uitrekend.
+      function arithmaticSubTotal(mandItems){
+        let currentSubTotal = 0;
+        for(let item = 0; item < mandItems.length; item++){
+          currentSubTotal += mandItems[items];
+        }
+        return(currentSubTotal)
+      }
 
       function verhoogMandItem(tabelRij,mandjeItemNr){
         const aantal = parseFloat(document.getElementById(tabelRij).cells[1].firstChild.nodeValue);
@@ -267,7 +275,6 @@
         document.getElementById(tabelRij).cells[1].firstChild.nodeValue = aantal +1;
         document.getElementById(tabelRij).cells[2].firstChild.nodeValue = (newsubtotaal*(aantal+1)).toFixed(2);
         winkelmandSubTotals[mandjeItemNr] = parseFloat((newsubtotaal*(aantal+1)).toFixed(2));
-
       }
 
       function voegItemToe(){
@@ -294,22 +301,22 @@
           winkelmandItems.push(tabelRow.children[0].innerHTML);
           winkelmandSubTotals.push(parseFloat(tabelRow.children[2].innerHTML));
           winkelmandRows.push("mandBucket"+winkelmandItems.length);
-        // if tabelRow.children[0] in keys van tabel verhoog aantal met 1
-        // en verhoog subtotaal van producten met prijs.
-        let shoppingCart = document.getElementById("shopping-cart-contents");
-        let newRow = document.createElement("tr");
-        newRow.id = "mandBucket"+winkelmandItems.length;
-        let prodName = document.createElement("td");
-        let prodQuantity = document.createElement("td");
-        let prodSubTotal = document.createElement("td");
-        prodName.innerHTML = tabelRow.children[0].innerHTML;
-        prodQuantity.innerHTML = 1;
-        prodSubTotal.innerHTML = tabelRow.children[2].innerHTML;
+          // if tabelRow.children[0] in keys van tabel verhoog aantal met 1
+          // en verhoog subtotaal van producten met prijs.
+          let shoppingCart = document.getElementById("shopping-cart-contents");
+          let newRow = document.createElement("tr");
+          newRow.id = "mandBucket"+winkelmandItems.length;
+          let prodName = document.createElement("td");
+          let prodQuantity = document.createElement("td");
+          let prodSubTotal = document.createElement("td");
+          prodName.innerHTML = tabelRow.children[0].innerHTML;
+          prodQuantity.innerHTML = 1;
+          prodSubTotal.innerHTML = tabelRow.children[2].innerHTML;
 
-        newRow.appendChild(prodName);
-        newRow.appendChild(prodQuantity);
-        newRow.appendChild(prodSubTotal);
-        shoppingCart.appendChild(newRow);
+          newRow.appendChild(prodName);
+          newRow.appendChild(prodQuantity);
+          newRow.appendChild(prodSubTotal);
+          shoppingCart.appendChild(newRow);
         }
         console.log(winkelmandSubTotals)
         // cart.innerHTML += tabelRow.children[0].innerHTML;
