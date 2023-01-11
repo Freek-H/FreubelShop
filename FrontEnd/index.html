@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -11,8 +12,8 @@
 </head>
 
 <body>
-<!-- Preloader [zorgt ervoor dat html+js volledig geladen/klaar is voordat gebruiker iets ziet] -->
-<div id="PreLoader" style="height:100vh; width:100vh; background-color:white"></div>
+  <!-- Preloader [zorgt ervoor dat html+js volledig geladen/klaar is voordat gebruiker iets ziet] -->
+  <div id="PreLoader" style="height:100vh; width:100vh; background-color:white"></div>
 
   <header>
     <!-- Logo enzo -->
@@ -21,12 +22,12 @@
           width="75" height="75">
         <a class="btn btn-outline-light" style="float:right;margin-left: 5px">
           <i class="bi bi-person" style="font-size:20px"></i>[..]</a>
-          <a class="btn btn-outline-light" href="profile.html" id = "ProfielKnop" style="float:right">
+        <a class="btn btn-outline-light" href="profile.html" id="ProfielKnop" style="float:right">
           <i class="bi bi-person" style="font-size:20px"></i> Profiel</a>
       </div>
       <div id="sessie" style="float:right"></div>
       <div class="container-fluid navbar-brand fs-6 lh-1">Laat de oma in je los!</a>
-        
+
       </div>
     </div>
 
@@ -49,9 +50,9 @@
                 Categorieën
               </a>
               <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="test.html">Handwerk</a></li>
-                <li><a class="dropdown-item" href="test.html">Lezen & Puzzelen</a></li>
-                <li><a class="dropdown-item" href="test.html">Creatief</a></li>
+                <li><a class="dropdown-item" href="Handwerk.html">Handwerk</a></li>
+                <li><a class="dropdown-item" href="LezenPuzzelen.html">Lezen & Puzzelen</a></li>
+                <li><a class="dropdown-item" href="creatief.html">Creatief</a></li>
                 <li>
                   <hr class="dropdown-divider">
                 </li>
@@ -109,9 +110,9 @@
 
   <main>
     <!-- Afbeeldingen van categorieen -->
-    <div id = "categorieen" class="container text-center">
+    <div id="categorieen" class="container text-center">
       <div class="row">
-        <div id = "cat_handwerk" class="col-sm-3">
+        <div id="cat_handwerk" class="col-sm-3">
           <div class="card">
             <img class="card-img-top" src="grandma.png" alt="Card image cap" height=300>
             <div class="card-body">
@@ -119,25 +120,25 @@
               <p style="font-weight: bold;">Handwerk</p>
               <p>Hier vind je alles wat je zoekt om te breien, haken, naaien, borduren, punniken en noem het maar op!
               </p>
-              <a href="test.html" class="btn btn-danger">Bekijk Handwerk</a>
+              <a href="Handwerk.html" class="btn btn-danger">Bekijk Handwerk</a>
               </p>
             </div>
           </div>
         </div>
 
-        <div id = "cat_lezen" class="col-sm-3">
+        <div id="cat_lezen" class="col-sm-3">
           <div class="card">
             <img class="card-img-top" src="grandma.png" alt="Card image cap" height=300>
             <div class="card-body">
               <p class="card-text">
               <p style="font-weight: bold;">Lezen & Puzzelen</p>
               <p>Zoals de naam al zegt: hier vind je alles (maar dan ook echt alles) om te lezen en te puzzelen.</p>
-              <a href="test.html" class="btn btn-danger">Bekijk Lezen & Puzzelen</a></p>
+              <a href="LezenPuzzelen.html" class="btn btn-danger">Bekijk Lezen & Puzzelen</a></p>
             </div>
           </div>
         </div>
 
-        <div id = "cat_creatief" class="col-sm-3">
+        <div id="cat_creatief" class="col-sm-3">
           <div class="card">
             <img class="card-img-top" src="grandma.png" alt="Card image cap" height=300>
             <div class="card-body">
@@ -145,12 +146,12 @@
               <p style="font-weight: bold;">Creatief</p>
               <p>Laat de Bob Ross in je naar boven komen met creatieve producten zoals verf, verfdoeken en kleurpotloden
               </p>
-              <a href="test.html" class="btn btn-danger">Bekijk Creatief</a></p>
+              <a href="creatief.html" class="btn btn-danger">Bekijk Creatief</a></p>
             </div>
           </div>
         </div>
 
-        <div id = "cat_alles" class="col-sm-3">
+        <div id="cat_alles" class="col-sm-3">
           <div class="card">
             <img class="card-img-top" src="grandma.png" alt="Card image cap" height=300>
             <div class="card-body">
@@ -168,58 +169,58 @@
 
 </html>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 
 <script>
 
 
 
-    window.onload = CheckSession
-    // Preloader
-    const PreLoader = document.getElementById("PreLoader")
-    setTimeout(() => {
+  window.onload = CheckSession
+  // Preloader
+  const PreLoader = document.getElementById("PreLoader")
+  setTimeout(() => {
     PreLoader.style.display = "none"
-    },125);
+  }, 125);
 
-    // Hide elementen die toegang vereisen 
-    const ProfielKnop = document.getElementById("ProfielKnop")
-    ProfielKnop.style.display = "none" 
-    const AdminTools = document.getElementById("AdminTools")
-    AdminTools.style.display = "none" 
+  // Hide elementen die toegang vereisen 
+  const ProfielKnop = document.getElementById("ProfielKnop")
+  ProfielKnop.style.display = "none"
+  const AdminTools = document.getElementById("AdminTools")
+  AdminTools.style.display = "none"
 
-    const sessie = document.getElementById("sessie")
-    const Ingelogd = localStorage.getItem("Ingelogd")
-    const Sessienaam = localStorage.getItem("Sessienaam")
-    const Rol = localStorage.getItem("Rol")
+  const sessie = document.getElementById("sessie")
+  const Ingelogd = localStorage.getItem("Ingelogd")
+  const Sessienaam = localStorage.getItem("Sessienaam")
+  const Rol = localStorage.getItem("Rol")
 
   // Login Check bij Laden Pagina // 
-    function CheckSession() {
-          Login = document.getElementsByClassName("btn btn-outline-light")[0]
-          if (localStorage.getItem("Ingelogd") == "Ja") { // Controleert Login aan de hand van LocalStorage
-              Login.childNodes[2].textContent = " Uitloggen" 
-              Login.removeAttribute("href");
-              Login.addEventListener("click", Clear) 
-              sessie.innerHTML = "Welkom " +Sessienaam + " ( " +Rol + " ) " 
-              ProfielKnop.style.display = "block" 
-                  if(localStorage.getItem("Rol") == "Winkelier") {
-                  AdminTools.style.display = "block"
-          }}
-          else {
-              Login.childNodes[2].textContent = " Inloggen"     
-              Login.setAttribute("href", "login.html")
-          }
+  function CheckSession() {
+    Login = document.getElementsByClassName("btn btn-outline-light")[0]
+    if (localStorage.getItem("Ingelogd") == "Ja") { // Controleert Login aan de hand van LocalStorage
+      Login.childNodes[2].textContent = " Uitloggen"
+      Login.removeAttribute("href");
+      Login.addEventListener("click", Clear)
+      sessie.innerHTML = "Welkom " + Sessienaam + " ( " + Rol + " ) "
+      ProfielKnop.style.display = "block"
+      if (localStorage.getItem("Rol") == "Winkelier") {
+        AdminTools.style.display = "block"
+      }
     }
+    else {
+      Login.childNodes[2].textContent = " Inloggen"
+      Login.setAttribute("href", "login.html")
+    }
+  }
 
-// Logout - Reset Local Storage 
-    function Clear(){
-      localStorage.removeItem("Ingelogd")
-      localStorage.removeItem("Sessienaam")
-      localStorage.removeItem("Rol")
-      window.location.reload();
-    }
+  // Logout - Reset Local Storage 
+  function Clear() {
+    localStorage.removeItem("Ingelogd")
+    localStorage.removeItem("Sessienaam")
+    localStorage.removeItem("Rol")
+    window.location.reload();
+  }
 
 
 
 </script>
-
-  
