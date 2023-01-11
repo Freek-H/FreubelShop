@@ -1,6 +1,3 @@
-<!-- Ik heb geprobeerd om de drie vlakken te fixeren
-    Zodat we die daarna kunnen invullen met de content. -->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -206,7 +203,8 @@
                               <td>${product.naam}</td>
                               <td>${product.categorie}</td>
                               <td>${product.prijs}</td>
-                              <td><button type="button" class="btn btn-secondary buyItem">Voeg toe aan winkelmandje</button></td>
+                              <td><button type="button" class="btn btn-secondary buyItem" data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvas">Voeg toe aan winkelmandje</button></td>
                               <td>
                                   <img class="img-fluid" src="${product.afbeelding_url}">
                               </td>
@@ -247,18 +245,29 @@
                           </td>
                         </tr>
                         </table>`
+                        // <td>
+                        //     <button><img src="wegermee.png" width="20" height="20">
+                        //   </td>
           cart.innerHTML = cartRow;
           winkelmandItems.push(tabelRow.children[0].innerHTML);
           winkelmandSubTotals.push(parseFloat(tabelRow.children[2].innerHTML));
           winkelmandRows.push("mandBucket1");
 
           let totalPrice = document.createElement("div");
-          totalPrice.innerHTML = parseFloat(tabelRow.children[2].innerHTML);
+          // totalPrice.innerHTML = parseFloat(tabelRow.children[2].innerHTML);
+          totalPrice.innerHTML = arithmaticSubTotal(winkelmandSubTotals);
+          totalPrice.id = "sub-totaal";
           document.getElementById("offcanvas").appendChild(totalPrice);
-          console.log(totalPrice);
+          // console.log(totalPrice);
       }
 
-      // implementeer array som functie die gegeven een float-array het totaal uitrekend.
+      function arithmaticSubTotal(mandItems){
+        let currentSubTotal = 0;
+        for(let item = 0; item < mandItems.length; item++){
+          currentSubTotal += mandItems[item];
+        }
+        return(parseFloat(currentSubTotal).toFixed(2));
+      }
 
       function verhoogMandItem(tabelRij,mandjeItemNr){
         const aantal = parseFloat(document.getElementById(tabelRij).cells[1].firstChild.nodeValue);
@@ -268,6 +277,7 @@
         document.getElementById(tabelRij).cells[2].firstChild.nodeValue = (newsubtotaal*(aantal+1)).toFixed(2);
         winkelmandSubTotals[mandjeItemNr] = parseFloat((newsubtotaal*(aantal+1)).toFixed(2));
 
+        document.getElementById("sub-totaal").innerHTML = arithmaticSubTotal(winkelmandSubTotals);
       }
 
       function voegItemToe(){
@@ -294,29 +304,30 @@
           winkelmandItems.push(tabelRow.children[0].innerHTML);
           winkelmandSubTotals.push(parseFloat(tabelRow.children[2].innerHTML));
           winkelmandRows.push("mandBucket"+winkelmandItems.length);
-        // if tabelRow.children[0] in keys van tabel verhoog aantal met 1
-        // en verhoog subtotaal van producten met prijs.
-        let shoppingCart = document.getElementById("shopping-cart-contents");
-        let newRow = document.createElement("tr");
-        newRow.id = "mandBucket"+winkelmandItems.length;
-        let prodName = document.createElement("td");
-        let prodQuantity = document.createElement("td");
-        let prodSubTotal = document.createElement("td");
-        prodName.innerHTML = tabelRow.children[0].innerHTML;
-        prodQuantity.innerHTML = 1;
-        prodSubTotal.innerHTML = tabelRow.children[2].innerHTML;
+          // if tabelRow.children[0] in keys van tabel verhoog aantal met 1
+          // en verhoog subtotaal van producten met prijs.
+          let shoppingCart = document.getElementById("shopping-cart-contents");
+          let newRow = document.createElement("tr");
+          newRow.id = "mandBucket"+winkelmandItems.length;
+          let prodName = document.createElement("td");
+          let prodQuantity = document.createElement("td");
+          let prodSubTotal = document.createElement("td");
+          prodName.innerHTML = tabelRow.children[0].innerHTML;
+          prodQuantity.innerHTML = 1;
+          prodSubTotal.innerHTML = tabelRow.children[2].innerHTML;
 
-        newRow.appendChild(prodName);
-        newRow.appendChild(prodQuantity);
-        newRow.appendChild(prodSubTotal);
-        shoppingCart.appendChild(newRow);
+          newRow.appendChild(prodName);
+          newRow.appendChild(prodQuantity);
+          newRow.appendChild(prodSubTotal);
+          shoppingCart.appendChild(newRow);
+
+          document.getElementById("sub-totaal").innerHTML = arithmaticSubTotal(winkelmandSubTotals);
         }
-        console.log(winkelmandSubTotals)
+        // console.log(winkelmandSubTotals)
         // cart.innerHTML += tabelRow.children[0].innerHTML;
       }
     }
 
-      // async function buttonsListenen(){
       function buttonsListenen(){
         // await laadData();
         const buttonCollection = document.getElementsByClassName("buyItem"); // zouden er dus 10 moeten zijn.
@@ -328,71 +339,6 @@
 
       laadData().then(buttonsListenen);
 
-
-      // buttonsListenen();
-      // ;
-      // window.setTimeout(buttonsListenen,100); // seconde wachten werkt wel.
-      
-      
-      
-      // let tableFetched = new Promise(function(myResolve, myReject){
-      //   if (tableLoaded){
-      //     myResolve(buttonsListenen(), console.log("toch?"));
-      //   }else{
-      //     myReject(console.log("Dat ging niet goed."))
-      //   }
-      // });
-
-      // tableFetched.then(
-
-      // )
-
-      
-
-
-      // console.log(buttonCollection);
-      // console.log("buttonCollection", buttonCollection);
-      // console.log(buttonCollection[0]);
-      
-      
-// Dus nu maak ik dynamisch knoppen aan, top.
-// stap 2 is om een eventlistener toe te voegen aan alle knoppen met classe = buy-item.
-// Als een willekeurige knop met die classe wordt aangeklikt, vuurt er een event af, die het product waar die knop bijhoort, toevoegt aan het mandje.
-//  - Daarvoor ontbreekt het volgende
-//    - een winkelmandje uberhaupt.
-//    - de koppeling tussen knop-met-classe-buy-item naar alle waardes van die rij. Maybe "parent" van list item?
-
-
-        
-
-    //     let menuShown = true;
-    
-    //     function resizeTable(){
-    //     let tabelHeight = window.innerHeight;
-    //     let tabelWidth = window.innerWidth;
-    //     console.log(tabelWidth*0.2);
-    //     document.getElementsByClassName("menukolom").style="width: "+(tabelWidth*0.2);
-    //     document.getElementsByClassName("product").style="padding: "+(tabelWidth*0.1)+"px"+(tabelWidth*0.1)+"px";
-    //     document.getElementsByClassName("omschrijving").style="padding: "+(tabelWidth*0.15)+"px"+(tabelWidth*0.15)+"px";
-    //     document.getElementsByClassName("afbeelding").style="padding: "+(tabelWidth*0.15)+"px"+(tabelWidth*0.15)+"px";
-    //     //document.getElementById("productLog").style="min-width: "+tabelWidth*0.8;
-    //     //document.getElementsByClassName("menukolom")[0].innerHTML=tabelWidth;
-    // }
-    //     function showMenu(){
-    //         var x = document.getElementsByClassName("menukolom")[0];
-    //         //log.console(document.getElementsByClassName("grid-container")[0][1]);
-    //         if (x.style.display=="none"){
-    //             x.style.display = "block";
-    //         }else{
-    //             x.style.display ="none";
-    //             //document.getElementsByClassName("grid-container").style= "grid-template-areas:\n"+
-    //             //'header header header header header header header header\n'+
-    //             //'main main main main main main main main\n'+
-    //             //'main main main main main main main main\n'+
-    //             //'main main main main main main main main';
-    //             //document.getElementsByClassName("grid-container").style
-    //         }
-    // }
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 </body>
