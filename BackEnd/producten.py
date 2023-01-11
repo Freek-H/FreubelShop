@@ -1,4 +1,12 @@
-import mariadb
+from flask import Flask, session, abort
+from flask_cors import CORS, cross_origin
+from flaskext.mysql import MySQL
+import pymysql
+from flask import jsonify
+import json
+from flask import flash, request
+from passlib.hash import sha512_crypt
+
 import json
 import decimal
 
@@ -7,29 +15,31 @@ import io
 import PIL.Image as Image
 from array import array
 
-def vindalleproducten():
-    #return '[{"name":"a","description":"b","img":"c"}]'
-    mydb = mariadb.connect(
-        host="localhost",  #port erbij indien mac
-        user="root",
-        password="",
-        database="webshopusers"
-    )
-    mycursor = mydb.cursor()
+from config import *
 
-    mycursor.execute("SELECT * FROM producten")
-    rijen = [x for x in mycursor]
-    naam = [x[0] for x in mycursor.description[0:3]]
-    freubelItems = []
-    for rij in rijen:
-        freubelItem = {}
-        # vul de dictionary met als key de kolomnaam
-        # en als waarde de tabel entry van de huidige rij.
-        for prop, val in zip(naam, rij):
-            freubelItem[prop] = val
-        freubelItems.append(freubelItem)
-    jsonstring = json.dumps(freubelItems)
-    return jsonstring
+# def vindalleproducten():
+#     #return '[{"name":"a","description":"b","img":"c"}]'
+#     mydb = mysql.connect(
+#         # host="localhost",  #port erbij indien mac
+#         # user="root",
+#         # password="",
+#         # database="webshopusers"
+#     )
+#     mycursor = mydb.cursor()
+
+#     mycursor.execute("SELECT * FROM producten")
+#     rijen = [x for x in mycursor]
+#     naam = [x[0] for x in mycursor.description[0:3]]
+#     freubelItems = []
+#     for rij in rijen:
+#         freubelItem = {}
+#         # vul de dictionary met als key de kolomnaam
+#         # en als waarde de tabel entry van de huidige rij.
+#         for prop, val in zip(naam, rij):
+#             freubelItem[prop] = val
+#         freubelItems.append(freubelItem)
+#     jsonstring = json.dumps(freubelItems)
+#     return jsonstring
 
 #def readimage(path):
 #    count=os.stat(path).st_size / 2
@@ -37,11 +47,11 @@ def vindalleproducten():
 #        return bytearray(f.read())
 
 def vindNonStandardGegevens():
-    mydb = mariadb.connect(
-        host="localhost",  #port erbij indien mac
-        user="root",
-        password="",
-        database="webshopusers"
+    mydb = mysql.connect(
+        # host="localhost",  #port erbij indien mac
+        # user="root",
+        # password="",
+        # database="webshopusers"
     )
     mycursor = mydb.cursor()
 
@@ -77,4 +87,4 @@ def vindNonStandardGegevens():
 
 
 #print(vindNonStandardGegevens())
-vindNonStandardGegevens()
+# vindNonStandardGegevens()
