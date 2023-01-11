@@ -94,9 +94,7 @@
           <h5 class="offcanvas-title" id="offcanvasLabel">Winkelmandje</h5>
           <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
-        <div class="offcanvas-body">
-
-        </div>
+        <div id= "shopping-cart" class="offcanvas-body">Uw Winkelmandje is nog leeg.</div>
       </div>
     </div>
   </header>
@@ -188,6 +186,11 @@
   </main>
  
     <script>
+
+      let winkelmandItems = [];
+      let winkelmandSubTotals = [];
+      let winkelmandRows = [];
+
       async function laadData() 
       {
         // start (asynchroon?) process om data op te halen uit db
@@ -202,7 +205,9 @@
           productenHtml += `<tr>
                               <td>${product.naam}</td>
                               <td>${product.categorie}</td>
-                              <td><button type="button" class="btn btn-secondary buyItem">${product.prijs}</button></td>
+                              <td>${product.prijs}</td>
+                              <td><button type="button" class="btn btn-secondary buyItem" data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvas">Voeg toe aan winkelmandje</button></td>
                               <td>
                                   <img class="img-fluid" src="${product.afbeelding_url}">
                               </td>
@@ -217,21 +222,120 @@
           // met het resultaat van de gebouwde string.
       }
       
-      function voegItemToe(){
-        console.log("Itempje toegevoegd als een baas.");
+      function nieuwWinkelmandje(tabelRow, cart){
+        document.getElementById("shopping-cart").innerHTML = "";
+        let cartRow =   `<table id="shopping-cart-contents">
+                        <tr>
+                          <th>
+                            Product
+                          </th>
+                          <th>
+                            Aantal
+                          </th>
+                          <th>
+                            SubTotaal
+                          </th>
+                        </tr>
+                        <tr id="mandBucket1">
+                          <td>
+                            ${tabelRow.children[0].innerHTML}
+                          </td>
+                          <td>
+                            1
+                          </td>
+                          <td>
+                            ${tabelRow.children[2].innerHTML}
+                          </td>
+                        </tr>
+                        </table>`
+          cart.innerHTML = cartRow;
+          winkelmandItems.push(tabelRow.children[0].innerHTML);
+          winkelmandSubTotals.push(parseFloat(tabelRow.children[2].innerHTML));
+          winkelmandRows.push("mandBucket1");
+
+          let totalPrice = document.createElement("div");
+          totalPrice.innerHTML = parseFloat(tabelRow.children[2].innerHTML);
+          document.getElementById("offcanvas").appendChild(totalPrice);
+          console.log(totalPrice);
       }
 
+      // implementeer array som functie die gegeven een float-array het totaal uitrekend.
+      function arithmaticSubTotal(mandItems){
+        let currentSubTotal = 0;
+        for(let item = 0; item < mandItems.length; item++){
+          currentSubTotal += mandItems[items];
+        }
+        return(currentSubTotal)
+      }
+
+      function verhoogMandItem(tabelRij,mandjeItemNr){
+        const aantal = parseFloat(document.getElementById(tabelRij).cells[1].firstChild.nodeValue);
+        const subsubtotaal = parseFloat(document.getElementById(tabelRij).cells[2].firstChild.nodeValue);
+        const newsubtotaal = subsubtotaal/aantal;
+        document.getElementById(tabelRij).cells[1].firstChild.nodeValue = aantal +1;
+        document.getElementById(tabelRij).cells[2].firstChild.nodeValue = (newsubtotaal*(aantal+1)).toFixed(2);
+        winkelmandSubTotals[mandjeItemNr] = parseFloat((newsubtotaal*(aantal+1)).toFixed(2));
+      }
+
+      function voegItemToe(){
+        let productAanwezig = false;
+        const tabelRow = this.parentNode.parentElement;
+        const cart = document.getElementById("shopping-cart")
+        // Dit vervangt een eventueel leeg winkelmandje.
+        // Met toekomstige functionaliteit kan dan een winkelmandje geleegd worden.
+        // En dan moet deze weer worden "teruggezet" naar de tekst "Uw Winkelmandje is nog leeg."
+        if(cart.innerHTML=="Uw Winkelmandje is nog leeg."){// als deze dus leeg is, maak een nieuwe aan.
+          nieuwWinkelmandje(tabelRow, cart)
+        }else{
+          let productNaam = tabelRow.children[0].innerHTML;
+          // ga elke waarde af in het huidige winkelmandje en kijk of het productnaam
+          // er al in zit, zo ja, verhoog de quantity met 1, verhoog de prijs met product.prijs.
+          for(let mandjeItemNr = 0; mandjeItemNr < winkelmandItems.length; mandjeItemNr++){
+            if(productNaam == winkelmandItems[mandjeItemNr]){
+              verhoogMandItem(winkelmandRows[mandjeItemNr],mandjeItemNr);
+              productAanwezig = true;
+              break;
+            }
+          }
+        if(productAanwezig == false){
+          winkelmandItems.push(tabelRow.children[0].innerHTML);
+          winkelmandSubTotals.push(parseFloat(tabelRow.children[2].innerHTML));
+          winkelmandRows.push("mandBucket"+winkelmandItems.length);
+          // if tabelRow.children[0] in keys van tabel verhoog aantal met 1
+          // en verhoog subtotaal van producten met prijs.
+          let shoppingCart = document.getElementById("shopping-cart-contents");
+          let newRow = document.createElement("tr");
+          newRow.id = "mandBucket"+winkelmandItems.length;
+          let prodName = document.createElement("td");
+          let prodQuantity = document.createElement("td");
+          let prodSubTotal = document.createElement("td");
+          prodName.innerHTML = tabelRow.children[0].innerHTML;
+          prodQuantity.innerHTML = 1;
+          prodSubTotal.innerHTML = tabelRow.children[2].innerHTML;
+
+          newRow.appendChild(prodName);
+          newRow.appendChild(prodQuantity);
+          newRow.appendChild(prodSubTotal);
+          shoppingCart.appendChild(newRow);
+        }
+        console.log(winkelmandSubTotals)
+        // cart.innerHTML += tabelRow.children[0].innerHTML;
+      }
+    }
+
       // async function buttonsListenen(){
-        function buttonsListenen(){
+      function buttonsListenen(){
         // await laadData();
         const buttonCollection = document.getElementsByClassName("buyItem"); // zouden er dus 10 moeten zijn.
-        console.log(buttonCollection);
+        // console.log(buttonCollection);
         for (let buttonnr = 0; buttonnr < buttonCollection.length; buttonnr++){
           buttonCollection[buttonnr].addEventListener("click",voegItemToe);
         }
       }
 
       laadData().then(buttonsListenen);
+
+
       // buttonsListenen();
       // ;
       // window.setTimeout(buttonsListenen,100); // seconde wachten werkt wel.
