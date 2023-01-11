@@ -105,35 +105,55 @@
       </header>
 
 
+<div class = "container text-center d-grid gap-2">
+  <div id="Profiel" class = "fs-3"><b>Mijn Profiel</b></div>
+  <div class = "fs-6 d-grid gap-3" style="margin:auto">
+    <label for="ID"> ID</label>
+    <input readonly style="width:200px" type="text" id="ID" placeholder="ID" class="form-control text-center">
 
-<div id="Profiel" style="text-align: center; text-align: center;"><h1>Mijn Profiel</h1>
-    ID<br><input readonly style="width:200px" type="text" id="ID" placeholder="ID"><br>
-    Username<br><input readonly style="width:200px" type="text" id="Username" placeholder="Username"><br>
-    Password<br><input style="width:200px" type="password" id="Password" placeholder="Password"><br>
-    Voornaam<br><input style="width:200px" type="text" id="Voornaam" placeholder="Voornaam"><br>
-    Achternaam<br><input style="width:200px" type="text" id="Achternaam" placeholder="Achternaam"><br>
-    Geslacht<br><select style="width:200px" id="Geslacht" placeholder="Geslacht"><br>
+    <label for="Username">Gebruikersnaam</label>
+    <input readonly style="width:200px" type="text" id="Username" placeholder="Username" class="form-control text-center">
+
+    <label for="Password">Wachtwoord</label>
+    <input style="width:200px" type="password" id="Password" placeholder="Password" class="form-control text-center">
+    <label for="GEslacht">Geslacht</label>
+    <select style="width:200px" id="Geslacht" placeholder="Geslacht" class="form-select text-center">
         <option value="Anders">Anders</option>
         <option value="Man">Man</option>
-        <option value="Vrouw">Vrouw</option></select><br>
-    Woonadres<br><input style="width:200px" type="text" id="Woonadres" placeholder="Woonadres"><br>
-    Telefoon<br><input style="width:200px" type="text" id="Telefoon" placeholder="Telefoon"><br>
-    Email<br><input style="width:200px" type="text" id="Email" placeholder="Email"><br>
-    Geboortedatum<br><input style="width:200px" type="date" id="Geboortedatum" placeholder="Geboortedatum"><br>
-    Betaling<br><select style="width:200px" id="Betaling" placeholder="Betaling"><br>
+        <option value="Vrouw">Vrouw</option></select>
+    
+    <label for="Geboortedatum">Geboortedatum</label>
+    <input style="width:200px" type="date" id="Geboortedatum" placeholder="Geboortedatum" class="form-control text-center">
+
+    <label for="Voornaam">Voornaam</label>
+    <input style="width:200px" type="text" id="Voornaam" placeholder="Voornaam" class="form-control text-center">
+
+    <label for="Achternaam">Achternaam</label>
+    <input style="width:200px" type="text" id="Achternaam" placeholder="Achternaam" class="form-control text-center">
+    
+    <label for="Telefoon">Telefoonnummer</label>
+    <input style="width:200px" type="text" id="Telefoon" placeholder="Telefoon" class="form-control text-center">
+
+    <label for="Email">E-mailadres</label>
+    <input style="width:200px" type="text" id="Email" placeholder="Email" class="form-control text-center">
+
+    <label for="Woonadres">Woonadres</label>
+    <input style="width:200px" type="text" id="Woonadres" placeholder="Woonadres" class="form-control text-center">
+
+    <label for="Afleveradres">Afleveradres</label>
+    <input style="width:200px" type="text" id="Afleveradres" placeholder="Afleveradres" class="form-control text-center">
+
+    <label for="Betaling">Betalingsvoorkeur</label>
+    <select style="width:200px" id="Betaling" placeholder="Betaling" class="form-select text-center">
     <option value="iDeal">iDeal</option>
     <option value="Credit Card">Credit Card</option>
-    <option value="PayPal">PayPal</option></select><br>
-    Afleveradres<br><input style="width:200px" type="text" id="Afleveradres" placeholder="Afleveradres"><br><br>
+    <option value="PayPal">PayPal</option></select>
 
-    <button id="Delete" onclick="Delete()">Delete Account</button>
-    <button id="Update" onclick="Update()">Update Account</button>
-
-
-
-
-
-
+    <button style="width:150px; margin:auto" class="btn btn-outline-danger" id="Delete" onclick="Delete()">Delete Account</button>
+    <button style="width:150px; margin:auto" class="btn btn-outline-danger" id="Update" onclick="Update()">Update Account</button>
+    
+    </div>
+  </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
 integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
