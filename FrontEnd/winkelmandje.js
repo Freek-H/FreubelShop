@@ -75,7 +75,7 @@
           // let totalPrice = document.createElement("div");
           // totalPrice.innerHTML = parseFloat(tabelRow.children[2].innerHTML);
           let totalPrice = document.getElementById("totaalVanMandje");
-          totalPrice.innerHTML += "Doei";
+          // totalPrice.innerHTML += "Doei";
           totalPrice.innerHTML += arithmaticSubTotal(winkelmandSubTotals);
           // totalPrice.id = "sub-totaal";
           // sidebar-winkelmandje aanmaken 3e DIV
@@ -116,7 +116,7 @@
         document.getElementById(tabelRij).cells[2].firstChild.nodeValue = (newsubtotaal*(aantal+1)).toFixed(2);
         winkelmandSubTotals[mandjeItemNr] = parseFloat((newsubtotaal*(aantal+1)).toFixed(2));
 
-        document.getElementById("sub-totaal").innerHTML = arithmaticSubTotal(winkelmandSubTotals);
+        document.getElementById("totaalVanMandje").innerHTML = arithmaticSubTotal(winkelmandSubTotals);
 
         // Aanpassen van localStorage zodat er voor dit product één extra is.
         let hoeveelheden = JSON.parse("["+localStorage.getItem("Aantallen")+"]");
@@ -176,8 +176,7 @@
           newRow.appendChild(prodQuantity);
           newRow.appendChild(prodSubTotal);
           shoppingCart.appendChild(newRow);
-
-          document.getElementById("sub-totaal").innerHTML = arithmaticSubTotal(winkelmandSubTotals);
+          document.getElementById("totaalVanMandje").innerHTML = arithmaticSubTotal(winkelmandSubTotals);
         }
         // console.log(winkelmandSubTotals)
         // cart.innerHTML += tabelRow.children[0].innerHTML;
@@ -197,13 +196,98 @@
       function verversWinkelmandje(){
         let winkelmandItems = localStorage.getItem("Producten");
         winkelmandItems = winkelmandItems.split(",");
+
+        let winkelmandAantallen = localStorage.getItem("Aantallen");
+        winkelmandAantallen = winkelmandAantallen.split(",");
+
+        let winkelmandPrijzen = localStorage.getItem("Prijzen");
+        winkelmandPrijzen = winkelmandPrijzen.split(",");
         
 
 
         console.log(winkelmandItems);
-        console.log(winkelmandQuantities);
-        console.log(winkelmandPrices);
+        console.log(winkelmandAantallen);
+        console.log(winkelmandPrijzen);
         
+        let productenHtml = ""; //start van de stringbuild
+        document.getElementById("shopping-cart").innerHTML = "";
+
+        
+        result_dat.forEach(product => { // voor elk item uit data noem dit product.
+        productenHtml += `<tr>
+                            <td>${product.naam}</td>
+                            <td>${product.categorie}</td>
+                            <td>${product.prijs}</td>
+                            <td><button type="button" class="btn btn-secondary buyItem" data-bs-toggle="offcanvas"
+              data-bs-target="#offcanvas">Voeg toe aan winkelmandje</button></td>
+                            <td>
+                                <img class="img-fluid" src="${product.afbeelding_url}">
+                            </td>
+                          </tr>`
+        // vul in het bovenstaande de string aan volgens een vast schema,
+        // met kolomnamen "naam/categorie/prijs/afbeeldinurl"
+        // <td>Toevoegen aan winkelmand.</td>
+        });
+
+        let cartRow =   `<table id="shopping-cart-contents">
+                        <tr>
+                          <th>
+                            Product
+                          </th>
+                          <th>
+                            Aantal
+                          </th>
+                          <th>
+                            SubTotaal
+                          </th>
+                        </tr>
+                        <tr id="mandBucket1">
+                          <td>
+                            ${tabelRow.children[0].innerHTML}
+                          </td>
+                          <td>
+                            1
+                          </td>
+                          <td>
+                            ${tabelRow.children[2].innerHTML}
+                          </td>
+                        </tr>
+                        </table>`
+                        // <td>
+                        //     <button><img src="wegermee.png" width="20" height="20">
+                        //   </td>
+          cart.innerHTML = cartRow;
+          winkelmandItems.push(tabelRow.children[0].innerHTML);
+          winkelmandQuantities.push(1);
+          winkelmandPrices.push(tabelRow.children[2].innerHTML);
+          winkelmandSubTotals.push(parseFloat(tabelRow.children[2].innerHTML));
+          winkelmandRows.push("mandBucket1");
+
+          // let totalPrice = document.createElement("div");
+          // totalPrice.innerHTML = parseFloat(tabelRow.children[2].innerHTML);
+          let totalPrice = document.getElementById("totaalVanMandje");
+          // totalPrice.innerHTML += "Doei";
+          totalPrice.innerHTML += arithmaticSubTotal(winkelmandSubTotals);
+          // totalPrice.id = "sub-totaal";
+          // sidebar-winkelmandje aanmaken 3e DIV
+          // document.getElementById("offcanvas").appendChild(totalPrice);
+          // console.log(totalPrice);
+
+          // Als ik het bovenstaande ontleen, zie ik het volgende:
+          //  - Een HTML-string die de tabel maakt.                       (1)
+          //  - Een array die bijhoudt waarvan er minstens 1 item in zit  (2)
+          //  - Een array die per item bijhoudt wat het subtotaal is      (3)
+          //  - Een array die de id's van de entries bijhoudt             (4)
+          //  - HET totaal van alle subtotalen --> valt te berekenen.     
+          //  - dit geeft vier local storage items.
+
+                              // Als ik bij het binnenhengelen in de laadDatacall ook het ID onthoud
+                              // kan dit een stuk compacter
+          // Bij het aanmaken van een nieuw winkelmandje, wordt de localstorage opnieuw gedefinieerd.
+          localStorage.setItem("Producten",winkelmandItems);
+          localStorage.setItem("Aantallen",winkelmandQuantities);
+          localStorage.setItem("Prijzen",winkelmandPrices);
+
       }
 
       laadData().then(buttonsListenen);
@@ -211,9 +295,9 @@
       // wordt gecontroleerd of er nog gegevens in de localstorage staan.
       // Zo ja, dan wordt het winkelmandje hersteld.
       if(localStorage.getItem("Producten")==null){
-        document.getElementById("shopping-cart").innerHTML = "Uw winkelmandje is noig leeg.";
+        document.getElementById("shopping-cart").innerHTML = "Uw winkelmandje is nog leeg.";
       }else{
-        verversWinkelmandje();
+        // verversWinkelmandje();
       }
 // Nadat de tabel met de producten is geladen, zal gecontroleerd moeten worden óf en welke waardes er in de localstorage zitten van het winkelmandje.
 // Stel dat daar niets in zit, zet de waarde van de div op "Uw Winkelmandje is nog leeg.".
