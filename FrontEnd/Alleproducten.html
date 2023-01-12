@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Freubelshop Landing Page</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
 
-    <link rel="stylesheet" href="styling.css">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Freubelshop Landing Page</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+
+  <link rel="stylesheet" href="styling.css">
 </head>
 
 <body>
@@ -91,7 +93,23 @@
           <h5 class="offcanvas-title" id="offcanvasLabel">Winkelmandje</h5>
           <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
-        <div id= "shopping-cart" class="offcanvas-body">Uw Winkelmandje is nog leeg.</div>
+        <div id="heelWinkelmandje" class="container offcanvas-body">
+          <div id="shopping-cart" class="offcanvas-body" style="height: 90%;">Uw Winkelmandje is nog leeg.</div>
+
+          <div class="container ">
+            <div class="row align-items-center">
+              <div class="col-8">
+                <div id="totaalVanMandje" style="font-weight: 900"></div>
+              </div>
+              <div class="col-4">
+                <div id="naarAfrekenen" class="btn btn-outline-danger opacity-75 m-0"> Afrekenen </div>
+              </div>
+            </div>
+
+
+          </div>
+
+        </div>
       </div>
     </div>
   </header>
@@ -99,247 +117,102 @@
   <main>
     <div class="container">
       <div class="row">
-          <div class="col-12 text-center"><h1>Alle Producten</h1></div>
+        <div class="col-12 text-center">
+          <h1>Alle Producten</h1>
+        </div>
       </div>
       <div class="row">
-          <div class="col-4">
-              <table class="table">
-                  <tr><td>Categorie</td></tr>
-                  <tr><td>Prijs</td></tr>
-                  <tr><td>Kleur</td></tr>
-                  <tr><td>Merk</td></tr>
-              </table>
-          </div>
-          <div class="col-8">
-              <table class="table table-striped">
-                  <thead>
-                      <tr>
-                          <th class = "product">Product</th>
-                          <th class = "omschrijving">Beschrijving</th>
-                          <th class = "prijs">Prijs</th>
-                          <th class = "afbeelding">Afbeelding</th>
-                      </tr>
-                  </thead>
-                  <tbody id="productCatalog">
-                      <tr>
-                          <td>Prod_1</td>
-                          <td>Beschr_1</td>
-                          <td><button type="button" class="btn btn-secondary">1.99</button></td>
-                          <td>Img_1</td>
-                      </tr>
-                      <tr>
-                          <td>Prod_2</td>
-                          <td>Beschr_2</td>
-                          <td><button type="button" class="btn btn-secondary">1.99</button></td>
-                          <td>Img_2</td>
-                      </tr>
-                      <tr>
-                          <td>Prod_3</td>
-                          <td>Beschr_3</td>
-                          <td><button type="button" class="btn btn-secondary">1.99</button></td>
-                          <td>Img_3</td>
-                      </tr>
-                      <tr>
-                          <td>Prod_4</td>
-                          <td>Beschr_4</td>
-                          <td><button type="button" class="btn btn-secondary">1.99</button></td>
-                          <td>Img_4</td>
-                      </tr>
-                      <tr>
-                          <td>Prod_5</td>
-                          <td>Beschr_5</td>
-                          <td><button type="button" class="btn btn-secondary">1.99</button></td>
-                          <td>Img_5</td>
-                      </tr>
-                      <tr>
-                          <td>Prod_6</td>
-                          <td>Beschr_6</td>
-                          <td><button type="button" class="btn btn-secondary">1.99</button></td>
-                          <td>Img_6</td>
-                      </tr>
-                      <tr>
-                          <td>Prod_7</td>
-                          <td>Beschr_7</td>
-                          <td><button type="button" class="btn btn-secondary">1.99</button></td>
-                          <td>Img_7</td>
-                      </tr>
-                      <tr>
-                          <td>Prod_8</td>
-                          <td>Beschr_8</td>
-                          <td><button type="button" class="btn btn-secondary">1.99</button></td>
-                          <td>Img_8</td>
-                      </tr>
-                  </tbody>
-              </table>
-          </div>
+        <div class="col-4">
+          <table class="table">
+            <tr>
+              <td>Categorie</td>
+            </tr>
+            <tr>
+              <td>Prijs</td>
+            </tr>
+            <tr>
+              <td>Kleur</td>
+            </tr>
+            <tr>
+              <td>Merk</td>
+            </tr>
+          </table>
+        </div>
+        <div class="col-8">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th class="product">Product</th>
+                <th class="omschrijving">Beschrijving</th>
+                <th class="prijs">Prijs</th>
+                <th class="afbeelding">Afbeelding</th>
+              </tr>
+            </thead>
+            <tbody id="productCatalog">
+              <tr>
+                <td>Prod_1</td>
+                <td>Beschr_1</td>
+                <td><button type="button" class="btn btn-secondary">1.99</button></td>
+                <td>Img_1</td>
+              </tr>
+              <tr>
+                <td>Prod_2</td>
+                <td>Beschr_2</td>
+                <td><button type="button" class="btn btn-secondary">1.99</button></td>
+                <td>Img_2</td>
+              </tr>
+              <tr>
+                <td>Prod_3</td>
+                <td>Beschr_3</td>
+                <td><button type="button" class="btn btn-secondary">1.99</button></td>
+                <td>Img_3</td>
+              </tr>
+              <tr>
+                <td>Prod_4</td>
+                <td>Beschr_4</td>
+                <td><button type="button" class="btn btn-secondary">1.99</button></td>
+                <td>Img_4</td>
+              </tr>
+              <tr>
+                <td>Prod_5</td>
+                <td>Beschr_5</td>
+                <td><button type="button" class="btn btn-secondary">1.99</button></td>
+                <td>Img_5</td>
+              </tr>
+              <tr>
+                <td>Prod_6</td>
+                <td>Beschr_6</td>
+                <td><button type="button" class="btn btn-secondary">1.99</button></td>
+                <td>Img_6</td>
+              </tr>
+              <tr>
+                <td>Prod_7</td>
+                <td>Beschr_7</td>
+                <td><button type="button" class="btn btn-secondary">1.99</button></td>
+                <td>Img_7</td>
+              </tr>
+              <tr>
+                <td>Prod_8</td>
+                <td>Beschr_8</td>
+                <td><button type="button" class="btn btn-secondary">1.99</button></td>
+                <td>Img_8</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
-  </div>
-  
+    </div>
 
-          
-      <!--Dit is het middelste scroll venster met de producten. Door middel van een dynamische tabel kun je hier eindeloos blijven scrollen om alle producten te zien.</div>
+
+
+    <!--Dit is het middelste scroll venster met de producten. Door middel van een dynamische tabel kun je hier eindeloos blijven scrollen om alle producten te zien.</div>
       <div id = "rechter">Dit is de rechter banner met aanbiedingen.</div>
       <div id = "onder">Dit is de onderste banner met site informatie.</div><-->
   </main>
- 
-    <script>
-
-      let winkelmandItems = [];
-      let winkelmandSubTotals = [];
-      let winkelmandRows = [];
-
-      async function laadData() 
-      {
-        // start (asynchroon?) process om data op te halen uit db
-        const response = await fetch('http://localhost:5000/producten');
-        const result_dat = await response.json();
-        
-        // .then(response => response.json()) // Zet json als tekst om naar een object
-        // .then(data => { //gebruik het resultaat van net als "data"
-
-          let productenHtml = ""; //start van de stringbuild
-          result_dat.forEach(product => { // voor elk item uit data noem dit product.
-          productenHtml += `<tr>
-                              <td>${product.naam}</td>
-                              <td>${product.categorie}</td>
-                              <td>${product.prijs}</td>
-                              <td><button type="button" class="btn btn-secondary buyItem" data-bs-toggle="offcanvas"
-                data-bs-target="#offcanvas">Voeg toe aan winkelmandje</button></td>
-                              <td>
-                                  <img class="img-fluid" src="${product.afbeelding_url}">
-                              </td>
-                            </tr>`
-          // vul in het bovenstaande de string aan volgens een vast schema,
-          // met kolomnamen "naam/categorie/prijs/afbeeldinurl"
-          // <td>Toevoegen aan winkelmand.</td>
-          });
-
-          document.getElementById('productCatalog').innerHTML = productenHtml;
-          // pas in het document de innerhtml van element met id productcata... aan
-          // met het resultaat van de gebouwde string.
-      }
-      
-      function nieuwWinkelmandje(tabelRow, cart){
-        document.getElementById("shopping-cart").innerHTML = "";
-        let cartRow =   `<table id="shopping-cart-contents">
-                        <tr>
-                          <th>
-                            Product
-                          </th>
-                          <th>
-                            Aantal
-                          </th>
-                          <th>
-                            SubTotaal
-                          </th>
-                        </tr>
-                        <tr id="mandBucket1">
-                          <td>
-                            ${tabelRow.children[0].innerHTML}
-                          </td>
-                          <td>
-                            1
-                          </td>
-                          <td>
-                            ${tabelRow.children[2].innerHTML}
-                          </td>
-                        </tr>
-                        </table>`
-                        // <td>
-                        //     <button><img src="wegermee.png" width="20" height="20">
-                        //   </td>
-          cart.innerHTML = cartRow;
-          winkelmandItems.push(tabelRow.children[0].innerHTML);
-          winkelmandSubTotals.push(parseFloat(tabelRow.children[2].innerHTML));
-          winkelmandRows.push("mandBucket1");
-
-          let totalPrice = document.createElement("div");
-          // totalPrice.innerHTML = parseFloat(tabelRow.children[2].innerHTML);
-          totalPrice.innerHTML = arithmaticSubTotal(winkelmandSubTotals);
-          totalPrice.id = "sub-totaal";
-          document.getElementById("offcanvas").appendChild(totalPrice);
-          // console.log(totalPrice);
-      }
-
-      function arithmaticSubTotal(mandItems){
-        let currentSubTotal = 0;
-        for(let item = 0; item < mandItems.length; item++){
-          currentSubTotal += mandItems[item];
-        }
-        return(parseFloat(currentSubTotal).toFixed(2));
-      }
-
-      function verhoogMandItem(tabelRij,mandjeItemNr){
-        const aantal = parseFloat(document.getElementById(tabelRij).cells[1].firstChild.nodeValue);
-        const subsubtotaal = parseFloat(document.getElementById(tabelRij).cells[2].firstChild.nodeValue);
-        const newsubtotaal = subsubtotaal/aantal;
-        document.getElementById(tabelRij).cells[1].firstChild.nodeValue = aantal +1;
-        document.getElementById(tabelRij).cells[2].firstChild.nodeValue = (newsubtotaal*(aantal+1)).toFixed(2);
-        winkelmandSubTotals[mandjeItemNr] = parseFloat((newsubtotaal*(aantal+1)).toFixed(2));
-
-        document.getElementById("sub-totaal").innerHTML = arithmaticSubTotal(winkelmandSubTotals);
-      }
-
-      function voegItemToe(){
-        let productAanwezig = false;
-        const tabelRow = this.parentNode.parentElement;
-        const cart = document.getElementById("shopping-cart")
-        // Dit vervangt een eventueel leeg winkelmandje.
-        // Met toekomstige functionaliteit kan dan een winkelmandje geleegd worden.
-        // En dan moet deze weer worden "teruggezet" naar de tekst "Uw Winkelmandje is nog leeg."
-        if(cart.innerHTML=="Uw Winkelmandje is nog leeg."){// als deze dus leeg is, maak een nieuwe aan.
-          nieuwWinkelmandje(tabelRow, cart)
-        }else{
-          let productNaam = tabelRow.children[0].innerHTML;
-          // ga elke waarde af in het huidige winkelmandje en kijk of het productnaam
-          // er al in zit, zo ja, verhoog de quantity met 1, verhoog de prijs met product.prijs.
-          for(let mandjeItemNr = 0; mandjeItemNr < winkelmandItems.length; mandjeItemNr++){
-            if(productNaam == winkelmandItems[mandjeItemNr]){
-              verhoogMandItem(winkelmandRows[mandjeItemNr],mandjeItemNr);
-              productAanwezig = true;
-              break;
-            }
-          }
-        if(productAanwezig == false){
-          winkelmandItems.push(tabelRow.children[0].innerHTML);
-          winkelmandSubTotals.push(parseFloat(tabelRow.children[2].innerHTML));
-          winkelmandRows.push("mandBucket"+winkelmandItems.length);
-          // if tabelRow.children[0] in keys van tabel verhoog aantal met 1
-          // en verhoog subtotaal van producten met prijs.
-          let shoppingCart = document.getElementById("shopping-cart-contents");
-          let newRow = document.createElement("tr");
-          newRow.id = "mandBucket"+winkelmandItems.length;
-          let prodName = document.createElement("td");
-          let prodQuantity = document.createElement("td");
-          let prodSubTotal = document.createElement("td");
-          prodName.innerHTML = tabelRow.children[0].innerHTML;
-          prodQuantity.innerHTML = 1;
-          prodSubTotal.innerHTML = tabelRow.children[2].innerHTML;
-
-          newRow.appendChild(prodName);
-          newRow.appendChild(prodQuantity);
-          newRow.appendChild(prodSubTotal);
-          shoppingCart.appendChild(newRow);
-
-          document.getElementById("sub-totaal").innerHTML = arithmaticSubTotal(winkelmandSubTotals);
-        }
-        // console.log(winkelmandSubTotals)
-        // cart.innerHTML += tabelRow.children[0].innerHTML;
-      }
-    }
-
-      function buttonsListenen(){
-        // await laadData();
-        const buttonCollection = document.getElementsByClassName("buyItem"); // zouden er dus 10 moeten zijn.
-        // console.log(buttonCollection);
-        for (let buttonnr = 0; buttonnr < buttonCollection.length; buttonnr++){
-          buttonCollection[buttonnr].addEventListener("click",voegItemToe);
-        }
-      }
-
-      laadData().then(buttonsListenen);
-
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+  <script src="winkelmandje.js" type="module"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+    crossorigin="anonymous"></script>
 </body>
+
 </html>
