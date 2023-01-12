@@ -61,6 +61,20 @@ function nieuwWinkelmandje(tabelRow, cart) {
                           </td>
                         </tr>
                         </table>`
+
+  // Als ik het bovenstaande ontleed, zie ik het volgende:
+  //  - Een HTML-string die de tabel maakt.                       (1)
+  //  - Een array die bijhoudt waarvan er minstens 1 item in zit  (2)
+  //  - Een array die per item bijhoudt wat het subtotaal is      (3)
+  //  - Een array die de id's van de entries bijhoudt             (4)
+  //  - HET totaal van alle subtotalen --> valt te berekenen.     
+  //  - dit geeft vier local storage items.
+
+                      // Als ik bij het binnenhengelen in de laadDatacall ook het ID onthoud
+                      // kan dit een stuk compacter
+
+  // Bij het aanmaken van een nieuw winkelmandje, wordt de localstorage opnieuw gedefinieerd.
+
   // <td>
   //     <button><img src="wegermee.png" width="20" height="20">
   //   </td>
@@ -74,30 +88,21 @@ function nieuwWinkelmandje(tabelRow, cart) {
   // let totalPrice = document.createElement("div");
   // totalPrice.innerHTML = parseFloat(tabelRow.children[2].innerHTML);
   let totalPrice = document.getElementById("totaalVanMandje");
-  totalPrice.innerHTML = "Totaalprijs: €";
+  // totalPrice.innerHTML = "Totaalprijs: €";
   totalPrice.innerHTML += arithmaticSubTotal(winkelmandSubTotals);
+  
+  localStorage.setItem("Producten",winkelmandItems);
+  localStorage.setItem("Aantallen",winkelmandQuantities);
+  localStorage.setItem("Prijzen",winkelmandPrices);
+  console.log(localStorage.getItem("Producten"));
+  console.log(localStorage.getItem("Aantallen"));
 
   // totalPrice.id = "sub-totaal";
   // sidebar-winkelmandje aanmaken 3e DIV
   // document.getElementById("offcanvas").appendChild(totalPrice);
   // console.log(totalPrice);
+  }
 
-  // Als ik het bovenstaande ontleen, zie ik het volgende:
-  //  - Een HTML-string die de tabel maakt.                       (1)
-  //  - Een array die bijhoudt waarvan er minstens 1 item in zit  (2)
-  //  - Een array die per item bijhoudt wat het subtotaal is      (3)
-  //  - Een array die de id's van de entries bijhoudt             (4)
-  //  - HET totaal van alle subtotalen --> valt te berekenen.     
-  //  - dit geeft vier local storage items.
-
-  // Als ik bij het binnenhengelen in de laadDatacall ook het ID onthoud
-  // kan dit een stuk compacter
-  // Bij het aanmaken van een nieuw winkelmandje, wordt de localstorage opnieuw gedefinieerd.
-  localStorage.setItem("Producten", winkelmandItems);
-  localStorage.setItem("Aantallen", winkelmandQuantities);
-  localStorage.setItem("Prijzen", winkelmandPrices);
-
-}
 
 function arithmaticSubTotal(mandItems) {
   let currentSubTotal = 0;
@@ -107,86 +112,99 @@ function arithmaticSubTotal(mandItems) {
   return (parseFloat(currentSubTotal).toFixed(2));
 }
 
-function verhoogMandItem(tabelRij, mandjeItemNr) {
+function verhoogMandItem(tabelRij,mandjeItemNr){
   // tabelRij is hier een id-handle voor de volledige rij van de side-bar winkelmandje tabel
   const aantal = parseFloat(document.getElementById(tabelRij).cells[1].firstChild.nodeValue);
   const subsubtotaal = parseFloat(document.getElementById(tabelRij).cells[2].firstChild.nodeValue);
-  const newsubtotaal = subsubtotaal / aantal;
-  document.getElementById(tabelRij).cells[1].firstChild.nodeValue = aantal + 1;
-  document.getElementById(tabelRij).cells[2].firstChild.nodeValue = (newsubtotaal * (aantal + 1)).toFixed(2);
-  winkelmandSubTotals[mandjeItemNr] = parseFloat((newsubtotaal * (aantal + 1)).toFixed(2));
+  const newsubtotaal = subsubtotaal/aantal;
+  document.getElementById(tabelRij).cells[1].firstChild.nodeValue = aantal +1;
+  document.getElementById(tabelRij).cells[2].firstChild.nodeValue = (newsubtotaal*(aantal+1)).toFixed(2);
+  winkelmandSubTotals[mandjeItemNr] = parseFloat((newsubtotaal*(aantal+1)).toFixed(2));
 
-  let totalPrice = document.getElementById("totaalVanMandje");
-  totalPrice.innerHTML = "Totaalprijs: €";
-  totalPrice.innerHTML += arithmaticSubTotal(winkelmandSubTotals);
+  document.getElementById("totaalVanMandje").innerHTML = arithmaticSubTotal(winkelmandSubTotals);
 
   // Aanpassen van localStorage zodat er voor dit product één extra is.
-  let hoeveelheden = JSON.parse("[" + localStorage.getItem("Aantallen") + "]");
+  // let hoeveelheden = JSON.parse("["+localStorage.getItem("Aantallen")+"]");
+  let hoeveelheden = localStorage.getItem("Aantallen");
+  hoeveelheden = hoeveelheden.split(",");
   let hoeveelheid = parseFloat(hoeveelheden[mandjeItemNr]);
-  hoeveelheden[mandjeItemNr] = hoeveelheid + 1;
-  localStorage.setItem("Aantallen", hoeveelheden);
+  hoeveelheden[mandjeItemNr] = hoeveelheid+1;
+  localStorage.setItem("Aantallen",hoeveelheden);
+  console.log(localStorage.getItem("Producten"));
+  console.log(localStorage.getItem("Aantallen"));
+  //  let totalPrice = document.getElementById("totaalVanMandje");
+  // totalPrice.innerHTML = "Totaalprijs: €";
+  // totalPrice.innerHTML += arithmaticSubTotal(winkelmandSubTotals);
 }
 
-function voegItemToe() {
-  let productAanwezig = false;
-  const tabelRow = this.parentNode.parentElement;
-  const cart = document.getElementById("shopping-cart");
-  // Dit vervangt een eventueel leeg winkelmandje.
-  // Met toekomstige functionaliteit kan dan een winkelmandje geleegd worden.
-  // En dan moet deze weer worden "teruggezet" naar de tekst "Uw Winkelmandje is nog leeg."
-  if (cart.innerHTML == "Uw Winkelmandje is nog leeg.") {// als deze dus leeg is, maak een nieuwe aan.
-    nieuwWinkelmandje(tabelRow, cart)
-  } else {
-    let productNaam = tabelRow.children[0].innerHTML;
-    // ga elke waarde af in het huidige winkelmandje en kijk of het productnaam
-    // er al in zit, zo ja, verhoog de quantity met 1, verhoog de prijs met product.prijs.
-    for (let mandjeItemNr = 0; mandjeItemNr < winkelmandItems.length; mandjeItemNr++) {
-      if (productNaam == winkelmandItems[mandjeItemNr]) {
-        verhoogMandItem(winkelmandRows[mandjeItemNr], mandjeItemNr);
-        productAanwezig = true;
-        break;
+function voegItemToe(){
+        let productAanwezig = false;
+        const tabelRow = this.parentNode.parentElement;
+        const cart = document.getElementById("shopping-cart");
+        // Dit vervangt een eventueel leeg winkelmandje.
+        // Met toekomstige functionaliteit kan dan een winkelmandje geleegd worden.
+        // En dan moet deze weer worden "teruggezet" naar de tekst "Uw Winkelmandje is nog leeg."
+        if(cart.innerHTML=="Uw Winkelmandje is nog leeg."){// als deze dus leeg is, maak een nieuwe aan.
+          nieuwWinkelmandje(tabelRow, cart)
+        }else{
+          let productNaam = tabelRow.children[0].innerHTML;
+          // ga elke waarde af in het huidige winkelmandje en kijk of het productnaam
+          // er al in zit, zo ja, verhoog de quantity met 1, verhoog de prijs met product.prijs.
+          for(let mandjeItemNr = 0; mandjeItemNr < winkelmandItems.length; mandjeItemNr++){
+            if(productNaam == winkelmandItems[mandjeItemNr]){
+              verhoogMandItem(winkelmandRows[mandjeItemNr],mandjeItemNr);
+              
+              productAanwezig = true;
+              break;
+            }
+          }if(productAanwezig == false){
+          // Productnamen
+          winkelmandItems.push(tabelRow.children[0].innerHTML);
+          localStorage.setItem("Producten",winkelmandItems);
+          winkelmandSubTotals.push(parseFloat(tabelRow.children[2].innerHTML));
+          // Product aantallen
+          let hoeveelheden = localStorage.getItem("Aantallen");
+          hoeveelheden = hoeveelheden.split(",");
+          hoeveelheden.push(1);
+          localStorage.setItem("Aantallen",hoeveelheden);
+          console.log(winkelmandQuantities);
+          winkelmandQuantities = hoeveelheden;// winkelmandQuantities niet echt nodig
+          console.log(hoeveelheden);
+          console.log(localStorage.getItem("Aantallen"));
+          
+          // Product prijzen
+          winkelmandPrices.push(tabelRow.children[2].innerHTML);
+          localStorage.setItem("Prijzen",winkelmandPrices);
+          // Product tabelrij
+          winkelmandRows.push("mandBucket"+winkelmandItems.length);
+
+          // if tabelRow.children[0] in keys van tabel verhoog aantal met 1
+          // en verhoog subtotaal van producten met prijs.
+          let shoppingCart = document.getElementById("shopping-cart-contents").firstElementChild;
+          let newRow = document.createElement("tr");
+          newRow.id = "mandBucket"+winkelmandItems.length;
+          let prodName = document.createElement("td");
+          let prodQuantity = document.createElement("td");
+          let prodSubTotal = document.createElement("td");
+          prodName.innerHTML = tabelRow.children[0].innerHTML;
+          prodQuantity.innerHTML = 1;
+          prodSubTotal.innerHTML = tabelRow.children[2].innerHTML;
+
+          newRow.appendChild(prodName);
+          newRow.appendChild(prodQuantity);
+          newRow.appendChild(prodSubTotal);
+          shoppingCart.appendChild(newRow);
+          //  let totalPrice = document.getElementById("totaalVanMandje");
+          //  totalPrice.innerHTML = "Totaalprijs: €";
+          //  totalPrice.innerHTML += arithmaticSubTotal(winkelmandSubTotals);
+          document.getElementById("totaalVanMandje").innerHTML = arithmaticSubTotal(winkelmandSubTotals);
+
+          console.log(localStorage.getItem("Producten"));
+          console.log(localStorage.getItem("Aantallen"));
+        }
+        // cart.innerHTML += tabelRow.children[0].innerHTML;
       }
     }
-    if (productAanwezig == false) {
-      // Productnamen
-      winkelmandItems.push(tabelRow.children[0].innerHTML);
-      localStorage.setItem("Producten", winkelmandItems);
-      console.log(localStorage.getItem("Producten"));
-      winkelmandSubTotals.push(parseFloat(tabelRow.children[2].innerHTML));
-      // Product aantallen
-      winkelmandQuantities.push(1);
-      localStorage.setItem("Aantallen", winkelmandQuantities);
-      // Product prijzen
-      winkelmandPrices.push(tabelRow.children[2].innerHTML);
-      localStorage.setItem("Prijzen", winkelmandPrices);
-      // Product tabelrij
-      winkelmandRows.push("mandBucket" + winkelmandItems.length);
-
-      // if tabelRow.children[0] in keys van tabel verhoog aantal met 1
-      // en verhoog subtotaal van producten met prijs.
-      let shoppingCart = document.getElementById("shopping-cart-contents").firstElementChild;
-      let newRow = document.createElement("tr");
-      newRow.id = "mandBucket" + winkelmandItems.length;
-      let prodName = document.createElement("td");
-      let prodQuantity = document.createElement("td");
-      let prodSubTotal = document.createElement("td");
-      prodName.innerHTML = tabelRow.children[0].innerHTML;
-      prodQuantity.innerHTML = 1;
-      prodSubTotal.innerHTML = tabelRow.children[2].innerHTML;
-
-      newRow.appendChild(prodName);
-      newRow.appendChild(prodQuantity);
-      newRow.appendChild(prodSubTotal);
-      shoppingCart.appendChild(newRow);
-
-      let totalPrice = document.getElementById("totaalVanMandje");
-      totalPrice.innerHTML = "Totaalprijs: €";
-      totalPrice.innerHTML += arithmaticSubTotal(winkelmandSubTotals);
-    }
-    // console.log(winkelmandSubTotals)
-    // cart.innerHTML += tabelRow.children[0].innerHTML;
-  }
-}
 
 function buttonsListenen() {
   // await laadData();
@@ -198,113 +216,158 @@ function buttonsListenen() {
 }
 
 
-function verversWinkelmandje() {
-  let winkelmandItems = localStorage.getItem("Producten");
-  winkelmandItems = winkelmandItems.split(",");
+      function verversWinkelmandje(){
+        console.log(localStorage.getItem("Producten"));
+        let winkelmandItems = localStorage.getItem("Producten");
+        winkelmandItems = winkelmandItems.split(",");
 
-  let winkelmandAantallen = localStorage.getItem("Aantallen");
-  winkelmandAantallen = winkelmandAantallen.split(",");
+        console.log(localStorage.getItem("Aantallen"));
+        let winkelmandAantallen = localStorage.getItem("Aantallen");
+        winkelmandAantallen = winkelmandAantallen.split(",");
 
-  let winkelmandPrijzen = localStorage.getItem("Prijzen");
-  winkelmandPrijzen = winkelmandPrijzen.split(",");
+        let winkelmandPrijzen = localStorage.getItem("Prijzen");
+        winkelmandPrijzen = winkelmandPrijzen.split(",");
 
-
-
-  console.log(winkelmandItems);
-  console.log(winkelmandAantallen);
-  console.log(winkelmandPrijzen);
-
-  let productenHtml = ""; //start van de stringbuild
-  document.getElementById("shopping-cart").innerHTML = "";
-
-
-  result_dat.forEach(product => { // voor elk item uit data noem dit product.
-    productenHtml += `<tr>
-                            <td>${product.naam}</td>
-                            <td>${product.categorie}</td>
-                            <td>${product.prijs}</td>
-                            <td><button type="button" class="btn btn-secondary buyItem" data-bs-toggle="offcanvas"
-              data-bs-target="#offcanvas">Voeg toe aan winkelmandje</button></td>
-                            <td>
-                                <img class="img-fluid" src="${product.afbeelding_url}">
-                            </td>
+        let winkelmandRows = [];
+        
+        let productenHtml = ""; //start van de stringbuild
+        let cart = document.getElementById("shopping-cart");
+        cart.innerHTML = "";
+        productenHtml += `<table id="shopping-cart-contents">
+                          <tr>
+                            <th>
+                              Product
+                            </th>
+                            <th>
+                              Aantal
+                            </th>
+                            <th>
+                              SubTotaal
+                            </th>
                           </tr>`
-    // vul in het bovenstaande de string aan volgens een vast schema,
-    // met kolomnamen "naam/categorie/prijs/afbeeldinurl"
-    // <td>Toevoegen aan winkelmand.</td>
-  });
+        
+        for(let itemNr = 0 ; itemNr < winkelmandItems.length; itemNr++){
+          const bucket = 'mandBucket'+(itemNr+1);
+          productenHtml += `<tr id=${bucket}>
+                            <td>${winkelmandItems[itemNr]}</td>
+                            <td>${parseInt(winkelmandAantallen[itemNr])}</td>
+                            <td>${(parseFloat(winkelmandPrijzen[itemNr])*parseInt(winkelmandAantallen[itemNr])).toFixed(2)}</td>
+                            </tr>`
+          winkelmandRows.push(bucket);
+        }
+        cart.innerHTML = productenHtml;
 
-  let cartRow = `<table id="shopping-cart-contents">
-                        <tr>
-                          <th>
-                            Product
-                          </th>
-                          <th>
-                            Aantal
-                          </th>
-                          <th>
-                            SubTotaal
-                          </th>
-                        </tr>
-                        <tr id="mandBucket1">
-                          <td>
-                            ${tabelRow.children[0].innerHTML}
-                          </td>
-                          <td>
-                            1
-                          </td>
-                          <td>
-                            ${tabelRow.children[2].innerHTML}
-                          </td>
-                        </tr>
-                        </table>`
-  // <td>
-  //     <button><img src="wegermee.png" width="20" height="20">
-  //   </td>
-  cart.innerHTML = cartRow;
-  winkelmandItems.push(tabelRow.children[0].innerHTML);
-  winkelmandQuantities.push(1);
-  winkelmandPrices.push(tabelRow.children[2].innerHTML);
-  winkelmandSubTotals.push(parseFloat(tabelRow.children[2].innerHTML));
-  winkelmandRows.push("mandBucket1");
 
-  // let totalPrice = document.createElement("div");
-  // totalPrice.innerHTML = parseFloat(tabelRow.children[2].innerHTML);
-  let totalPrice = document.getElementById("totaalVanMandje");
-  // totalPrice.innerHTML += "Doei";
-  totalPrice.innerHTML += arithmaticSubTotal(winkelmandSubTotals);
-  // totalPrice.id = "sub-totaal";
-  // sidebar-winkelmandje aanmaken 3e DIV
-  // document.getElementById("offcanvas").appendChild(totalPrice);
-  // console.log(totalPrice);
+          // Als ik het bovenstaande ontleen, zie ik het volgende:
+          //  - Een HTML-string die de tabel maakt.                       (1)
+          //  - Een array die bijhoudt waarvan er minstens 1 item in zit  (2)
+          //  - Een array die per item bijhoudt wat het subtotaal is      (3)
+          //  - Een array die de id's van de entries bijhoudt             (4)
+          //  - HET totaal van alle subtotalen --> valt te berekenen.     
+          //  - dit geeft vier local storage items.
 
-  // Als ik het bovenstaande ontleen, zie ik het volgende:
-  //  - Een HTML-string die de tabel maakt.                       (1)
-  //  - Een array die bijhoudt waarvan er minstens 1 item in zit  (2)
-  //  - Een array die per item bijhoudt wat het subtotaal is      (3)
-  //  - Een array die de id's van de entries bijhoudt             (4)
-  //  - HET totaal van alle subtotalen --> valt te berekenen.     
-  //  - dit geeft vier local storage items.
+                              // Als ik bij het binnenhengelen in de laadDatacall ook het ID onthoud
+                              // kan dit een stuk compacter
+          // Bij het aanmaken van een nieuw winkelmandje, wordt de localstorage opnieuw gedefinieerd.
+          localStorage.setItem("Producten",winkelmandItems);
+          localStorage.setItem("Aantallen",winkelmandAantallen);
+          localStorage.setItem("Prijzen",winkelmandPrijzen);
+          console.log(localStorage.getItem("Producten"));
+          let varArrays = [winkelmandItems, winkelmandAantallen, winkelmandPrijzen, winkelmandRows];
 
-  // Als ik bij het binnenhengelen in de laadDatacall ook het ID onthoud
-  // kan dit een stuk compacter
-  // Bij het aanmaken van een nieuw winkelmandje, wordt de localstorage opnieuw gedefinieerd.
-  localStorage.setItem("Producten", winkelmandItems);
-  localStorage.setItem("Aantallen", winkelmandQuantities);
-  localStorage.setItem("Prijzen", winkelmandPrices);
+          return varArrays;
+      }
 
-}
+      laadData().then(buttonsListenen);
+      // Na het inladen van de tabel met producten en het toewijzen van functionaliteit aan de knoppen.
+      // wordt gecontroleerd of er nog gegevens in de localstorage staan.
+      // Zo ja, dan wordt het winkelmandje hersteld.
+      if(localStorage.getItem("Producten")==null){
+        console.log("Er is geen bestaand winkelmandje.");
+        document.getElementById("shopping-cart").innerHTML = "Uw Winkelmandje is nog leeg.";
+      }else{
+        console.log("Er zijn artikelen gevonden om terug te zetten.");
+        const variablesSelection = verversWinkelmandje();
+        winkelmandItems = variablesSelection[0];
+        winkelmandQuantities = variablesSelection[1];
+        winkelmandPrices = variablesSelection[2];
+        winkelmandRows = variablesSelection[3];
+        console.log(winkelmandQuantities);
+        console.log(localStorage.getItem("Aantallen"));
+        // localStorage.clear();
+      }
 
-laadData().then(buttonsListenen);
-// Na het inladen van de tabel met producten en het toewijzen van functionaliteit aan de knoppen.
-// wordt gecontroleerd of er nog gegevens in de localstorage staan.
-// Zo ja, dan wordt het winkelmandje hersteld.
-if (localStorage.getItem("Producten") == null) {
-  document.getElementById("shopping-cart").innerHTML = "Uw winkelmandje is nog leeg.";
-} else {
-  // verversWinkelmandje();
-}
+      let knopskediv = document.getElementById("totaalVanMandje");
+      let leeg_winkelmandje = document.createElement("button");
+      leeg_winkelmandje.id="leeg_winkelmandje";
+      leeg_winkelmandje.innerHTML="maak winkelmandje leeg";
+      // leeg_winkelmandje.onclick=localStorage.clear();
+      knopskediv.appendChild(leeg_winkelmandje);
+
+
+
+
+
+
 // Nadat de tabel met de producten is geladen, zal gecontroleerd moeten worden óf en welke waardes er in de localstorage zitten van het winkelmandje.
 // Stel dat daar niets in zit, zet de waarde van de div op "Uw Winkelmandje is nog leeg.".
 
 
+
+        // result_dat.forEach(product => { // voor elk item uit data noem dit product.
+        // productenHtml += `<tr>
+        //                     <td>${product.naam}</td>
+        //                     <td>${product.categorie}</td>
+        //                     <td>${product.prijs}</td>
+        //                     <td><button type="button" class="btn btn-secondary buyItem" data-bs-toggle="offcanvas"
+        //       data-bs-target="#offcanvas">Voeg toe aan winkelmandje</button></td>
+        //                     <td>
+        //                         <img class="img-fluid" src="${product.afbeelding_url}">
+        //                     </td>
+        //                   </tr>`
+        // vul in het bovenstaande de string aan volgens een vast schema,
+        // met kolomnamen "naam/categorie/prijs/afbeeldinurl"
+        // <td>Toevoegen aan winkelmand.</td>
+
+        // let cartRow =   `<table id="shopping-cart-contents">
+        //                 <tr>
+        //                   <th>
+        //                     Product
+        //                   </th>
+        //                   <th>
+        //                     Aantal
+        //                   </th>
+        //                   <th>
+        //                     SubTotaal
+        //                   </th>
+        //                 </tr>
+        //                 <tr id="mandBucket1">
+        //                   <td>
+        //                     ${tabelRow.children[0].innerHTML}
+        //                   </td>
+        //                   <td>
+        //                     1
+        //                   </td>
+        //                   <td>
+        //                     ${tabelRow.children[2].innerHTML}
+        //                   </td>
+        //                 </tr>
+        //                 </table>`
+        //                 // <td>
+        //                 //     <button><img src="wegermee.png" width="20" height="20">
+        //                 //   </td>
+        //   cart.innerHTML = cartRow;
+        //   winkelmandItems.push(tabelRow.children[0].innerHTML);
+        //   winkelmandQuantities.push(1);
+        //   winkelmandPrices.push(tabelRow.children[2].innerHTML);
+        //   winkelmandSubTotals.push(parseFloat(tabelRow.children[2].innerHTML));
+        //   winkelmandRows.push("mandBucket1");
+
+        //   // let totalPrice = document.createElement("div");
+        //   // totalPrice.innerHTML = parseFloat(tabelRow.children[2].innerHTML);
+        //   let totalPrice = document.getElementById("totaalVanMandje");
+        //   // totalPrice.innerHTML += "Doei";
+        //   totalPrice.innerHTML += arithmaticSubTotal(winkelmandSubTotals);
+          // totalPrice.id = "sub-totaal";
+          // sidebar-winkelmandje aanmaken 3e DIV
+          // document.getElementById("offcanvas").appendChild(totalPrice);
