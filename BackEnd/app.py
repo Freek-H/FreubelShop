@@ -8,6 +8,7 @@ from flask import flash, request
 from passlib.hash import sha512_crypt
 
 import producten
+import addform
 import register
 import login
 import profiel
@@ -37,6 +38,10 @@ if __name__ == "__main__":
 @app.route('/register', methods=['POST'])
 def user_register():
     return register.register()
+
+@app.route('/addform', methods=['POST'])
+def send_form():
+    return addform.addForm()
 
 @app.route('/login', methods=['POST'])
 def user_login():
