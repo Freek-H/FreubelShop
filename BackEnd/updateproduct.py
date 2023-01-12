@@ -6,17 +6,17 @@ from flask import jsonify
 import json
 from flask import flash, request
 from passlib.hash import sha512_crypt
+import config
+#app = Flask(__name__)
+#app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
+#CORS(app)
 
-app = Flask(__name__)
-app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
-CORS(app)
-
-mysql = MySQL()
-app.config['MYSQL_DATABASE_USER'] = 'root'
-app.config['MYSQL_DATABASE_PASSWORD'] = ''
-app.config['MYSQL_DATABASE_DB'] = 'webshopusers'
-app.config['MYSQL_DATABASE_HOST'] = 'localhost'
-mysql.init_app(app)
+#mysql = MySQL()
+#app.config['MYSQL_DATABASE_USER'] = 'root'
+#app.config['MYSQL_DATABASE_PASSWORD'] = ''
+#app.config['MYSQL_DATABASE_DB'] = 'webshopusers'
+#app.config['MYSQL_DATABASE_HOST'] = 'localhost'
+#mysql.init_app(app)
 
 def product_update():
     conn = mysql.connect()
