@@ -10,7 +10,7 @@
   <title>Over ons</title>
 </head>
 
-<body>
+<body id ="body">
   <!-- Bedrijfsnaam en logo -->
   <div class="container-fluid text-bg-danger p-3 text-white text-left bg-opacity-75">
     <div class="container-fluid navbar-brand fw-bold fs-1 lh-1">Granny Inc.&nbsp; &nbsp; <img src="grandma.png"
@@ -119,32 +119,19 @@
         <b>Contactformulier</b>
         <div class="fs-6">
           <form>
-            <label for="name">Naam</label><br>
-            <input type="text" id="name" name="name" class="form-control"><br>
+            <label for="naam">Naam</label><br>
+            <input type="text" id="naam" name="naam" class="form-control"><br>
             <label for="ordernummer">Ordernummer</label><br>
             <input type="text" id="ordernummer" name="odernummer" class="form-control"><br>
             <label for="email">E-mailadres</label><br>
             <input type="text" id="email" name="email" class="form-control"><br>
-            <label for="phonenumer">Telefoonnummer</label><br>
-            <input type="tel" id="'phonenumber" name="phonenumber" class="form-control"><br>
-            <label for="question">Vraag/opmerking</label><br>
-            <textarea id="question" name="question" class="form-control"></textarea><br><br>
-            <button class="btn btn-outline-danger" onclick="verstuur()">Verstuur</button>
+            <label for="telefoonnummer">Telefoonnummer</label><br>
+            <input type="tel" id="telefoonnummer" name="telefoonnummer" class="form-control"><br>
+            <label for="vraag">Vraag/opmerking</label><br>
+            <textarea id="vraag" name="vraag" class="form-control"></textarea><br><br>
           </form>
+          <button class="btn btn-outline-danger" onclick="sendJSON()">Verstuur</button>
           <br>
-          <div id="popup" style="visibility: hidden" class="alert alert-success d-flex align-items-center" role="alert">
-            <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
-              <symbol id="check-circle-fill" fill="currentColor" viewBox="0 0 16 16">
-                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
-            </symbol>
-            </svg>
-            <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:">
-              <use xlink:href="#check-circle-fill" />
-            </svg>
-            <div>
-              <b>Bedankt voor jouw bericht!</b><br>
-              Wij hebben deze in goede orde ontvangen. Binnen 3 werkdagen wordt er contact met je opgenomen.
-            </div>
           </div>
         </div>
       </div>
@@ -153,16 +140,41 @@
 </body>
 <script>
 
-  function verstuur() {
-    var berichtVerstuurd = document.getElementById("popup");
-    console.log("geklikt")
-    if (berichtVerstuurd.style.visibility === "hidden") {
-      berichtVerstuurd.style.visibility = "visible";
-    }
-    else {
-      berichtVerstuurd.style.visibility = "hidden";
-    }
-  }
+  
+  function sendJSON() {
+    var name = document.getElementById("naam").value
+    var ordernr = document.getElementById("ordernummer").value
+    var mail = document.getElementById("email").value
+    var tel = document.getElementById("telefoonnummer").value
+    var question = document.getElementById("vraag").value
+
+    fetch('http://127.0.0.1:5000/addform', {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+        naam: name,
+        odernummer: ordernr,
+        email: mail,
+        telefoonnummer: tel,
+        vraag: question
+        }),
+        })
+
+          .then(response => response.json())
+          .then(json => {
+            if (json === 'SUCCES'){
+              alert("Het contactformulier is in goede orde ontvangen. Wij zullen jouw bericht binnen 3 werkdagen behandelen.")
+              window.location.href = "over_ons_def.html";
+              return
+            }
+            else {
+                    alert("Fout bij versturen formulier. Niet alles is ingevuld!")
+            }
+          })
+          .catch(err => console.log('Request Failed', err)); 
+}
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
   integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
