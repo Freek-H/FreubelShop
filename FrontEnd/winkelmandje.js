@@ -75,8 +75,9 @@
           // let totalPrice = document.createElement("div");
           // totalPrice.innerHTML = parseFloat(tabelRow.children[2].innerHTML);
           let totalPrice = document.getElementById("totaalVanMandje");
-          totalPrice.innerHTML += "Doei";
+          totalPrice.innerHTML = "Totaalprijs: €";
           totalPrice.innerHTML += arithmaticSubTotal(winkelmandSubTotals);
+          
           // totalPrice.id = "sub-totaal";
           // sidebar-winkelmandje aanmaken 3e DIV
           // document.getElementById("offcanvas").appendChild(totalPrice);
@@ -116,8 +117,12 @@
         document.getElementById(tabelRij).cells[2].firstChild.nodeValue = (newsubtotaal*(aantal+1)).toFixed(2);
         winkelmandSubTotals[mandjeItemNr] = parseFloat((newsubtotaal*(aantal+1)).toFixed(2));
 
-        document.getElementById("sub-totaal").innerHTML = arithmaticSubTotal(winkelmandSubTotals);
 
+        let newTotalPrice = document.getElementById("totaalVanMandje");
+        newTotalPrice.innerHTML = "Totaalprijs: €";
+        newTotalPrice.innerHTML += arithmaticSubTotal(winkelmandSubTotals);
+
+        
         // Aanpassen van localStorage zodat er voor dit product één extra is.
         let hoeveelheden = JSON.parse("["+localStorage.getItem("Aantallen")+"]");
         let hoeveelheid = parseFloat(hoeveelheden[mandjeItemNr]);
@@ -177,7 +182,11 @@
           newRow.appendChild(prodSubTotal);
           shoppingCart.appendChild(newRow);
 
-          document.getElementById("sub-totaal").innerHTML = arithmaticSubTotal(winkelmandSubTotals);
+          let newTotalPrice = document.getElementById("totaalVanMandje");
+          newTotalPrice.innerHTML = "Totaalprijs: €";
+          newTotalPrice.innerHTML += arithmaticSubTotal(winkelmandSubTotals);
+
+
         }
         // console.log(winkelmandSubTotals)
         // cart.innerHTML += tabelRow.children[0].innerHTML;
